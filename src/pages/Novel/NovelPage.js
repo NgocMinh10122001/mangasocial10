@@ -25,6 +25,7 @@ const NovelPage = () => {
   const [comment, setComment] = useState("");
   const params = useParams();
   const { slug } = params;
+  console.log("check slug", slug);
   const sv = useSelector((state) => state.server.sv);
   const user_id = sessionStorage.getItem("user_id");
   const [currentChap, setCurrentChap] = useState("");
@@ -89,7 +90,10 @@ const NovelPage = () => {
   };
   const fetchChapterDetail = async () => {
     try {
-      const response = await axios.get(`https://apimanga.mangasocial.online/rnovel/${slug}`);
+      const response = await axios.get(
+        `https://apimanga.mangasocial.online/rnovel/${slug}`
+      );
+      console.log("check res", response);
       setChapterDetail(response.data);
       setCurrentChap(response.data[0].chapters[0]);
       setListChap(response.data[0].chapters);
@@ -107,20 +111,20 @@ const NovelPage = () => {
     setVisibleChapterCount((prevCount) => prevCount + 10);
   };
 
-  const sortedChapters = chapterDetail[0]?.chapters.sort((a, b) => {
-    // Lấy 3 số sau ký tự "chapter-"
-    const getLastNumber = (url) =>
-      parseInt(
-        url.slice(url.indexOf("chapter-") + 8, url.indexOf("chapter-") + 11),
-        10
-      );
+  // const sortedChapters = chapterDetail[0]?.chapters.sort((a, b) => {
+  //   // Lấy 3 số sau ký tự "chapter-"
+  //   const getLastNumber = (url) =>
+  //     parseInt(
+  //       url.slice(url.indexOf("chapter-") + 8, url.indexOf("chapter-") + 11),
+  //       10
+  //     );
 
-    const chapterNumberA = getLastNumber(a);
+  //   const chapterNumberA = getLastNumber(a);
 
-    const chapterNumberB = getLastNumber(b);
+  //   const chapterNumberB = getLastNumber(b);
 
-    return chapterNumberA - chapterNumberB;
-  });
+  //   return chapterNumberA - chapterNumberB;
+  // });
 
   const viewsString = chapterDetail[0]?.views || "";
   const startIndex = viewsString.lastIndexOf("has ") + 4;
@@ -385,14 +389,15 @@ const NovelPage = () => {
                 className="bg-[#138e00] w-[200px] rounded-lg text-white justify-center"
                 onChange={() => handleChapter()}
               >
-                {chapterDetail[0]?.chapters.map((item, index) => (
+                <>{console.log("chapter detail:", chapterDetail)}</>
+                {/* {chapterDetail[0]?.chapters?.map((item, index) => (
                   <option value={item} key={index}>
                     {item.replace(
                       "http://apimanga.mangasocial.online/rnovel/" + slug + "/",
                       ""
                     )}
                   </option>
-                ))}
+                ))} */}
               </select>
 
               <button
@@ -419,7 +424,8 @@ const NovelPage = () => {
             </div>
             <div className="w-[70%] pt-8 mx-auto">
               {/* <TextToSpeech content={chapterData?.content} text={chapterData?.content} /> */}
-              <TTS content={chapterData?.content}/> {/*text-to-speech and highlight*/}
+              <TTS content={chapterData?.content} />{" "}
+              {/*text-to-speech and highlight*/}
             </div>
           </div>
         )}

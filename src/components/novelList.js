@@ -4,13 +4,14 @@ import Loading from "./Loading/Loading";
 import { Spin } from "antd";
 import NovelCard from "../pages/Novel/NovelCard";
 
-const NovelList = memo(function NovelList({index}) {
+const NovelList = memo(function NovelList({ index }) {
   const newRelease = useFetchNovel(index);
-  console.log(newRelease);
+  // console.log(newRelease);
   const firstFiveItem = newRelease.slice(0, 10);
+  // console.log("check path seg", firstFiveItem[0]);
   return (
     <>
-      <div className="grid md:grid-cols-5 2xl:grid-cols-10  gap-[20px] px-[60px] pb-[60px]">
+      <div className="grid md:grid-cols-7 2xl:grid-cols-10  gap-[20px] px-[60px] pb-[60px]">
         {firstFiveItem.map((item, index) => (
           <NovelCard
             key={index}

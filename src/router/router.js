@@ -116,15 +116,15 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "/:sv/login",
+    path: "/login",
     element: <Login />,
   },
   {
-    path: "/:sv/sign-up",
+    path: "/sign-up",
     element: <SignUp />,
   },
   {
-    path: "/:sv/test",
+    path: "/test",
     element: <ItemManga />,
   },
 ]);

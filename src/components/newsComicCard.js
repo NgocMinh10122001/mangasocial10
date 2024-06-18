@@ -6,9 +6,8 @@ const NewsComicCard = (props) => {
     <div className="rounded-xl group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl hover:shadow-black/30">
       <div className="w-[417px] h-[287px]">
         <img
-
           className="h-full w-full object-cover transition-transform duration-500 group-hover:rotate-3 group-hover:scale-125"
-          src="https://www.shutterstock.com/image-vector/anime-manga-girl-eyes-looking-600nw-2324145071.jpg"
+          src={`${poster}`}
           alt=""
         />
       </div>

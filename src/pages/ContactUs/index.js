@@ -761,19 +761,19 @@ export default function AboutCompany() {
                         <h4>{item.title}</h4>
                         <a href={item.link}>
                           <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              width="46"
-                              height="46"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              stroke-width="0.75"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              className="lucide lucide-heart opacity-75 scale-50"
-                            >
-                              <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
-                            </svg>
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="46"
+                            height="46"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="0.75"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            className="lucide lucide-heart opacity-75 scale-50"
+                          >
+                            <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
+                          </svg>
                         </a>
                       </div>
                     </div>
@@ -874,8 +874,8 @@ export default function AboutCompany() {
                                   cho các ứng dụng và web ứng dụng trí tuệ nhân
                                   tạo
                                 </em>{" "}
-                                 Ưu tiên ứng viên đã có kiến thức nền tảng
-                                Chấp nhận sinh viên từ năm 2 trở lên
+                                Ưu tiên ứng viên đã có kiến thức nền tảng Chấp
+                                nhận sinh viên từ năm 2 trở lên
                                 <span>CV gửi về hr@thinkdiff.us</span>
                               </h2>
                             </div>
@@ -1136,8 +1136,8 @@ const Container = styled.div`
   .container {
     max-width: 1280px !important;
   }
-  .sliderr{
-    border-radius:30px;
+  .sliderr {
+    border-radius: 30px;
   }
   .about-container {
     font-family: "Open Sans", sans-serif !important;
@@ -2455,7 +2455,7 @@ const Container = styled.div`
       padding: 15px 30px 15px 30px;
       color: #ffffff;
     }
-    .more-info1 h4{
+    .more-info1 h4 {
       color: #fff;
     }
 

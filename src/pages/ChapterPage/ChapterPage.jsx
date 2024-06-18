@@ -22,6 +22,7 @@ const ChapterPage = () => {
   const [showFullDescription, setShowFullDescription] = useState(false);
   const [comment, setComment] = useState("");
   const [loading, setLoading] = useState(true);
+  // console.log("check chapter", chapterDetail);
 
 
   const params = useParams();

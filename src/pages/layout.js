@@ -1,5 +1,5 @@
 import { useState, useContext, useRef } from "react";
-import { div, NavLink, Outlet, useParams } from "react-router-dom";
+import { div, Link, NavLink, Outlet, useParams } from "react-router-dom";
 import SubMenu from "../components/SubMenu/SubMenu";
 import platform from "platform";
 import ios from "../pages/img/ios.png";
@@ -46,50 +46,78 @@ export default function Layout() {
   const loading = useSelector((state) => state.server.loading);
   const navigate = useNavigate();
 
+  //  14    "https://br.ninemanga.com",
+  //                                 13    "https://de.ninemanga.com",
+  //                                 16    "https://es.ninemanga.com",
+  //                                 17    "https://fr.ninemanga.com",
+  //                                 18    "https://it.ninemanga.com",
+  //                                  5    "https://mangajar.com/manga",
+  //                                  8    "https://mangajar.com",
+  //                             *    6    "https://mangakomi.io/",
+  //                             *    2    "https://mangareader.cc",
+  //                                  7    "https://readm.org/",
+  //                                  1    "https://ww5.manganelo.tv",
+  //                                  0    "https://www.mangainn.net",
   const serverName = [
     {
-      sv: 1,
+      sv: 0,
       name: "mangainn.net",
       icon: <VN title="Vietnamese" className="h-4 w-4" />,
     },
     {
-      sv: 7,
+      sv: 1,
       name: "ww5.manganelo.tv",
       icon: <US title="Vietnamese" className="h-4 w-4" />,
     },
     {
-      sv: 2,
+      sv: 7,
       name: "readm.org",
       icon: <AC title="Vietnamese" className="h-4 w-4" />,
     },
     {
-      sv: 6,
+      sv: 2,
       name: "mangareader.cc",
       icon: <IC title="Vietnamese" className="h-4 w-4" />,
     },
     {
-      sv: 8,
+      sv: 6,
       name: "mangakomi.io",
       icon: <EU title="Vietnamese" className="h-4 w-4" />,
     },
-    {
-      sv: 5,
-      name: "mangajar.com",
-      icon: <XK title="Vietnamese" className="h-4 w-4" />,
-    },
+    // {
+    //   sv: 8,
+    //   name: "mangajar.com",
+    //   icon: <XK title="Vietnamese" className="h-4 w-4" />,
+    // },
+    // {
+    //   sv: 5,
+    //   name: "https://mangajar.com/manga",
+    //   icon: <JP title="Vietnamese" className="h-4 w-4" />,
+    // },
     {
       sv: 18,
       name: "it.ninemanga.com",
       icon: <JP title="Vietnamese" className="h-4 w-4" />,
     },
+
     {
-      sv: 17,
-      name: "fr.ninemanga.com",
+      sv: 11,
+      name: "novelhall.com",
       icon: <JP title="Vietnamese" className="h-4 w-4" />,
     },
     {
-      sv: 16,
-      name: "es.ninemanga.com",
+      sv: 4,
+      name: "bestlightnovel.com",
+      icon: <XK title="Vietnamese" className="h-4 w-4" />,
+    },
+    {
+      sv: 12,
+      name: "mto.com",
+      icon: <JP title="Vietnamese" className="h-4 w-4" />,
+    },
+    {
+      sv: 9,
+      name: "swatmanga.com",
       icon: <JP title="Vietnamese" className="h-4 w-4" />,
     },
   ];
@@ -320,7 +348,10 @@ export default function Layout() {
               <>
                 {serverName.map((item) =>
                   item.sv === sv ? (
-                    <div className="text-red-700 text-base tracking-wide font-normal absolute top-full w-full flex justify-start items-center gap-[6px]">
+                    <div
+                      key={item.sv}
+                      className="text-red-700 text-base tracking-wide font-normal absolute top-full w-full flex justify-start items-center gap-[6px]"
+                    >
                       <span>{item.name}</span>
                       <div>{item.icon}</div>
                     </div>
@@ -358,7 +389,11 @@ export default function Layout() {
     */}
 
           <div
-            onClick={() => navigate("/" + sv + "/novel")}
+            onClick={() => {
+              dispatch(changeServer(4));
+
+              navigate("/" + 4 + "/novel");
+            }}
             // onClick={() => dispatch(changeServer(4))}
           >
             {/* redirect to server novel : bestlightnovel.com*/}
@@ -396,11 +431,11 @@ export default function Layout() {
           />
           {!isLogin ? (
             <div className="flex justify-center align-middle items-center ml-4">
-              <div to={"/" + sv + `/login`}>
+              <Link to={`/login`}>
                 <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
                   Login
                 </button>
-              </div>
+              </Link>
             </div>
           ) : (
             // <div to="/user-profile">
@@ -416,7 +451,10 @@ export default function Layout() {
               <hr className="mt-[150px]" />
               {searchData ? (
                 searchData.slice(0, 3).map((item, index) => (
-                  <div className="w-[90%] h-full border-double border-red-900 rounded-lg flex border-4 cursor-pointer  ">
+                  <div
+                    key={index}
+                    className="w-[90%] h-full border-double border-red-900 rounded-lg flex border-4 cursor-pointer  "
+                  >
                     <img
                       className="w-1/3 h-[69%] py-2 rounded-lg"
                       src={item.poster}
@@ -424,7 +462,9 @@ export default function Layout() {
                     />
                     <div
                       to={"/" + sv + `/chapter/` + arr_path[index]}
-                      onClick={() => navigate("/ + sv + /chapter/" + arr_path[index])}
+                      onClick={() =>
+                        navigate("/ + sv + /chapter/" + arr_path[index])
+                      }
                       className="flex"
                     >
                       <div className="text-lg flex flex-col ml-6 justify-center">

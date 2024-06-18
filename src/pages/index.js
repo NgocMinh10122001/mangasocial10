@@ -18,14 +18,25 @@ import Top15Comics from "../components/top15Comics";
 import FreeComic from "../components/freeComic";
 import NewsComics from "../components/newsComics";
 import ToggleReadMode from "../components/ToggleBtn/ToggleReadMode";
+import ContactUs from "./ContactUs";
+import CustomizeSpin from "../components/spin/CustomizeSpin";
+// import { Space, Spin } from "antd";
+// import "antd/dist/antd.css";
 
 export default function Index() {
   let sv = useSelector((state) => state.server.sv);
+  const [loading, setLoading] = useState(true);
   const readmode = useSelector((state) => state.ReadMode.readmode);
-  console.log("check read mode");
-
+  // console.log("check read mode");
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setLoading(false);
+  //   }, 1000);
+  // }, []);
   return (
     <div className="cont">
+      {/* <CustomizeSpin /> */}
+
       <div className="title-released-comic ">
         <h2>New Released Comic</h2>
         <Link to="/newRelease">
