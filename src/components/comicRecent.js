@@ -8,7 +8,7 @@ const ComicRecent = () => {
   const [readMode, setReadMode] = useState(
     useSelector((state) => state.ReadMode.readmode)
   );
-  console.log(comicRecent);
+  // console.log(comicRecent);
   const firstFiveItem = comicRecent.slice(0, 20);
   return (
     <>

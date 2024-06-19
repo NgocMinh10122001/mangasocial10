@@ -16,15 +16,18 @@ const SignUp = () => {
   };
 
   const onFinish = async (values) => {
-    console.log("Success:", values);
+    // console.log("Success:", values);
     try {
       const response = await axios.post(
         "https://apimanga.mangasocial.online/register",
         values
       );
-      message.success("Signup is successfully");
+      await message.success(`Signup is successfully, ${response.data.message}`);
+      // console.log("check res", response);
 
-      navigate("/login");
+      setTimeout(() => { 
+        navigate("/login");
+      },1000)
     } catch (error) {
       message.error(`${error.response.data.message}`);
     }

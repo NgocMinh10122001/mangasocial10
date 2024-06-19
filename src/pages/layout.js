@@ -22,6 +22,8 @@ import AC from "country-flag-icons/react/3x2/AC";
 import IC from "country-flag-icons/react/3x2/IC";
 import EU from "country-flag-icons/react/3x2/EU";
 import XK from "country-flag-icons/react/3x2/XK";
+import RU from "country-flag-icons/react/3x2/RU";
+import FR from "country-flag-icons/react/3x2/FR";
 import { useNavigate } from "react-router-dom";
 
 let path = "";
@@ -59,50 +61,24 @@ export default function Layout() {
   //                                  1    "https://ww5.manganelo.tv",
   //                                  0    "https://www.mangainn.net",
   const serverName = [
-    {
-      sv: 0,
-      name: "mangainn.net",
-      icon: <VN title="Vietnamese" className="h-4 w-4" />,
-    },
+    // {
+    //   sv: 0,
+    //   name: "mangainn.net",
+    //   icon: <US title="Vietnamese" className="h-4 w-4" />,
+    // },
     {
       sv: 1,
       name: "ww5.manganelo.tv",
-      icon: <US title="Vietnamese" className="h-4 w-4" />,
-    },
-    {
-      sv: 7,
-      name: "readm.org",
-      icon: <AC title="Vietnamese" className="h-4 w-4" />,
+      icon: <JP title="Vietnamese" className="h-4 w-4" />,
     },
     {
       sv: 2,
       name: "mangareader.cc",
-      icon: <IC title="Vietnamese" className="h-4 w-4" />,
-    },
-    {
-      sv: 6,
-      name: "mangakomi.io",
-      icon: <EU title="Vietnamese" className="h-4 w-4" />,
-    },
-    // {
-    //   sv: 8,
-    //   name: "mangajar.com",
-    //   icon: <XK title="Vietnamese" className="h-4 w-4" />,
-    // },
-    // {
-    //   sv: 5,
-    //   name: "https://mangajar.com/manga",
-    //   icon: <JP title="Vietnamese" className="h-4 w-4" />,
-    // },
-    {
-      sv: 18,
-      name: "it.ninemanga.com",
       icon: <JP title="Vietnamese" className="h-4 w-4" />,
     },
-
     {
-      sv: 11,
-      name: "novelhall.com",
+      sv: 3,
+      name: "ninemanga.com",
       icon: <JP title="Vietnamese" className="h-4 w-4" />,
     },
     {
@@ -111,15 +87,80 @@ export default function Layout() {
       icon: <XK title="Vietnamese" className="h-4 w-4" />,
     },
     {
+      sv: 5,
+      name: "mangajar.com/manga",
+      icon: <EU title="Vietnamese" className="h-4 w-4" />,
+    },
+    {
+      sv: 6,
+      name: "mangakomi.io",
+      icon: <US title="Vietnamese" className="h-4 w-4" />,
+    },
+    {
+      sv: 7,
+      name: "readm.org",
+      icon: <EU title="Vietnamese" className="h-4 w-4" />,
+    },
+    // {
+    //   sv: 8,
+    //   name: "mangajar.com",
+    //   icon: <XK title="Vietnamese" className="h-4 w-4" />,
+    // },
+    {
+      sv: 9,
+      name: "swatmanga.com",
+      icon: <EU title="Vietnamese" className="h-4 w-4" />,
+    },
+    {
+      sv: 10,
+      name: "mangajar.com",
+      icon: <JP title="Vietnamese" className="h-4 w-4" />,
+    },
+    {
+      sv: 11,
+      name: "novelhall.com",
+      icon: <JP title="Vietnamese" className="h-4 w-4" />,
+    },
+    {
       sv: 12,
       name: "mto.com",
       icon: <JP title="Vietnamese" className="h-4 w-4" />,
     },
     {
-      sv: 9,
-      name: "swatmanga.com",
+      sv: 13,
+      name: "de.ninemanga.com",
       icon: <JP title="Vietnamese" className="h-4 w-4" />,
     },
+    {
+      sv: 14,
+      name: "br.ninemanga.com",
+      icon: <JP title="Vietnamese" className="h-4 w-4" />,
+    },
+    {
+      sv: 15,
+      name: "ru.ninemanga.com",
+      icon: <RU title="Vietnamese" className="h-4 w-4" />,
+    },
+    {
+      sv: 16,
+      name: "es.ninemanga.com",
+      icon: <JP title="Vietnamese" className="h-4 w-4" />,
+    },
+    {
+      sv: 17,
+      name: "fr.ninemanga.com",
+      icon: <FR title="Vietnamese" className="h-4 w-4" />,
+    },
+    {
+      sv: 18,
+      name: "it.ninemanga.com",
+      icon: <US title="Vietnamese" className="h-4 w-4" />,
+    },
+    // {
+    //   sv: 19,
+    //   name: "azoranov.com/series/",
+    //   icon: <US title="Vietnamese" className="h-4 w-4" />,
+    // },
   ];
 
   const dispatch = useDispatch();
@@ -201,8 +242,8 @@ export default function Layout() {
     arr_url[i] = arr_id_manga[i].lastIndexOf("/");
     arr_path[i] = arr_id_manga[i].slice(arr_url[i] + 1, 1000);
   }
-  console.log(arr_path);
-  console.log(path);
+  // console.log(arr_path);
+  // console.log(path);
   const handleCloseSearch = () => {
     setCheckSearch(false);
   };

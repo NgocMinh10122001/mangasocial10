@@ -17,37 +17,38 @@ const NewUsers = () => {
     // })();
     const newsResponse = await prodApis.server(sv);
     setNewUser(newsResponse.data[11].data);
-    console.log(newsResponse.data[11].data);
+    // console.log(newsResponse.data[11].data);
   };
 
   return (
     <>
       <div>
         <div className="news-right">
-          
-            <div className="lab">
-              <label>NEW USER</label>{" "}
-            </div>
-            {newUser &&
-              newUser.map((newUser, index) => {
-                return (
-                  <Link to="/view-user-profile" state={newUser.id_user} key={index}>
-                    
-                    <div className="username md:pt-0 xl:pt-[30px]" >
-                      <img
-                        className="avatar"
-                        src={newUser.avatar_user}
-                        alt="avatar"
-                      />
-                      <span className="text-avatar">{newUser.name_user}</span>
-                      <span className="date-text">
-                        {newUser.participation_time}
-                      </span>
-                    </div>
-                  </Link>
-                );
-              })}
-         
+          <div className="lab">
+            <label>NEW USER</label>{" "}
+          </div>
+          {newUser &&
+            newUser.map((newUser, index) => {
+              return (
+                <Link
+                  to={`/${sv}/view-user-profile`}
+                  state={newUser.id_user}
+                  key={index}
+                >
+                  <div className="username md:pt-0 xl:pt-[30px]">
+                    <img
+                      className="avatar"
+                      src={newUser.avatar_user}
+                      alt="avatar"
+                    />
+                    <span className="text-avatar">{newUser.name_user}</span>
+                    <span className="date-text">
+                      {newUser.participation_time}
+                    </span>
+                  </div>
+                </Link>
+              );
+            })}
         </div>
       </div>
     </>

@@ -19,6 +19,15 @@ const MangaCategory = () => {
   useEffect(() => {
     getManga();
   }, []);
+    const extractNovelId = (url) => {
+    const parts = url.split('/');
+    return parts.find(part => part.startsWith('novel_'));
+  };
+  const extractChapterId = (url) => {
+    const parts = url.split('/');
+    const chapterPart = parts.find(part => part.startsWith('chapter_'));
+    return chapterPart ? chapterPart.split('_')[1] : null;
+  };
 
   function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -31,6 +40,7 @@ const MangaCategory = () => {
         </h2>
       </div>
       <div className="grid grid-cols-5 gap-[20px]">
+        {console.log("chek manga", manga)}
         {manga.slice(0, 20).map((item, index) => (
           <CardManga
             key={index}
@@ -38,8 +48,8 @@ const MangaCategory = () => {
             title={item?.title}
             rate={item?.rate}
             update={item.time_release}
-            chapter={item?.chapter_new}
-            path_segment={item?.path_segment_manga}
+            chapter={extractChapterId(item?.chaper_new)}
+            path_segment={extractNovelId(item?.chaper_new)}
           />
         ))}
       </div>

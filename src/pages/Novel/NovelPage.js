@@ -63,7 +63,7 @@ const NovelPage = () => {
     const res = await axios.get(link_novel);
     setChapterData(res.data);
     let content = res.data.content;
-    let first = content.indexOf("Chapter ");
+    let first = content.indexOf("Chapter");
     let last = content.indexOf("Chapter", first + 1);
     setSubTitle(content.substring(first + 10, last));
   };
@@ -389,15 +389,17 @@ const NovelPage = () => {
                 className="bg-[#138e00] w-[200px] rounded-lg text-white justify-center"
                 onChange={() => handleChapter()}
               >
-                <>{console.log("chapter detail:", chapterDetail)}</>
-                {/* {chapterDetail[0]?.chapters?.map((item, index) => (
+                <option value={0}>Select Chapter</option>
+                {/* <>{console.log("chapter detail:", chapterDetail)}</> */}
+                {chapterDetail[0]?.chapters?.map((item, index) => (
                   <option value={item} key={index}>
-                    {item.replace(
+                    {/* {item.replace(
                       "http://apimanga.mangasocial.online/rnovel/" + slug + "/",
                       ""
-                    )}
+                    )} */}
+                    {`Chapter_${index + 1}`}
                   </option>
-                ))} */}
+                ))}
               </select>
 
               <button

@@ -39,7 +39,7 @@ export default function Index() {
 
       <div className="title-released-comic ">
         <h2>New Released Comic</h2>
-        <Link to="/newRelease">
+        <Link to={`/${sv}/newRelease`}>
           <p>See all</p>
         </Link>
       </div>
@@ -55,14 +55,14 @@ export default function Index() {
 
       <div className="title-released-comic">
         <h2>Recommended Comics</h2>
-        <Link to="/recommended">
+        <Link to={`/${sv}/recommended`}>
           <p>See all</p>
         </Link>
       </div>
       <Recommended />
       <div className="title-released-comic">
         <h2>Comming Soon Comics</h2>
-        <Link to="/commingsoon">
+        <Link to={`/${sv}/commingsoon`}>
           <p>See all</p>
         </Link>
       </div>
@@ -85,7 +85,7 @@ export default function Index() {
       <ComedyComics />
       <div className="title-released-comic">
         <h2>Free Comics</h2>
-        <Link to={`/`}>
+        <Link to={`/${sv}`}>
           <p>See all</p>
         </Link>
       </div>

@@ -32,7 +32,7 @@ export default function Login() {
 const token = Buffer.from(`dooxxinhgai@gmail.com:12345678`, 'utf8').toString('base64')
   const loginSubmit = async () => {
     try {
-      
+      // console.log("check input", input);
       const response = await axios.post("https://apimanga.mangasocial.online/login", input);
       if (response?.data.errCode !== 200) {
         message.error(response.data.message);
@@ -54,6 +54,8 @@ const token = Buffer.from(`dooxxinhgai@gmail.com:12345678`, 'utf8').toString('ba
     }
   };
   const handleSubmit = async () => {
+      // console.log("check input", input);
+
     await loginSubmit();
   };
 
@@ -175,12 +177,12 @@ const token = Buffer.from(`dooxxinhgai@gmail.com:12345678`, 'utf8').toString('ba
               )}
             </div>
 
-            <div className="w-full p-[10px] bg-[#929292] rounded-md hover:bg-[#EA6016] cursor-pointer">
+            <div className="w-full p-[10px] bg-[#929292] rounded-md hover:bg-[#EA6016] cursor-pointer" onClick={ handleSubmit}>
               <input
                 className="w-full border-none outline-none text-white opacity-100 uppercase bg-transparent cursor-pointer"
                 type="submit"
                 value={"Log in"}
-                onClick={handleSubmit}
+                onClick={ handleSubmit}
               />
             </div>
           </div>

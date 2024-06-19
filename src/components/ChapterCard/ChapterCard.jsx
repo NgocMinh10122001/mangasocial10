@@ -14,13 +14,21 @@ const ChapterCard = ({ chapter, title, poster, des, slug, chapterLink }) => {
     `https://apimanga.mangasocial.online/web/rmanga/${sv}/${slug}/`,
     ""
   );
-  console.log(chapterNumberReadMode);
+    const getChapterFromUrl = (url) => {
+    const parts = url.split('/');
+    return parts[parts.length - 1];
+  };
+  console.log("chapter", chapterNumber);
+  console.log("chapter2", chapterNumberReadMode);
+  // console.log("chapter3", chapterNumberReadMode);
+
+
 
   const truncatedDes = des.length > 50 ? `${des.slice(0, 50)}...` : des;
   return (
     <>
-      {readmode == true ? (
-        <NavLink to={`/${sv}/chapter/${slug}/${chapterNumberReadMode}`}>
+      {readmode == false? (
+        <NavLink to={`/${sv}/chapter/${slug}/${getChapterFromUrl(chapterNumberReadMode)}`}>
           <div className=" flex items-center gap-[239px] cursor-pointer py-[24px] px-[48px] hover:bg-[#000] border-b-2 border-gray-500 rounded-xl">
             {/* chapter info */}
             <div className="flex items-center gap-[12px] ">
@@ -31,7 +39,7 @@ const ChapterCard = ({ chapter, title, poster, des, slug, chapterLink }) => {
               />
               <div>
                 <div className="text-[24px] font-semibold leading-[32px] text-white ">
-                  {`${title} - ${chapterNumber} `}
+                  {`${title} - ${getChapterFromUrl(chapterNumberReadMode)} `}
                 </div>
                 <div className="text-[22px] font-semibold leading-[28px] text-white ">
                   12/07/2023

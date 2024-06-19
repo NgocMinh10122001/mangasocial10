@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    readmode:false,
+  readmode: false,
 };
 
 export const readModeSlice = createSlice({
@@ -17,7 +17,6 @@ export const readModeSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const {changeReadMode } = readModeSlice.actions;
-
+export const { changeReadMode } = readModeSlice.actions;
 
 export default readModeSlice.reducer;

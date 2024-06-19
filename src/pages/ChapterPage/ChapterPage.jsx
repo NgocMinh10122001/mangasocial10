@@ -22,7 +22,6 @@ const ChapterPage = () => {
   const [showFullDescription, setShowFullDescription] = useState(false);
   const [comment, setComment] = useState("");
   const [loading, setLoading] = useState(true);
-  // console.log("check chapter", chapterDetail);
 
 
   const params = useParams();
@@ -384,12 +383,13 @@ const ChapterPage = () => {
                   />
                   <div>{Object.keys(listChapter).length} chapters</div>
                 </div>
-                {readmode == true ? (
+                {readmode == false? (
                   <div className="px-12 py-6">
                     {linkList
                       .slice(0, visibleChapterCount)
                       .map((item, index) => (
                         <div key={index}>
+                          { console.log("check item", item)}
                           <ChapterCard
                             chapterLink={item}
                             title={chapterDetail?.title}

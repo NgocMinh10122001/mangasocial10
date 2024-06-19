@@ -78,7 +78,7 @@ const Novel = () => {
             <p>See all</p>
           </NavLink>
         </div>
-        <NovelList index={0} />
+        <NovelList index={1} />
 
         <div className="title-released-comic">
           <h2>Recommended Novel</h2>

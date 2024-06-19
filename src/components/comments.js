@@ -4,8 +4,12 @@ import useFetch from "../hooks/useFetch";
 import { useSelector } from "react-redux";
 const Comments = () => {
   const cmt = useFetch(12);
-  console.log(cmt);
+  // console.log(cmt);
   const sv = useSelector((state) => state.server.sv);
+  const extractNovelId = (url) => {
+    const parts = url.split("/");
+    return parts[parts.length - 1];
+  };
   return (
     <div>
       <div className="comments">
@@ -32,10 +36,8 @@ const Comments = () => {
                 <img className="ri-book" src="/images/ri_book-fill.svg"></img>
                 <NavLink
                   className="comic-name"
-                  to={`${sv}/chapter/${item.url_manga.replace(
-                    "http://apimanga.mangasocial.online/manga/",
-                    ""
-                  )}`}
+                  to={`/${sv}/chapter/${extractNovelId(item.url_manga)}
+                  `}
                 >
                   {item.title_manga}
                 </NavLink>
