@@ -61,11 +61,11 @@ export default function Layout() {
   //                                  1    "https://ww5.manganelo.tv",
   //                                  0    "https://www.mangainn.net",
   const serverName = [
-    // {
-    //   sv: 0,
-    //   name: "mangainn.net",
-    //   icon: <US title="Vietnamese" className="h-4 w-4" />,
-    // },
+    {
+      sv: 0,
+      name: "mangainn.net",
+      icon: <US title="Vietnamese" className="h-4 w-4" />,
+    },
     {
       sv: 1,
       name: "ww5.manganelo.tv",

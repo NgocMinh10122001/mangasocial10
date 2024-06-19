@@ -11,9 +11,6 @@ import Cookies from "js-cookie";
 import CMT_list from "./../../components/cmt_list";
 import Loading from "../../components/Loading/Loading";
 
-
-
-
 const ChapterPage = () => {
   const [showTab, setShowTab] = useState(true);
   const [chapterDetail, setChapterDetail] = useState([]);
@@ -22,7 +19,6 @@ const ChapterPage = () => {
   const [showFullDescription, setShowFullDescription] = useState(false);
   const [comment, setComment] = useState("");
   const [loading, setLoading] = useState(true);
-
 
   const params = useParams();
   const { slug } = params;
@@ -80,12 +76,6 @@ const ChapterPage = () => {
     fetchChapterDetail();
   }, []);
 
-  useEffect(() => {
-    document.title = chapterDetail.title || "ManageSocial"
-  },[chapterDetail])
-
- 
-
   const handleSeeMore = () => {
     setVisibleChapterCount((prevCount) => prevCount + 10);
   };
@@ -129,7 +119,6 @@ const ChapterPage = () => {
 
   return (
     <div style={{ zoom: 0.9 }}>
-      
       <div
         className=" w-[100%] h-full bg-cover bg-center bg-no-repeat md:flex md:gap-30 px-[14px] pt-[14px] md:px-[141px] md:pt-[48px] gap-10"
         style={{
@@ -383,13 +372,12 @@ const ChapterPage = () => {
                   />
                   <div>{Object.keys(listChapter).length} chapters</div>
                 </div>
-                {readmode == false? (
+               
                   <div className="px-12 py-6">
                     {linkList
                       .slice(0, visibleChapterCount)
                       .map((item, index) => (
                         <div key={index}>
-                          { console.log("check item", item)}
                           <ChapterCard
                             chapterLink={item}
                             title={chapterDetail?.title}
@@ -400,23 +388,7 @@ const ChapterPage = () => {
                         </div>
                       ))}
                   </div>
-                ) : (
-                  <div className="px-12 py-6">
-                    {sortedChapters
-                      ?.slice(0, visibleChapterCount)
-                      .map((chapter, index) => (
-                        <div key={index}>
-                          <ChapterCard
-                            chapter={chapter}
-                            title={chapterDetail?.title}
-                            des={chapterDetail?.description}
-                            poster={chapterDetail?.poster}
-                            slug={slug}
-                          />
-                        </div>
-                      ))}
-                  </div>
-                )}
+              
                 <div className="text-center mt-5">
                   <button
                     className="font-semibold text-[32px] leading-[40px] text-white  "
