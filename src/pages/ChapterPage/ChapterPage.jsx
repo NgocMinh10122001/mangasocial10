@@ -241,7 +241,7 @@ const ChapterPage = () => {
                     alt=""
                     className="h-[32px] w-[32px] hidden md:block"
                   />
-                  <div>{`${chapterDetail[0]?.chapters.length} chapter `} </div>
+                  <div>{`${chapterDetail.chapters.length} chapter `} </div>
                 </div>
               </div>
             </div>
@@ -419,7 +419,7 @@ const ChapterPage = () => {
             {/* logined user comment */}
             {sessionStorage.getItem("user_email") ? (
               <div className="w-full flex justify-center">
-                <div className="antialiased   mt-8 w-[91%] ">
+                <div className="antialiased   mt-8 w-full px-[14px] md:px-[141px] ">
                   <div className="space-y-4">
                     <div className="flex">
                       <div className="flex-shrink-0 mr-3">
