@@ -79,6 +79,7 @@ const ChapterPage = () => {
       console.log("slug:", slug);
     }
   };
+ 
 
   useEffect(() => {
     fetchChapterDetail();
@@ -108,6 +109,12 @@ const ChapterPage = () => {
     return listChapter[link];
   });
 
+
+
+    const getChapterFromUrl = (url) => {
+    const parts = url.split('/');
+    return parts[parts.length - 1];
+  };
   const viewsString = chapterDetail?.views || "";
   const startIndex = viewsString.lastIndexOf("has ") + 4;
   const viewsPart = viewsString.substring(startIndex);
@@ -241,7 +248,7 @@ const ChapterPage = () => {
                     alt=""
                     className="h-[32px] w-[32px] hidden md:block"
                   />
-                  <div>{`${chapterDetail.chapters.length} chapter `} </div>
+                  <div>{`${chapterDetail?.chapters?.length} chapter `} </div>
                 </div>
               </div>
             </div>
@@ -250,11 +257,11 @@ const ChapterPage = () => {
             <div className="flex flex-col gap-[40px]">
               {/* button */}
               <div className="flex  gap-5">
-                <button className=" p-[8px]  rounded-[12px] md:px-[52px] md:py-[26px]  bg-[#FF2020]  text-white md:rounded-[67px] ">
+                <Link to={`/${sv}/chapter/${slug}/${getChapterFromUrl(linkList[0]?? "")}`} className=" hover:text-white p-[8px]  rounded-[12px] md:px-[52px] md:py-[26px]  bg-[#FF2020]  text-white md:rounded-[67px] ">
                   <div className="font-bold text-[12px] leading-[16px] md:text-[36px] md:leading-[44px] ">
                     Read now
                   </div>
-                </button>
+                </Link>
                 <button className={ ` p-[8px]  rounded-[12px] text-black md:px-[52px] md:py-[26px]   ${active ? "bg-[#FF2020]": "bg-[#496EF1]"}  md:text-white md:rounded-[67px]`} onClick={() => handleActive("list")}>
                   <div className="font-bold text-[12px] leading-[16px] md:text-[36px] md:leading-[44px] flex gap-1 md:gap-3 " >
                     <div> My List </div>
