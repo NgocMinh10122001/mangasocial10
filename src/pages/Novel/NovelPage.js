@@ -18,6 +18,7 @@ const NovelPage = () => {
   const [showTab, setShowTab] = useState(true);
   const [chapterDetail, setChapterDetail] = useState([]);
   const [chapterData, setChapterData] = useState("");
+  // console.log("check chapter", chapterData);
   const [subTitle, setSubTitle] = useState("");
   const [listChap, setListChap] = useState("");
   const [visibleChapterCount, setVisibleChapterCount] = useState(12);
@@ -25,10 +26,10 @@ const NovelPage = () => {
   const [comment, setComment] = useState("");
   const params = useParams();
   const { slug } = params;
-  console.log("check slug", slug);
   const sv = useSelector((state) => state.server.sv);
   const user_id = sessionStorage.getItem("user_id");
   const [currentChap, setCurrentChap] = useState("");
+
   const text =
     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora delectus maiores dolores iste in autem accusantium corrupti dolorum ex molestias aut magni voluptates obcaecati esse, impedit, nam numquam repudiandae recusandae!";
 
@@ -39,6 +40,7 @@ const NovelPage = () => {
     fetchChapterContent(selectedChapter);
     setCurrentChap(selectedChapter);
   };
+
   const nextChap = () => {
     let indexOfCurrentChap = listChap.indexOf(currentChap);
     if (indexOfCurrentChap == listChap.length - 1) {
@@ -60,6 +62,7 @@ const NovelPage = () => {
   };
 
   const fetchChapterContent = async (link_novel) => {
+    // console.log("check link", link_novel);
     const res = await axios.get(link_novel);
     setChapterData(res.data);
     let content = res.data.content;
@@ -93,10 +96,11 @@ const NovelPage = () => {
       const response = await axios.get(
         `https://apimanga.mangasocial.online/rnovel/${slug}`
       );
-      console.log("check res", response);
+      // console.log("check res", response);
       setChapterDetail(response.data);
       setCurrentChap(response.data[0].chapters[0]);
       setListChap(response.data[0].chapters);
+      fetchChapterContent(response.data[0].chapters[0]);
       console.log("chapter detail:", response.data);
     } catch (error) {
       console.log(error);
@@ -383,16 +387,14 @@ const NovelPage = () => {
               </button>
 
               <select
-                defaultValue="aaa"
                 name="chapterList"
                 id="chapterList"
                 className="bg-[#138e00] w-[200px] rounded-lg text-white justify-center"
+                value={currentChap}
                 onChange={() => handleChapter()}
               >
-                <option value={0}>Select Chapter</option>
-                {/* <>{console.log("chapter detail:", chapterDetail)}</> */}
                 {chapterDetail[0]?.chapters?.map((item, index) => (
-                  <option value={item} key={index}>
+                  <option value={item} key={index + 1}>
                     {/* {item.replace(
                       "http://apimanga.mangasocial.online/rnovel/" + slug + "/",
                       ""

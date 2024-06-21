@@ -47,7 +47,7 @@ export default function Index() {
 
       <div className="title-released-comic">
         <h2>Recent Comics</h2>
-        <Link to="/recent">
+        <Link to={`/${sv}/recent`}>
           <p>See all</p>
         </Link>
       </div>

@@ -179,8 +179,9 @@ const ReadChapter = () => {
               id="chapterList"
               className="w-[450px] h-[40px] px-3 rounded-lg"
               onChange={(e) => handleChapter(e)}
-              value={chooseChapter}
+              value={id}
             >
+             
               {listChapter?.map((item, index) => (
                 <option key={index} value={item}>
                   {item}
@@ -239,8 +240,12 @@ const ReadChapter = () => {
               id="chapterList"
               className="w-[450px] h-[40px] px-3 rounded-lg"
               onChange={() => handleChapter()}
-              value={chooseChapter}
+              value={id}
             >
+              
+              <option >
+                  Select Chapter
+                </option>
               {listChapter?.map((item, index) => (
                 <option key={index} value={item}>
                   {item}
