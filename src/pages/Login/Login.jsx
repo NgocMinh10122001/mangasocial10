@@ -7,13 +7,14 @@ import { useNavigate } from "react-router-dom";
 import { Link, Outlet } from "react-router-dom";
 import { CiSearch } from "react-icons/ci";
 import Handle_function from "../../handle_account/handle";
-
+import { useSelector } from "react-redux";
 import { Buffer } from 'buffer';
 
 
 
 export default function Login() {
   const [input, setInput] = useState("");
+  const sv = useSelector((state) => state.server.sv);
   const navigate = useNavigate();
   const [hidden, setHidden] = useState(true);
 
@@ -32,7 +33,7 @@ export default function Login() {
 const token = Buffer.from(`dooxxinhgai@gmail.com:12345678`, 'utf8').toString('base64')
   const loginSubmit = async () => {
     try {
-      // console.log("check input", input);
+      console.log("check input", input);
       const response = await axios.post("https://apimanga.mangasocial.online/login", input);
       if (response?.data.errCode !== 200) {
         message.error(response.data.message);
@@ -47,7 +48,7 @@ const token = Buffer.from(`dooxxinhgai@gmail.com:12345678`, 'utf8').toString('ba
         sessionStorage.setItem("jwt", response?.data.account.jwt);
         console.log(response)
         // console.log(response.headers.getSetCookie());
-        navigate("/");
+        navigate(`/${sv}`);
       }
     } catch (error) {
       console.log(error);
@@ -62,14 +63,14 @@ const token = Buffer.from(`dooxxinhgai@gmail.com:12345678`, 'utf8').toString('ba
   return (
   <>
     <div className="header-top">
-        <Link to="/">
+        <Link to={`/${sv}`}>
           <div className="title">
             <img className="img-manga" src="/images/Ellipse 1.svg" alt=""></img>
             <h3>MangaSocial</h3>
           </div>
         </Link>
         <div className="menu-header">
-          <Link to="/">
+          <Link to={`/${sv}`}>
             <div
               className="comic"
             >
@@ -81,7 +82,7 @@ const token = Buffer.from(`dooxxinhgai@gmail.com:12345678`, 'utf8').toString('ba
             </div>
           </Link>
 
-          <Link to="/genres">
+          <Link to={`/${sv}/genres`}>
             <p>Genres</p>
           </Link>
 
@@ -93,10 +94,10 @@ const token = Buffer.from(`dooxxinhgai@gmail.com:12345678`, 'utf8').toString('ba
           </div>
           
 
-          <Link to="/contact-us">
+          <Link  to={`/${sv}/contact-us`}>
             <p className="contact">Contact us</p>
           </Link>
-          <Link to="/policy">
+          <Link   to={`/${sv}/policy`}>
             <p className="policy">Policy</p>
           </Link>
           <Link

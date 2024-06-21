@@ -3,9 +3,11 @@ import React, { useState, useEffect, useRef } from "react";
 import { GoPerson } from "react-icons/go";
 import { RiLogoutBoxRLine } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 const SubMenu = () => {
   const navigate = useNavigate();
+   const sv = useSelector((state) => state.server.sv);
   const [avatarUser,setAvatarUser] = useState("");
   // Set value hidden
   const [onHidden, setHidden] = useState(false);
@@ -41,7 +43,7 @@ const SubMenu = () => {
   }, []);
 
   const handelAccount = () => {
-    navigate("/user-profile");
+    navigate(`/${sv}/user-profile`);
     setHidden(false);
   };
 
@@ -49,7 +51,7 @@ const SubMenu = () => {
     try {
       await axios.get("https://apimanga.mangasocial.online/logout");
       sessionStorage.clear();
-      navigate("/");
+      navigate(`/${sv}`);
       console.log(sessionStorage.getItem("user"));
     } catch (error) {
       console.log(error);

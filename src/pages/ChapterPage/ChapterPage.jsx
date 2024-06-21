@@ -18,6 +18,7 @@ const ChapterPage = () => {
   const [visibleChapterCount, setVisibleChapterCount] = useState(12);
   const [showFullDescription, setShowFullDescription] = useState(false);
   const [comment, setComment] = useState("");
+  console.log("check comment", comment);
   const [loading, setLoading] = useState(true);
 
   const params = useParams();
@@ -25,6 +26,13 @@ const ChapterPage = () => {
   const sv = useSelector((state) => state.server.sv);
   const readmode = useSelector((state) => state.ReadMode.readmode);
   const user_id = sessionStorage.getItem("user_id");
+  const [active, setActive] = useState(false)
+  
+  const handleActive = (string) => {
+    if(string === "list"){
+      setActive(!active)
+    }
+  }
 
   const handleShowTab = () => {
     setShowTab(!showTab);
@@ -247,8 +255,8 @@ const ChapterPage = () => {
                     Read now
                   </div>
                 </button>
-                <button className=" p-[8px]  rounded-[12px] text-black md:px-[52px] md:py-[26px]   bg-[#496EF1]  md:text-white md:rounded-[67px]">
-                  <div className="font-bold text-[12px] leading-[16px] md:text-[36px] md:leading-[44px] flex gap-1 md:gap-3 ">
+                <button className={ ` p-[8px]  rounded-[12px] text-black md:px-[52px] md:py-[26px]   ${active ? "bg-[#FF2020]": "bg-[#496EF1]"}  md:text-white md:rounded-[67px]`} onClick={() => handleActive("list")}>
+                  <div className="font-bold text-[12px] leading-[16px] md:text-[36px] md:leading-[44px] flex gap-1 md:gap-3 " >
                     <div> My List </div>
                     <img
                       src="/images/ChapterPage/uil_plus.png"
@@ -341,7 +349,7 @@ const ChapterPage = () => {
           className={` ${showTab ? "tabbtn" : " none-tab "} `}
           onClick={handleShowTab}
         >
-          Chapter
+          { active ? "My List": "Chapter"}
         </div>
         <div
           className={` ${!showTab ? "tabbtn" : " none-tab "} `}
@@ -361,7 +369,7 @@ const ChapterPage = () => {
         />
       ) : (
         <div>
-          {showTab && (
+          {showTab && active === false && (
             <div className="bg-[#000] flex py-[50px] px-[100px] justify-center">
               <div className="bg-[#4A4A4A] py-[24px] px-[48px]">
                 <div className="flex items-center gap-2 font-semibold text-[22px] leading-[28px] text-white ">
@@ -399,18 +407,19 @@ const ChapterPage = () => {
                 </div>
               </div>
             </div>
-          )}
+            )}
+            { active && <div className="text-white bg-[#000] w-full flex py-[50px] px-[100px] justify-center">My list</div> }
         </div>
       )}
 
-      <div className="flex justify-center bg-black h-[1000vh]">
+      <div className="flex justify-center bg-black h-[1000vh] w-full">
         {!showTab && (
-          <div className="flex flex-col">
+          <div className="flex flex-col items-center w-full mt-8 ">
             <CMT_list cmt_arr={chapterDetail.comments} />
             {/* logined user comment */}
             {sessionStorage.getItem("user_email") ? (
-              <div>
-                <div className="antialiased mx-auto max-w-screen-sm scale-150 mt-24 w-[1000px]">
+              <div className="w-full flex justify-center">
+                <div className="antialiased   mt-8 w-[91%] ">
                   <div className="space-y-4">
                     <div className="flex">
                       <div className="flex-shrink-0 mr-3">
@@ -420,15 +429,15 @@ const ChapterPage = () => {
                           alt=""
                         />
                       </div>
-                      <div className="flex-1 border rounded-lg px-4 py-2 leading-relaxed">
-                        <div className="flex items-center">
-                          <strong className="text-white flex items-center">
+                      <div className="flex-1 border rounded-lg px-4 py-2 pb-4 leading-relaxed">
+                        <div className="flex items-center ">
+                          <strong className="text-white flex items-center ">
                             {sessionStorage.getItem("user_email")}
                           </strong>{" "}
                         </div>
                         <div className="flex flex-row gap-6">
                           <input
-                            className="text-lg text-white bg-slate-500 h-24 w-full rounded-lg my-2"
+                            className="text-lg text-white bg-slate-500 h-32  w-full rounded-lg my-2"
                             onChange={(e) => commentOnchange(e)}
                           ></input>
                           <button

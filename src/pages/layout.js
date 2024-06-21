@@ -191,9 +191,9 @@ export default function Layout() {
       document.removeEventListener("click", handleClickOutside);
     };
   }, []);
-  useEffect(() => {
-    navigate("/" + sv);
-  }, []);
+  // useEffect(() => {
+  //   navigate("/" + sv);
+  // }, []);
   const fetchData = (value) => {
     fetch("https://apimanga.mangasocial.online/")
       .then((response) => response.json())

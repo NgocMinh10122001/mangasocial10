@@ -2,10 +2,19 @@ import { Link } from "react-router-dom";
 import ComicRecent from "../../components/comicRecent";
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
+import { PiBagSimpleFill } from "react-icons/pi";
+import { PiGenderIntersexFill } from "react-icons/pi";
+import { FaTelegram } from "react-icons/fa";
+import { FaTags } from "react-icons/fa";
+import { FaBirthdayCake } from "react-icons/fa";
+import { RiKey2Fill } from "react-icons/ri";
+import { IoSettingsSharp } from "react-icons/io5";
 import { Modal } from "antd";
-
+import { Button, Checkbox, Form, Input } from "antd";
+import * as message from "../../components/Message/Message";
 function UserProfile() {
   const [userData, setUserData] = useState();
+  console.log("check userdata", userData);
   const [data, setData] = useState("");
   const [gioitinh, setGioitinh] = useState("");
   const inputRef = useRef(null);
@@ -14,7 +23,32 @@ function UserProfile() {
   const [openJob, setJob] = useState(false);
   const [openGender, setGender] = useState(false);
   const [openBirth, setBirth] = useState(false);
+  const [openPass, setPass] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  console.log("check id", sessionStorage.getItem("user_id"));
+  const onFinish = async (values) => {
+    try {
+      const response = await axios.post(
+        `https://apimanga.mangasocial.online//${sessionStorage.getItem(
+          "user_id"
+        )}/setting/password`,
+        values
+      );
+      message.success(`Update password is successfully, You have successfully registered for a mangasocial account. Please log in to your email, search for the verify account email to activate it, if not found, go to spam to search
+`);
+      console.log("check res", response);
 
+      //   if (response && response.data) {
+      // handleCancel();
+
+      //    }
+    } catch (error) {
+      message.error(`${error.response.data.message}`);
+    }
+  };
+  const onFinishFailed = (errorInfo) => {
+    console.log("Failed:", errorInfo);
+  };
   const handleGender = () => {
     let selectGender = document.getElementById("gender");
     let selectedValue = selectGender.options[selectGender.selectedIndex].value;
@@ -23,8 +57,16 @@ function UserProfile() {
   const handleChangeData = (e) => {
     setData(e.target.value);
   };
-
-  const showModal = (type) => {
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+  const showModalInput = (type) => {
     if (type === "introduction") {
       setOpenIntroduction(true);
     } else if (type === "job") {
@@ -35,6 +77,9 @@ function UserProfile() {
       setBirth(true);
     } else if (type === "name") {
       setOpeName(true);
+    } else if (type === "pass") {
+      setPass(true);
+      showModal();
     }
   };
   const editUserData = async (type, value) => {
@@ -122,13 +167,17 @@ function UserProfile() {
     } else if (type === "name") {
       setOpeName(false);
       editUserData("name", data);
+    } else if (type === "pass") {
+      setPass(false);
+      // editUserData("name", data);
     }
   };
 
   const fetchUserData = async () => {
     try {
       const res = await axios.get(
-        "https://apimanga.mangasocial.online/user/" + sessionStorage.getItem("user_id")
+        "https://apimanga.mangasocial.online/user/" +
+          sessionStorage.getItem("user_id")
       );
       setUserData(res.data);
       console.log(res.data);
@@ -142,23 +191,28 @@ function UserProfile() {
   const chosefile = (e) => {
     const file = e.target.files[0];
     axios
-    .post("https://apimanga.mangasocial.online/user/setting/" + sessionStorage.getItem("user_id")+"/", {gender:userData.gender,avatar_user:file},{
-      headers:{
-        "Content-Type":"multipart/form-data",
-      }
-    })
-    .then((response) => {
-      if(response.status===200){
-        alert("Update avatar successfull!");
-        window.location.reload();
-      }
-      else{
-        alert("Something Wrong!")
-      }
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+      .post(
+        "https://apimanga.mangasocial.online/user/setting/" +
+          sessionStorage.getItem("user_id") +
+          "/",
+        { gender: userData.gender, avatar_user: file },
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      )
+      .then((response) => {
+        if (response.status === 200) {
+          alert("Update avatar successfull!");
+          window.location.reload();
+        } else {
+          alert("Something Wrong!");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
   useEffect(() => {
     fetchUserData();
@@ -221,10 +275,10 @@ function UserProfile() {
                         {userData?.name_user}
                       </h2>
                       <svg
-                        onClick={() => showModal("name")}
+                        onClick={() => showModalInput("name")}
                         xmlns="http://www.w3.org/2000/svg"
-                        width="32"
-                        height="32"
+                        width="28"
+                        height="28"
                         viewBox="0 0 24 24"
                         fill="none"
                         stroke="currentColor"
@@ -248,8 +302,8 @@ function UserProfile() {
                         />
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
-                          width="32"
-                          height="32"
+                          width="28"
+                          height="28"
                           viewBox="0 0 24 24"
                           fill="none"
                           stroke="currentColor"
@@ -284,7 +338,7 @@ function UserProfile() {
                   <p type="text" className="text-[24px] inline-block w-[90%]">
                     {userData?.introduction
                       ? userData.introduction
-                      : "Not set yet"}
+                      : "Update Introduction"}
                   </p>
                 ) : (
                   <input
@@ -297,10 +351,10 @@ function UserProfile() {
 
                 {!openIntroduction ? (
                   <svg
-                    onClick={() => showModal("introduction")}
+                    onClick={() => showModalInput("introduction")}
                     xmlns="http://www.w3.org/2000/svg"
-                    width="32"
-                    height="32"
+                    width="28"
+                    height="28"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
@@ -315,8 +369,8 @@ function UserProfile() {
                 ) : (
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    width="32"
-                    height="32"
+                    width="28"
+                    height="28"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
@@ -332,23 +386,23 @@ function UserProfile() {
               </div>
               <hr />
             </div>
-            <div className="flex my-[30px]">
-              <img
-                src="images\UserProfile\material-symbols_work-sharp.png"
-                alt=""
-                className="w-[32px] h-[32px]"
+            <div className="flex  my-[30px] items-center gap-2">
+              <PiBagSimpleFill
+                size={30}
+                className="text-white"
+                onClick={() => showModalInput("job")}
               />
 
               {!openJob ? (
                 <div className="flex">
                   <p className="text-[22px] pl-2">
-                    {userData?.job ? userData.job : "Not set yet"}
+                    {userData?.job ? userData.job : "Update Job"}
                   </p>
                   <svg
-                    onClick={() => showModal("job")}
+                    onClick={() => showModalInput("job")}
                     xmlns="http://www.w3.org/2000/svg"
-                    width="32"
-                    height="32"
+                    width="28"
+                    height="28"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
@@ -360,6 +414,11 @@ function UserProfile() {
                     <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
                     <path d="m15 5 4 4" />
                   </svg>
+                  {/* <PiBagSimpleFill
+                    size={30}
+                    className="text-white"
+                    onClick={() => showModalInput("job")}
+                  /> */}
                 </div>
               ) : (
                 <div className="flex">
@@ -371,8 +430,8 @@ function UserProfile() {
                   />
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    width="32"
-                    height="32"
+                    width="28"
+                    height="28"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
@@ -384,24 +443,23 @@ function UserProfile() {
                   >
                     <path d="M20 6 9 17l-5-5" />
                   </svg>
+
+                  {/* <PiBagSimpleFill size={ 20}  onClick={() => hideModal("job")}/> */}
                 </div>
               )}
             </div>
-            <div className="flex mb-[30px]">
-              <img
-                src="images\UserProfile\ph_gender-intersex-bold.png"
-                alt=""
-                className="w-[32px] h-[32px]"
-              />
-
+            <div className="flex mb-[30px] gap-2 items-center">
+              <PiGenderIntersexFill size={33} className="text-white" />
               {!openGender ? (
                 <div className="flex">
-                  <p className="text-[22px] pl-2">{userData?.gender}</p>
+                  <p className="text-[22px] pl-2">
+                    {userData?.gender || "Update Sex"}
+                  </p>
                   <svg
-                    onClick={() => showModal("gender")}
+                    onClick={() => showModalInput("gender")}
                     xmlns="http://www.w3.org/2000/svg"
-                    width="32"
-                    height="32"
+                    width="28"
+                    height="28"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
@@ -413,6 +471,7 @@ function UserProfile() {
                     <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
                     <path d="m15 5 4 4" />
                   </svg>
+                  {/* <PiGenderIntersexFill size={30} className="text-white" />; */}
                 </div>
               ) : (
                 <div className="flex">
@@ -436,8 +495,8 @@ function UserProfile() {
                   </select>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    width="32"
-                    height="32"
+                    width="28"
+                    height="28"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
@@ -452,20 +511,13 @@ function UserProfile() {
                 </div>
               )}
             </div>
-            <div className="flex mb-[30px]">
-              <img
-                src="images\UserProfile\Frame 48097208.png"
-                alt=""
-                className="w-[32px] h-[32px]"
-              />
+            <div className="flex mb-[30px] gap-2 items-center">
+              <FaTags size={30} className="text-white" />
+
               <p className="text-[22px] pl-2">Manga-Action-Mystery</p>
             </div>
-            <div className="flex mb-[30px]">
-              <img
-                src="images\UserProfile\jam_birthday-cake-f.png"
-                alt=""
-                className="w-[32px] h-[32px]"
-              />
+            <div className="flex mb-[30px] gap-2 items-center">
+              <FaBirthdayCake size={27} className="text-white" />
 
               {!openBirth ? (
                 <div className="flex">
@@ -475,10 +527,10 @@ function UserProfile() {
                       : "Date of birth has not been set"}
                   </p>
                   <svg
-                    onClick={() => showModal("birth")}
+                    onClick={() => showModalInput("birth")}
                     xmlns="http://www.w3.org/2000/svg"
-                    width="32"
-                    height="32"
+                    width="28"
+                    height="28"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
@@ -490,6 +542,7 @@ function UserProfile() {
                     <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
                     <path d="m15 5 4 4" />
                   </svg>
+                  {/* <FaBirthdayCake size={30} className="text-white" /> */}
                 </div>
               ) : (
                 <div className="flex">
@@ -501,8 +554,8 @@ function UserProfile() {
                   />
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    width="32"
-                    height="32"
+                    width="28"
+                    height="28"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
@@ -516,6 +569,160 @@ function UserProfile() {
                   </svg>
                 </div>
               )}
+            </div>
+            <div className="flex mb-[30px] gap-2 items-center">
+              <RiKey2Fill size={31} className="text-white" />
+
+              {/* {!openPass ? ( */}
+              <div className="flex">
+                <p className="text-[22px] pl-2">Password</p>
+                <svg
+                  onClick={() => showModalInput("pass")}
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="28"
+                  height="28"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  className="lucide lucide-pencil cursor-pointer ml-4"
+                >
+                  <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
+                  <path d="m15 5 4 4" />
+                </svg>
+                {/* <FaBirthdayCake size={30} className="text-white" /> */}
+                <Modal
+                  title="Basic Modal"
+                  open={isModalOpen}
+                  onCancel={handleCancel}
+                  footer={false}
+                >
+                  <Form
+                    name="basic"
+                    labelCol={{
+                      span: 8,
+                    }}
+                    wrapperCol={{
+                      span: 16,
+                    }}
+                    style={{
+                      maxWidth: 600,
+                    }}
+                    initialValues={{
+                      remember: true,
+                    }}
+                    onFinish={onFinish}
+                    onFinishFailed={onFinishFailed}
+                    autoComplete="off"
+                  >
+                    <Form.Item
+                      label="Current Password"
+                      name="current_username"
+                      rules={[
+                        {
+                          required: true,
+                          message: "Please input your username!",
+                        },
+                      ]}
+                    >
+                      <Input />
+                    </Form.Item>
+
+                    <Form.Item
+                      label="New Password"
+                      name="new_password"
+                      rules={[
+                        {
+                          required: true,
+                          message: "Please input your password!",
+                        },
+                      ]}
+                    >
+                      <Input.Password />
+                    </Form.Item>
+                    <Form.Item
+                      label="Confirm Password"
+                      name="confirm_password"
+                      rules={[
+                        {
+                          required: true,
+                          message: "Please input your password!",
+                        },
+                      ]}
+                    >
+                      <Input.Password />
+                    </Form.Item>
+
+                    <Form.Item
+                      wrapperCol={{
+                        offset: 8,
+                        span: 16,
+                      }}
+                    >
+                      <Button
+                        type="primary"
+                        htmlType="submit"
+                        className="me-4 !text-blue-500 hover:!text-white"
+                      >
+                        Submit
+                      </Button>
+                      <Button
+                        type="primary"
+                        htmlType="submit"
+                        onClick={handleCancel}
+                        className=" !text-blue-500 hover:!text-white"
+                      >
+                        Cancel
+                      </Button>
+                    </Form.Item>
+                  </Form>
+                </Modal>
+              </div>
+              {/* ) : (
+                <div className="flex">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="28"
+                    height="28"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-check ml-4 cursor-pointer"
+                    onClick={() => hideModal("pass")}
+                  >
+                    <path d="M20 6 9 17l-5-5" />
+                  </svg>
+                </div>
+              )} */}
+            </div>
+            <div className="flex mb-[30px] gap-2 items-center">
+              <IoSettingsSharp size={30} className="text-white" />
+
+              {/* {!openPass ? ( */}
+              <div className="flex">
+                <p className="text-[22px] pl-2">Setting</p>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="28"
+                  height="28"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  className="lucide lucide-pencil cursor-pointer ml-4"
+                >
+                  <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
+                  <path d="m15 5 4 4" />
+                </svg>
+                {/* <FaBirthdayCake size={30} className="text-white" /> */}
+              </div>
             </div>
           </div>
         </div>

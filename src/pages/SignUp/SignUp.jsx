@@ -16,17 +16,18 @@ const SignUp = () => {
   };
 
   const onFinish = async (values) => {
-    // console.log("Success:", values);
+    console.log("Success:", values);
     try {
       const response = await axios.post(
         "https://apimanga.mangasocial.online/register",
         values
       );
-      await message.success(`Signup is successfully, ${response.data.message}`);
+//       await message.success(`Signup is successfully, You have successfully registered for a mangasocial account. Please log in to your email, search for the verify account email to activate it, if not found, go to spam to search
+// `);
       // console.log("check res", response);
 
       setTimeout(() => { 
-        navigate("/login");
+        navigate("/sign-up-success");
       },1000)
     } catch (error) {
       message.error(`${error.response.data.message}`);

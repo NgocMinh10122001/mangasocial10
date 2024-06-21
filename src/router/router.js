@@ -26,12 +26,19 @@ import Page_Recommended from "../pages/Recommended/Recommended.js";
 import ViewUserProfile from "../pages/profile/index.js";
 import Novel from "../pages/Novel/Novel.js";
 import NovelPage from "../pages/Novel/NovelPage.js";
+import SignUpSuccess from "../pages/SignUp/SignUpSuccess";
 
 // console.log("check sv di ko", sv);
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
+    children: [
+      {
+        index: true,
+        element: <Index />,
+      },
+    ],
   },
   {
     path: "/:sv",
@@ -122,6 +129,10 @@ const router = createBrowserRouter([
   {
     path: "/sign-up",
     element: <SignUp />,
+  },
+  {
+    path: "/sign-up-success",
+    element: <SignUpSuccess />,
   },
   {
     path: "/test",
