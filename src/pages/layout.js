@@ -25,6 +25,12 @@ import XK from "country-flag-icons/react/3x2/XK";
 import RU from "country-flag-icons/react/3x2/RU";
 import FR from "country-flag-icons/react/3x2/FR";
 import { useNavigate } from "react-router-dom";
+import { IoSettingsSharp } from "react-icons/io5";
+import { IoHomeSharp } from "react-icons/io5";
+import { IoNewspaperOutline } from "react-icons/io5";
+import { RiSettingsFill } from "react-icons/ri";
+import { FaBook } from "react-icons/fa6";
+import { FaGoogleDrive } from "react-icons/fa";
 
 let path = "";
 let arr_id_manga = [""];
@@ -64,102 +70,138 @@ export default function Layout() {
     {
       sv: 0,
       name: "mangainn.net",
-      icon: <US title="Vietnamese" className="h-4 w-4" />,
+      icon: (
+        <US title="Vietnamese" className="max-[435px]:h-5 max-[435px]:w-5 " />
+      ),
     },
     {
       sv: 1,
       name: "ww5.manganelo.tv",
-      icon: <JP title="Vietnamese" className="h-4 w-4" />,
+      icon: (
+        <JP title="Vietnamese" className="max-[435px]:h-5 max-[435px]:w-5" />
+      ),
     },
     {
       sv: 2,
       name: "mangareader.cc",
-      icon: <JP title="Vietnamese" className="h-4 w-4" />,
+      icon: (
+        <JP title="Vietnamese" className="max-[435px]:h-5 max-[435px]:w-5" />
+      ),
     },
     {
       sv: 3,
       name: "ninemanga.com",
-      icon: <JP title="Vietnamese" className="h-4 w-4" />,
+      icon: (
+        <JP title="Vietnamese" className="max-[435px]:h-5 max-[435px]:w-5" />
+      ),
     },
     {
       sv: 4,
       name: "bestlightnovel.com",
-      icon: <XK title="Vietnamese" className="h-4 w-4" />,
+      icon: (
+        <XK title="Vietnamese" className="max-[435px]:h-5 max-[435px]:w-5" />
+      ),
     },
     {
       sv: 5,
       name: "mangajar.com/manga",
-      icon: <EU title="Vietnamese" className="h-4 w-4" />,
+      icon: (
+        <EU title="Vietnamese" className="max-[435px]:h-5 max-[435px]:w-5" />
+      ),
     },
     {
       sv: 6,
       name: "mangakomi.io",
-      icon: <US title="Vietnamese" className="h-4 w-4" />,
+      icon: (
+        <US title="Vietnamese" className="max-[435px]:h-5 max-[435px]:w-5" />
+      ),
     },
     {
       sv: 7,
       name: "readm.org",
-      icon: <EU title="Vietnamese" className="h-4 w-4" />,
+      icon: (
+        <EU title="Vietnamese" className="max-[435px]:h-5 max-[435px]:w-5" />
+      ),
     },
     // {
     //   sv: 8,
     //   name: "mangajar.com",
-    //   icon: <XK title="Vietnamese" className="h-4 w-4" />,
+    //   icon: <XK title="Vietnamese" className="max-[435px]:h-5 max-[435px]:w-5" />,
     // },
     {
       sv: 9,
       name: "swatmanga.com",
-      icon: <EU title="Vietnamese" className="h-4 w-4" />,
+      icon: (
+        <EU title="Vietnamese" className="max-[435px]:h-5 max-[435px]:w-5" />
+      ),
     },
     {
       sv: 10,
       name: "mangajar.com",
-      icon: <JP title="Vietnamese" className="h-4 w-4" />,
+      icon: (
+        <JP title="Vietnamese" className="max-[435px]:h-5 max-[435px]:w-5" />
+      ),
     },
     {
       sv: 11,
       name: "novelhall.com",
-      icon: <JP title="Vietnamese" className="h-4 w-4" />,
+      icon: (
+        <JP title="Vietnamese" className="max-[435px]:h-5 max-[435px]:w-5" />
+      ),
     },
     {
       sv: 12,
       name: "mto.com",
-      icon: <JP title="Vietnamese" className="h-4 w-4" />,
+      icon: (
+        <JP title="Vietnamese" className="max-[435px]:h-5 max-[435px]:w-5" />
+      ),
     },
     {
       sv: 13,
       name: "de.ninemanga.com",
-      icon: <JP title="Vietnamese" className="h-4 w-4" />,
+      icon: (
+        <JP title="Vietnamese" className="max-[435px]:h-5 max-[435px]:w-5" />
+      ),
     },
     {
       sv: 14,
       name: "br.ninemanga.com",
-      icon: <JP title="Vietnamese" className="h-4 w-4" />,
+      icon: (
+        <JP title="Vietnamese" className="max-[435px]:h-5 max-[435px]:w-5" />
+      ),
     },
     {
       sv: 15,
       name: "ru.ninemanga.com",
-      icon: <RU title="Vietnamese" className="h-4 w-4" />,
+      icon: (
+        <RU title="Vietnamese" className="max-[435px]:h-5 max-[435px]:w-5" />
+      ),
     },
     {
       sv: 16,
       name: "es.ninemanga.com",
-      icon: <JP title="Vietnamese" className="h-4 w-4" />,
+      icon: (
+        <JP title="Vietnamese" className="max-[435px]:h-5 max-[435px]:w-5" />
+      ),
     },
     {
       sv: 17,
       name: "fr.ninemanga.com",
-      icon: <FR title="Vietnamese" className="h-4 w-4" />,
+      icon: (
+        <FR title="Vietnamese" className="max-[435px]:h-5 max-[435px]:w-5" />
+      ),
     },
     {
       sv: 18,
       name: "it.ninemanga.com",
-      icon: <US title="Vietnamese" className="h-4 w-4" />,
+      icon: (
+        <US title="Vietnamese" className="max-[435px]:h-5 max-[435px]:w-5" />
+      ),
     },
     // {
     //   sv: 19,
     //   name: "azoranov.com/series/",
-    //   icon: <US title="Vietnamese" className="h-4 w-4" />,
+    //   icon: <US title="Vietnamese" className="max-[435px]:h-5 max-[435px]:w-5" />,
     // },
   ];
 
@@ -304,9 +346,9 @@ export default function Layout() {
   }
   return (
     <>
-      <div className="header-top">
+      <div className="header-top max-[435px]:hidden">
         <div onClick={() => navigate(`/` + sv)}>
-          <div className="title">
+          <div className="title text-white">
             <img
               className="img-manga"
               src="/images/logo-thinkdiff.png"
@@ -526,6 +568,198 @@ export default function Layout() {
             </div>
           ) : null}
         </div>
+      </div>
+      <div className="header-top 2 hidden !bg-black !w-full !h-fit max-[435px]:block">
+        <div className="avatar_search max-[435px]:!px-4 max-[435px]:!py-4 max-[435px]:!ml-0  w-full flex-col !gap-4 !items-start">
+          {!isLogin ? (
+            <div className="flex justify-between w-full align-middle items-center ml-4 max-[435px]:!ml-0">
+              <p className="text-white italic text-4xl font-semibold">
+                Manga Social
+              </p>
+              <Link to={`/login`}>
+                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4  max-[435px]:text-base rounded-full">
+                  Login
+                </button>
+              </Link>
+            </div>
+          ) : (
+            // <div to="/user-profile">
+            //     <div className="avatar">
+            //         <img src="/images/usersquare.svg" alt="usersquare"></img>
+            //     </div>
+            // </div>
+            <div className="max-[435px]:flex max-[435px]:justify-between max-[435px]:items-center w-full">
+              <SubMenu />
+              <IoSettingsSharp
+                size={40}
+                className="text-white hidden max-[435px]:block"
+              />
+            </div>
+          )}
+          <div className="!w-full flex justify-center items-center ">
+            {/* <CiSearch
+              color="red"
+              size={32}
+              onClick={handleSearch}
+              className="mr-2 cursor-pointer"
+            /> */}
+            <input
+              className=" border-none outline-none !bg-[#4A4A4A] max-[435px]:!text-white opacity-100 !w-[100%] !h-[50px] !text-sm !rounded-3xl max-[435px]:!ps-6"
+              placeholder="Search..."
+              name="content"
+              onChange={handleOnChange}
+              onKeyDown={handleSearch}
+            />
+          </div>
+          {/*  */}
+          {checkSearch ? (
+            <div className="h-80 w-[17rem] bg-[#DADADA] absolute mt-[375px] ml-[50px] rounded-lg border-double flex justify-center flex-col items-center overflow-y-auto ">
+              <hr className="mt-[150px]" />
+              {searchData ? (
+                searchData.slice(0, 3).map((item, index) => (
+                  <div
+                    key={index}
+                    className="w-[90%] h-full border-double border-red-900 rounded-lg flex border-4 cursor-pointer  "
+                  >
+                    <img
+                      className="w-1/3 h-[69%] py-2 rounded-lg"
+                      src={item.poster}
+                      alt=""
+                    />
+                    <div
+                      to={"/" + sv + `/chapter/` + arr_path[index]}
+                      onClick={() =>
+                        navigate("/ + sv + /chapter/" + arr_path[index])
+                      }
+                      className="flex"
+                    >
+                      <div className="text-lg flex flex-col ml-6 justify-center">
+                        <div>{item.title}</div>
+                        <div>Rate:{item.rate}</div>
+                        <div>Views: {item.views}</div>
+                      </div>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <p>Not found @@</p>
+              )}
+
+              <div className="text-white border-5 border-white bg-blue-400 rounded-lg h-6 w-24 flex text-center content-center justify-center my-2">
+                <button onClick={() => handleCloseSearch()}>Close</button>
+              </div>
+            </div>
+          ) : null}
+        </div>
+      </div>
+      <div className="header-mobile  w-full z-[999] py-2 px-0 bg-[#F45F17] fixed bottom-0 right-0 hidden max-[435px]:block">
+        <ul className="flex justify-center items-center gap-14">
+          <li className="">
+            <Link
+              to={`/${sv}`}
+              className="flex flex-col gap-1 justify-center items-center w-full h-full"
+            >
+              <div className="icon text-white">
+                <IoHomeSharp size={20} />
+              </div>
+              <p className="title text-white font-semibold ">Home</p>
+            </Link>
+          </li>
+          <li className="">
+            <Link
+              to={`/${sv}`}
+              className="flex flex-col gap-1 justify-center items-center w-full h-full"
+            >
+              <div className="icon text-white">
+                <IoNewspaperOutline size={20} />
+              </div>
+              <p className="title text-white font-semibold">News</p>
+            </Link>
+          </li>
+          <li className="">
+            <button
+              className="flex flex-col gap-1 justify-center items-center w-full h-full"
+              ref={submenuRef}
+              onClick={() => handleOpen()}
+            >
+              {/* <button ref={submenuRef}>Server</button> */}
+
+              <div className="icon text-white">
+                {open ? (
+                  <FaGoogleDrive size={20} />
+                ) : (
+                  <>
+                    {serverName.map((item) =>
+                      item.sv === sv ? (
+                        <div
+                          key={item.sv}
+                          ref={submenuRef}
+                          onClick={() => handleOpen()}
+                        >
+                          {item.icon}
+                        </div>
+                      ) : (
+                        ""
+                      )
+                    )}
+                  </>
+                )}
+              </div>
+              <div className="dropdown max-[435px]:static text-sm max-[435px]:hover:!text-white">
+                <div className="!text-white hover:!text-white">Server</div>
+                {open ? (
+                  <ul
+                    className="menu max-[435px]:absolute grid grid-cols-2 max-[435px]:bottom-[90%] max-[435px]:!left-0 max-[435px]:right-0 max-[435px]:w-full z-[999]"
+                    onClick={() => handleOpen()}
+                  >
+                    {serverName &&
+                      serverName.length > 0 &&
+                      serverName.map((item) => (
+                        <li
+                          key={item.sv}
+                          className="menu-item flex justify-start  items-center pe-2"
+                          onClick={() => navigate("/" + item.sv)}
+                        >
+                          <button
+                            onClick={() => dispatch(changeServer(item.sv))}
+                          >
+                            {item.name}
+                          </button>
+                          <div className="">{item.icon}</div>
+                        </li>
+                      ))}
+                  </ul>
+                ) : null}
+              </div>
+            </button>
+          </li>
+          <li className="">
+            <Link
+              to={`/${sv}/genres`}
+              className="flex flex-col gap-1 justify-center items-center w-full h-full"
+            >
+              <div className="icon text-white">
+                <RiSettingsFill size={20} />
+              </div>
+              <p className="title text-white font-semibold">Genres</p>
+            </Link>
+          </li>
+          <li className="">
+            <div
+              className="flex flex-col gap-1 justify-center items-center w-full h-full"
+              onClick={() => {
+                dispatch(changeServer(4));
+
+                navigate("/" + 4 + "/novel");
+              }}
+            >
+              <div className="icon text-white">
+                <FaBook size={20} />
+              </div>
+              <p className="title text-white font-semibold">Novel</p>
+            </div>
+          </li>
+        </ul>
       </div>
       <Outlet></Outlet>
 

@@ -11,7 +11,7 @@ const FreeComic = () => {
     return parts[parts.length - 1];
   };
   return (
-    <div className="grid grid-cols-6 gap-[20px] px-[60px] pb-[60px]">
+    <div className="grid max-[435px]:grid-cols-3 md:grid-cols-7 2xl:grid-cols-10  gap-[20px] px-[60px] max-[435px]:px-4 max-[435px]:gap-4 max-[435px]:pb-4 pb-[60px]">
       {firstFiveItem.map((item, index) => (
         <CardManga
           key={index}

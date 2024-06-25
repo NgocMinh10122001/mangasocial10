@@ -23,32 +23,36 @@ const NewUsers = () => {
   return (
     <>
       <div>
-        <div className="news-right">
+        <div className="news-right max-[435px]:!h-auto  max-[435px]:py-4 ">
           <div className="lab">
             <label>NEW USER</label>{" "}
           </div>
-          {newUser &&
-            newUser.map((newUser, index) => {
-              return (
-                <Link
-                  to={`/${sv}/view-user-profile`}
-                  state={newUser.id_user}
-                  key={index}
-                >
-                  <div className="username md:pt-0 xl:pt-[30px]">
-                    <img
-                      className="avatar"
-                      src={newUser.avatar_user}
-                      alt="avatar"
-                    />
-                    <span className="text-avatar">{newUser.name_user}</span>
-                    <span className="date-text">
-                      {newUser.participation_time}
-                    </span>
-                  </div>
-                </Link>
-              );
-            })}
+          <div className="hidden max-[435px]:flex  flex-col justify-center gap-4">
+            {newUser &&
+              newUser.map((newUser, index) => {
+                return (
+                  <Link
+                    to={`/${sv}/view-user-profile`}
+                    state={newUser.id_user}
+                    key={index}
+                  >
+                    <div className="username md:pt-0 xl:pt-[30px] max-[435px]:flex max-[435px]:justify-center max-[435px]:items-center">
+                      <img
+                        className="avatar object-contain"
+                        src={newUser.avatar_user}
+                        alt="avatar"
+                      />
+                      <span className="text-avatar max-[435px]:!text-xl max-[435px]:flex max-[435px]:items-center">
+                        {newUser.name_user}
+                      </span>
+                      <span className="date-text max-[435px]:!text-base max-[435px]:flex max-[435px]:items-center">
+                        {newUser.participation_time}
+                      </span>
+                    </div>
+                  </Link>
+                );
+              })}
+          </div>
         </div>
       </div>
     </>

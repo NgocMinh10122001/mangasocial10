@@ -5,8 +5,11 @@ import { useDispatch, useSelector } from "react-redux";
 const RankItem = ({ rank, categories, title, poster, path_segment_manga }) => {
   const sv = useSelector((state) => state.server.sv);
   return (
-    <NavLink to={`/${sv}/chapter/${path_segment_manga}`}>
-      <div className="flex items-center px-[20px] py-[12px] bg-[#2C2C2C] rounded-[20px] w-[370px] gap-5">
+    <NavLink
+      to={`/${sv}/chapter/${path_segment_manga}`}
+      className="max-[435px]:w-full"
+    >
+      <div className="flex items-center px-[20px] py-[12px] bg-[#2C2C2C] rounded-[20px] w-[370px] gap-5 w-full">
         <h2 className="text-[36px] text-[red] font-bold">{rank}</h2>
 
         <div className="">

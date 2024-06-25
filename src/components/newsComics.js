@@ -22,7 +22,7 @@ const NewsComics = () => {
     }
   };
   return (
-    <div className="grid grid-cols-3 gap-2 h-[1000px] w-[60%] rounded-xl border-white border-2">
+    <div className="grid grid-cols-3 gap-2 h-[1000px] max-[435px]:h-[800px] w-[60%] max-[435px]:w-full  rounded-xl border-white border-2">
       {news?.map((item, index) => (
         <NewsComicCard
           key={index}

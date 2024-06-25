@@ -5,6 +5,7 @@ import { RiLogoutBoxRLine } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
+
 const SubMenu = () => {
   const navigate = useNavigate();
    const sv = useSelector((state) => state.server.sv);
@@ -61,17 +62,20 @@ const SubMenu = () => {
   };
 
   return (
-    <div className="inline-block overflow-x-hidden overflow-y-auto" ref={submenuRef}>
+    <div className="inline-block  max-[435px]:!flex max-[435px]:!justify-between max-[435px]:!items-center max-[435px]:!w-full max-[435px]:relative" ref={submenuRef}>
      
-       <div className="w-12 h-12 rounded-full cursor-pointer">
-          <img onClick={handleButtonClick} className="h-full w-full rounded-full" src={avatarUser?avatarUser:null} alt="" srcset="" />
-     
+       <div className="w-12 h-12  max-[435px]:w-full max-[435px]:h-14 rounded-full cursor-pointer max-[435px]:flex max-[435px]:items-center max-[435px]:gap-2">
+          <img onClick={handleButtonClick} className="h-full w-full rounded-full max-[435px]:w-14 max-[435px]:h-14" src={avatarUser?avatarUser:null} alt="" srcset="" />
+        <div className="hidden max-[435px]:flex flex-col gap-1">
+          <span className="text-white text-lg font-semibold">Minhdz</span>
+          <span className="text-white text-base">10/12/2004</span>
+     </div>
        </div>
 
       <div
         className={`${
           onHidden
-            ? "block origin-top-right mt-2 w-72 rounded-md shadow-lg bg-white divide-y-2 fixed z-1000"
+            ? "block origin-top-right mt-2 w-72 rounded-md shadow-lg max-[435px]:absolute max-[435px]:top-full bg-white divide-y-2 fixed z-1000"
             : "hidden "
         }`}
       >

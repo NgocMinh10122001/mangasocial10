@@ -155,7 +155,7 @@ const ChapterPage = () => {
             <img
               src={chapterDetail?.poster}
               alt=""
-              className=" h-[203px] w-[330px] md:h-[649px] md:w-[433px] bg-cover object-cover bg-center rounded-[8px]"
+              className=" h-[203px] w-[330px] max-[435px]:w-full  md:h-[649px] md:w-[433px] bg-cover object-cover bg-center rounded-[8px]"
             />
             <div className="absolute top-0 right-5  hidden md:block ">
               <svg

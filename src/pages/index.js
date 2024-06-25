@@ -37,75 +37,105 @@ export default function Index() {
     <div className="cont">
       {/* <CustomizeSpin /> */}
 
-      <div className="title-released-comic ">
-        <h2>New Released Comic</h2>
+      <div className="title-released-comic  max-[435px]:px-4">
+        <div className="max-[435px]:!text-2xl  text-[50px]  max-[435px]:relative text-white font-semibold">
+          New Released Comic
+          <div className="hidden max-[435px]:block w-[100px] h-[7px] bg-[#F45F17] -top-[40%] rounded-[35px] left-0 absolute "></div>
+        </div>
         <Link to={`/${sv}/newRelease`}>
-          <p>See all</p>
+          <p className="max-[435px]:!text-xl">See all</p>
         </Link>
       </div>
       <NewRelease key={readmode} />
 
-      <div className="title-released-comic">
-        <h2>Recent Comics</h2>
+      <div className="title-released-comic  max-[435px]:px-4">
+        <div className="max-[435px]:!text-2xl  text-[50px] max-[435px]:relative text-white font-semibold">
+          Recent Comics
+          <div className="hidden max-[435px]:block w-[100px] h-[7px] bg-[#F45F17] -top-[40%] rounded-[35px] left-0 absolute "></div>
+        </div>
         <Link to={`/${sv}/recent`}>
-          <p>See all</p>
+          <p className="max-[435px]:!text-xl">See all</p>
         </Link>
       </div>
       <ComicRecent></ComicRecent>
 
-      <div className="title-released-comic">
-        <h2>Recommended Comics</h2>
+      <div className="title-released-comic  max-[435px]:px-4">
+        <div className="max-[435px]:!text-2xl  text-[50px] max-[435px]:relative text-white font-semibold">
+          Recommended Comics
+          <div className="hidden max-[435px]:block w-[100px] h-[7px] bg-[#F45F17] -top-[40%] rounded-[35px] left-0 absolute "></div>
+        </div>
         <Link to={`/${sv}/recommended`}>
-          <p>See all</p>
+          <p className="max-[435px]:!text-xl">See all</p>
         </Link>
       </div>
       <Recommended />
-      <div className="title-released-comic">
-        <h2>Comming Soon Comics</h2>
+      <div className="title-released-comic  max-[435px]:px-4">
+        <div className="max-[435px]:!text-2xl  text-[50px] max-[435px]:relative text-white font-semibold">
+          Comming Soon Comics
+          <div className="hidden max-[435px]:block w-[100px] h-[7px] bg-[#F45F17] -top-[40%] rounded-[35px] left-0 absolute "></div>
+        </div>
         <Link to={`/${sv}/commingsoon`}>
-          <p>See all</p>
+          <p className="max-[435px]:!text-xl">See all</p>
         </Link>
       </div>
       <CommingSoon></CommingSoon>
 
-      <div className="title-released-comic">
-        <h2>Top 15 Best Comics of the Week</h2>
+      <div className="title-released-comic  max-[435px]:px-4">
+        <div className="max-[435px]:!text-2xl  text-[50px] max-[435px]:relative text-white font-semibold">
+          Top 15 Best Comics of the Week
+          <div className="hidden max-[435px]:block w-[100px] h-[7px] bg-[#F45F17] -top-[40%] rounded-[35px] left-0 absolute "></div>
+        </div>
         <Link>
-          <p>See all</p>
+          <p className="max-[435px]:!text-xl">See all</p>
         </Link>
       </div>
       <Top15Comics />
 
-      <div className="title-released-comic">
-        <h2>Comedy Comics</h2>
+      <div className="title-released-comic  max-[435px]:px-4">
+        <div className="max-[435px]:!text-2xl  text-[50px] max-[435px]:relative text-white font-semibold">
+          Comedy Comics
+          <div className="hidden max-[435px]:block w-[100px] h-[7px] bg-[#F45F17] -top-[40%] rounded-[35px] left-0 absolute "></div>
+        </div>
         <Link>
-          <p>See all</p>
+          <p className="max-[435px]:!text-xl">See all</p>
         </Link>
       </div>
       <ComedyComics />
-      <div className="title-released-comic">
-        <h2>Free Comics</h2>
+      <div className="title-released-comic  max-[435px]:px-4">
+        <div className="max-[435px]:!text-2xl  text-[50px] max-[435px]:relative text-white font-semibold">
+          Free Comics
+          <div className="hidden max-[435px]:block w-[100px] h-[7px] bg-[#F45F17] -top-[40%] rounded-[35px] left-0 absolute "></div>
+        </div>
         <Link to={`/${sv}`}>
-          <p>See all</p>
+          <p className="max-[435px]:!text-xl">See all</p>
         </Link>
       </div>
       <FreeComic></FreeComic>
-      <div className="title-released-comic">
-        <h2>News</h2>
+      <div className="title-released-comic  max-[435px]:px-4">
+        <div className="max-[435px]:!text-2xl  text-[50px] max-[435px]:relative text-white font-semibold">
+          News
+          <div className="hidden max-[435px]:block w-[100px] h-[7px] bg-[#F45F17] -top-[40%] rounded-[35px] left-0 absolute "></div>
+        </div>
         <Link>
-          <p>See all</p>
+          <p className="max-[435px]:!text-xl">See all</p>
         </Link>
       </div>
-      <div className="news">
+      <div className="news max-[435px]:flex max-[435px]:flex-col  max-[435px]:px-4">
         <NewsComics />
         <NewUsers />
       </div>
-      <div className="title-released-comic">
-        <h2>Rank</h2>
+      <div className="title-released-comic  max-[435px]:px-4">
+        <div className="max-[435px]:!text-2xl  text-[50px] max-[435px]:relative text-white font-semibold">
+          Rank
+          <div className="hidden max-[435px]:block w-[100px] h-[7px] bg-[#F45F17] -top-[40%] rounded-[35px] left-0 absolute "></div>
+        </div>
       </div>
       <Rank></Rank>
-      <div className="title-released-comic">
-        <h2>Comment</h2>
+      <div className="title-released-comic  max-[435px]:px-4">
+        <div className="max-[435px]:!text-2xl  text-[50px] max-[435px]:relative text-white font-semibold">
+          Comment
+          <div className="hidden max-[435px]:block w-[100px] h-[7px] bg-[#F45F17] -top-[40%] rounded-[35px] left-0 absolute "></div>
+        </div>
       </div>
       <Comments></Comments>
       <ToggleReadMode key={readmode + 1} />
