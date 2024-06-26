@@ -18,6 +18,7 @@ const Recommended = () => {
           rate={item?.rate}
           update={item.time_release}
           path_segment={item?.path_segment_manga}
+          chapterLink={item.url_chapter}
         />
       ))}
     </div>

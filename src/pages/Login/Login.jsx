@@ -9,6 +9,7 @@ import { CiSearch } from "react-icons/ci";
 import Handle_function from "../../handle_account/handle";
 import { useSelector } from "react-redux";
 import { Buffer } from 'buffer';
+import CustomizeSpin from "../../components/spin/CustomizeSpin";
 
 
 
@@ -17,6 +18,7 @@ export default function Login() {
   const sv = useSelector((state) => state.server.sv);
   const navigate = useNavigate();
   const [hidden, setHidden] = useState(true);
+  const [loading, setLoading] = useState(true)
 
   const handleOnChange = (event) => {
     const { name, value } = event.target;
@@ -33,8 +35,9 @@ export default function Login() {
 const token = Buffer.from(`dooxxinhgai@gmail.com:12345678`, 'utf8').toString('base64')
   const loginSubmit = async () => {
     try {
-      console.log("check input", input);
+      // console.log("check input", input);
       const response = await axios.post("https://apimanga.mangasocial.online/login", input);
+     
       if (response?.data.errCode !== 200) {
         message.error(response.data.message);
         console.log(response);
@@ -46,8 +49,9 @@ const token = Buffer.from(`dooxxinhgai@gmail.com:12345678`, 'utf8').toString('ba
         sessionStorage.setItem("user_email", response?.data.account.email);
         sessionStorage.setItem("user_id", response?.data.account.id_user);
         sessionStorage.setItem("jwt", response?.data.account.jwt);
-        console.log(response)
+        // console.log(response)
         // console.log(response.headers.getSetCookie());
+        setLoading(true)
         navigate(`/${sv}`);
       }
     } catch (error) {
@@ -59,6 +63,7 @@ const token = Buffer.from(`dooxxinhgai@gmail.com:12345678`, 'utf8').toString('ba
 
     await loginSubmit();
   };
+  // console.log("check loading", loading);
 
   return (
   <>
@@ -142,7 +147,8 @@ const token = Buffer.from(`dooxxinhgai@gmail.com:12345678`, 'utf8').toString('ba
             <h1 className="text-4xl  text-white max-[435px]:text-3xl max-[435px]:leading-[28px] max-[435px]:font-semibold">Log in</h1>
             <h1 className="text-xl text-white max-[435px]:text-base max-[435px]:font-semibold">
               You can use your app or account to login
-            </h1>
+              </h1>
+              
             </div>
             <div className="relative flex py-5 items-center w-[378px]">
             <div className="flex-grow border-t border-gray-400"></div>
@@ -186,13 +192,13 @@ const token = Buffer.from(`dooxxinhgai@gmail.com:12345678`, 'utf8').toString('ba
               )}
             </div>
 
-            <div className="w-full p-[10px] max-[435px]:w-[90%] bg-[#929292] rounded-md max-[435px]:rounded-xl hover:bg-[#EA6016] cursor-pointer" onClick={ handleSubmit}>
-              <input
-                className="w-full border-none outline-none text-white opacity-100 uppercase bg-transparent cursor-pointer max-[435px]:h-[16px] max-[435px]:text-xs max-[435px]:font-semibold"
-                type="submit"
-                value={"Log in"}
-                onClick={ handleSubmit}
-              />
+              <div className="w-full h-full" onClick={() => setLoading(false)}>
+                <div className="w-full p-[10px] max-[435px]:w-[90%] bg-[#929292] rounded-md max-[435px]:rounded-xl hover:bg-[#EA6016] cursor-pointer" onClick={ handleSubmit}>
+              <div
+                className="w-full border-none text-center outline-none text-white opacity-100 uppercase bg-transparent cursor-pointer max-[435px]:h-[16px] max-[435px]:text-xs max-[435px]:font-semibold ">
+                    { loading ? "Log in": <CustomizeSpin/>}
+              </div>
+            </div>
             </div>
           </div>
 

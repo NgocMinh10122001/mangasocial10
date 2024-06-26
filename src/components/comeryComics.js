@@ -15,6 +15,7 @@ const ComedyComics = () => {
           rate={item?.rate}
           update={item.time_release}
           chapter={item?.chaper_new}
+          chapterLink={item.url_chapter}
           path_segment={item?.path_segment_manga}
         />
       ))}

@@ -15,9 +15,11 @@ const ChapterPage = () => {
   const [showTab, setShowTab] = useState(true);
   const [chapterDetail, setChapterDetail] = useState([]);
   const [listChapter, setListChapter] = useState([]);
+
   const [visibleChapterCount, setVisibleChapterCount] = useState(12);
   const [showFullDescription, setShowFullDescription] = useState(false);
   const [comment, setComment] = useState("");
+  const [commentDetail, setCommentDetail]= useState([])
   console.log("check comment", comment);
   const [loading, setLoading] = useState(true);
 
@@ -27,7 +29,7 @@ const ChapterPage = () => {
   const readmode = useSelector((state) => state.ReadMode.readmode);
   const user_id = sessionStorage.getItem("user_id");
   const [active, setActive] = useState(false)
-  
+  console.log("check read mode", readmode)
   const handleActive = (string) => {
     if(string === "list"){
       setActive(!active)
@@ -48,6 +50,12 @@ const ChapterPage = () => {
       );
       console.log("response:", res);
       console.log("comment:", comment);
+      if (res) { 
+        let resc = await axios.get(`https://apimanga.mangasocial.online/cmanga/${slug}`)
+        setComment("")
+
+        if (resc) setCommentDetail(resc.data)
+      }
     } catch (error) {
       console.log(error);
       console.log("comment:", comment);
@@ -63,7 +71,7 @@ const ChapterPage = () => {
         );
         setChapterDetail(response.data);
         setListChapter(response.data.chapters);
-        console.log("chapter detail:", response.data);
+        // setCommentDetail(response.data.comment)
         setLoading(false);
       } else {
         const response = await axios.get(
@@ -71,7 +79,6 @@ const ChapterPage = () => {
         );
         setChapterDetail(response.data);
         setListChapter(response.data.chapters);
-        console.log("chapter detail:", response.data);
         setLoading(false);
       }
     } catch (error) {
@@ -79,10 +86,16 @@ const ChapterPage = () => {
       console.log("slug:", slug);
     }
   };
+
+  const fetchListComment = async () => { 
+    let resc = await axios.get(`https://apimanga.mangasocial.online/cmanga/${slug}`)
+    if(resc) setCommentDetail(resc.data)
+  }
  
 
   useEffect(() => {
     fetchChapterDetail();
+    fetchListComment()
   }, []);
 
   const handleSeeMore = () => {
@@ -105,9 +118,15 @@ const ChapterPage = () => {
   });
 
   const arrChapterLink = Object.keys(listChapter);
+
+
+
+
   const linkList = arrChapterLink.map(function (link) {
     return listChapter[link];
   });
+  
+
 
 
 
@@ -248,7 +267,7 @@ const ChapterPage = () => {
                     alt=""
                     className="h-[32px] w-[32px] hidden md:block"
                   />
-                  <div>{`${chapterDetail?.chapters?.length} chapter `} </div>
+                  <div>{`${readmode ? Object.keys(chapterDetail?.chapters ?? {}).length ?? [] : chapterDetail?.chapters?.length} chapter `} </div>
                 </div>
               </div>
             </div>
@@ -393,8 +412,10 @@ const ChapterPage = () => {
                       .slice(0, visibleChapterCount)
                       .map((item, index) => (
                         <div key={index}>
+                          {/* {console.log("check link", item)} */}
                           <ChapterCard
                             chapterLink={item}
+                            chapterName={ arrChapterLink[index]}
                             title={chapterDetail?.title}
                             des={chapterDetail?.description}
                             poster={chapterDetail?.poster}
@@ -422,7 +443,7 @@ const ChapterPage = () => {
       <div className="flex justify-center bg-black h-[1000vh] w-full">
         {!showTab && (
           <div className="flex flex-col items-center w-full mt-8 ">
-            <CMT_list cmt_arr={chapterDetail.comments} />
+            <CMT_list cmt_arr={commentDetail || []} />
             {/* logined user comment */}
             {sessionStorage.getItem("user_email") ? (
               <div className="w-full flex justify-center">
@@ -445,6 +466,7 @@ const ChapterPage = () => {
                         <div className="flex flex-row gap-6">
                           <input
                             className="text-lg text-white bg-slate-500 h-32  w-full rounded-lg my-2"
+                            value={comment}
                             onChange={(e) => commentOnchange(e)}
                           ></input>
                           <button

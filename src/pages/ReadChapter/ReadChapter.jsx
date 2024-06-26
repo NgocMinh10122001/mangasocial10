@@ -26,13 +26,24 @@ const ReadChapter = () => {
   const fetchChapter = async () => {
     try {
       
+      if (readmode) {
         const response = await axios.get(
+          `https://apimanga.mangasocial.online/web/rmanga/${sv}/${slug}/${id}`
+        );
+
+        setChapterDetail(response.data);
+        setLoading(false);
+        // console.log(response.data);
+       }
+      else {
+         const response = await axios.get(
           `https://apimanga.mangasocial.online/rmanga/${slug}/${id}`
         );
 
         setChapterDetail(response.data);
         setLoading(false);
-        console.log(response.data);
+        // console.log(response.data);
+      }
       
     } catch (error) {
       console.log("error", error);
@@ -71,8 +82,8 @@ const ReadChapter = () => {
   const fetchListChapter = async () => {
     try {
      
-        const response = await axios.get(
-          `https://apimanga.mangasocial.online/rmanga/${slug}`
+      if (readmode) { const response = await axios.get(
+          `https://apimanga.mangasocial.online/web/rmanga/${sv}/${slug}`
         );
       console.log("check rs", response.data.chapters);
       
@@ -91,7 +102,10 @@ const ReadChapter = () => {
       console.log("check key val",getChapterFromUrl(keys[0]) );
       const values = keys.map((item) => getChapterFromUrl(item))
         setListChapter(values);
-        console.log(values);
+        console.log(values); }
+      else { 
+
+      }
       
     } catch (error) {
       console.log(error);

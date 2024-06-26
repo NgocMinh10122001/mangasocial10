@@ -18,6 +18,7 @@ const Top15Comics = () => {
           chapter={item?.chapter_new}
           update={item.time_release}
           path_segment={item?.path_segment_manga}
+          chapterLink={item.url_chapter}
         />
       ))}
     </div>
