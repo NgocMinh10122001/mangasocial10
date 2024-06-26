@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const ChapterCard = ({ chapter, title, poster, des, slug, chapterLink }) => {
-  console.log("check link", chapterLink);
+  // console.log("check link", chapterLink);
   const sv = useSelector((state) => state.server.sv);
   const readmode = useSelector((state) => state.ReadMode.readmode);
   const user_id = sessionStorage.getItem("user_id");
@@ -11,15 +11,13 @@ const ChapterCard = ({ chapter, title, poster, des, slug, chapterLink }) => {
     `http://apimanga.mangasocial.online/rmanga/${slug}/`,
     ""
   );
-  const chapterNumberReadMode = chapterLink?.replace(
-    `https://apimanga.mangasocial.online/web/rmanga/${sv}/${slug}/`,
-    ""
-  );
+  const chapterNumberReadMode = chapterLink
+  console.log("chapter",chapterLink);
    const getChapterFromUrl = (url) => {
     const parts = url.split('/');
     return parts[parts.length - 1];
   };
-  console.log(chapterNumberReadMode);
+  console.log(getChapterFromUrl(chapterNumberReadMode));
 
   const truncatedDes = des.length > 50 ? `${des.slice(0, 50)}...` : des;
   return (

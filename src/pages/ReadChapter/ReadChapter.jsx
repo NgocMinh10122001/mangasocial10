@@ -27,7 +27,7 @@ const ReadChapter = () => {
     try {
       
         const response = await axios.get(
-          `https://apimanga.mangasocial.online/web/rmanga/${sv}/${slug}/${id}`
+          `https://apimanga.mangasocial.online/rmanga/${slug}/${id}`
         );
 
         setChapterDetail(response.data);
@@ -72,7 +72,7 @@ const ReadChapter = () => {
     try {
      
         const response = await axios.get(
-          `https://apimanga.mangasocial.online/web/rmanga/${sv}/${slug}`
+          `https://apimanga.mangasocial.online/rmanga/${slug}`
         );
       console.log("check rs", response.data.chapters);
       
@@ -84,7 +84,7 @@ const ReadChapter = () => {
 
       const getChapterFromUrl = (url) => {
     const parts = url.split('/');
-    return parts[parts.length - 2];
+    return parts[parts.length - 1];
       };
       
 
