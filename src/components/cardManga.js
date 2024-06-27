@@ -44,11 +44,14 @@ const CardManga = ({
               {title}
             </p>
             <NavLink
-              to={`/${sv}/chapter/${path_segment}/${
-                readmode
-                  ? getChapterFromUrl2(chapterNumberReadMode)
-                  : getChapterFromUrl(chapterNumberReadMode)
-              }`}
+              // to={`
+              // /${sv}/chapter/${path_segment}/${
+              //   readmode
+              //     ? getChapterFromUrl2(chapterNumberReadMode)
+              //     : getChapterFromUrl(chapterNumberReadMode)
+              // }`}
+              to={`
+             `}
             >
               <p className="lg:text-[16px] 2xl:text-[18px] max-[435px]:text-[13px] leading-8 font-semibold  mt-3 max-[435px]:mt-1">
                 Chapter: {chapter}
