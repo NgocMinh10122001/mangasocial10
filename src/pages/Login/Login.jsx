@@ -40,8 +40,8 @@ const token = Buffer.from(`dooxxinhgai@gmail.com:12345678`, 'utf8').toString('ba
      
       if (response?.data.errCode !== 200) {
         message.error(response.data.message);
+        setLoading(true)
         console.log(response);
-        
       } else {
         message.success(response.data.message);
         
