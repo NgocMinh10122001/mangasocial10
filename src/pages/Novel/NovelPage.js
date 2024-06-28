@@ -148,20 +148,18 @@ const NovelPage = () => {
   ];
 
   return (
-    <div style={{ zoom: 0.9 }}>
+    <div className="w-full" style={{ zoom: 0.9 }}>
       <div
         className=" w-[100%] h-full bg-cover bg-center bg-no-repeat md:flex md:gap-30 px-[14px] pt-[14px] md:px-[141px] md:pt-[48px] gap-10"
         style={{
-          backgroundImage: "url('/images/ChapterPage/bia.png')",
-          background:
-            "linear-gradient(0deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 100%), linear-gradient(0deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 100%), url('/images/ChapterPage/bia.png'), lightgray 50% / cover no-repeat",
+          background: "black",
         }}
       >
         <div className="relative">
           <img
             src={chapterDetail[0]?.poster}
             alt=""
-            className=" h-[203px] w-[330px] md:h-[649px] md:w-[433px] bg-cover object-cover bg-center rounded-[8px]"
+            className=" h-[203px] w-[330px]  max-[435px]:w-hidden max-[435px]:h-auto max-[435px]:w-[100%]    md:h-[649px] md:w-[433px] bg-cover object-cover bg-center rounded-[8px]"
           />
           {chapterDetail?.r18 ? (
             <div className="absolute top-0 right-5  hidden md:block ">
@@ -253,7 +251,7 @@ const NovelPage = () => {
             <div className="flex flex-col gap-[40px]">
               {/* button */}
               <div className="flex  gap-5">
-                <button className=" p-[8px]  rounded-[12px] md:px-[52px] md:py-[26px]  bg-[#FF2020]  text-white md:rounded-[67px] ">
+                <button className="  hover:text-white p-[8px]  rounded-[12px] md:px-[52px] md:py-[26px]  bg-[#FF2020]  text-white md:rounded-[67px] ">
                   <div className="font-bold text-[12px] leading-[16px] md:text-[36px] md:leading-[44px] ">
                     Read now
                   </div>
@@ -284,7 +282,7 @@ const NovelPage = () => {
                 <div className=" font-bold text-[12px] leading-[16px]  md:text-[28px] md:leading-[36px] text-white ">
                   Server
                 </div>
-                <div className="flex flex-wrap items-center justify-between">
+                <div className="flex flex-wrap items-center justify-normal gap-3">
                   {listServer.map((item, index) => (
                     <img
                       key={index}
@@ -354,21 +352,168 @@ const NovelPage = () => {
       </div>
       <div className="bg-black">
         {showTab && (
-          <div className="bg-black mx-36 ] ">
+          // <div className="bg-black mx-36 ] ">
+          //   <div className="flex flex-col justify-center items-center pt-8">
+          //     <h1 className="text-6xl text-white ">
+          //       {chapterDetail[0]?.title}
+          //     </h1>
+          //     <h3 className="text-3xl text-gray-400 pt-4">
+          //       <span>{subTitle}</span>
+          //     </h3>
+          //   </div>
+          //   <div className="flex gap-3 justify-center pt-10">
+          //     <button
+          //       className="bg-[#138e00] h-10 px-4 flex items-center text-lg rounded-lg text-white w-50"
+          //       onClick={prevChap}
+          //     >
+          //       {" "}
+          //       <svg
+          //         xmlns="http://www.w3.org/2000/svg"
+          //         width="24"
+          //         height="24"
+          //         viewBox="0 0 24 24"
+          //         fill="none"
+          //         stroke="currentColor"
+          //         stroke-width="2"
+          //         stroke-linecap="round"
+          //         stroke-linejoin="round"
+          //         className="lucide lucide-chevron-left"
+          //       >
+          //         <path d="m15 18-6-6 6-6" />
+          //       </svg>{" "}
+          //       Previous Chapter
+          //     </button>
+
+          //     <select
+          //       name="chapterList"
+          //       id="chapterList"
+          //       className="bg-[#138e00] w-[200px] rounded-lg text-white justify-center"
+          //       value={currentChap}
+          //       onChange={() => handleChapter()}
+          //     >
+          //       {chapterDetail[0]?.chapters?.map((item, index) => (
+          //         <option value={item} key={index + 1}>
+          //           {/* {item.replace(
+          //             "http://apimanga.mangasocial.online/rnovel/" + slug + "/",
+          //             ""
+          //           )} */}
+          //           {`Chapter_${index + 1}`}
+          //         </option>
+          //       ))}
+          //     </select>
+
+          //     <button
+          //       className="bg-[#138e00] h-10 px-4 flex items-center text-lg rounded-lg text-white w-50"
+          //       onClick={nextChap}
+          //     >
+          //       {" "}
+          //       Next Chapter
+          //       <svg
+          //         xmlns="http://www.w3.org/2000/svg"
+          //         width="24"
+          //         height="24"
+          //         viewBox="0 0 24 24"
+          //         fill="none"
+          //         stroke="currentColor"
+          //         stroke-width="2"
+          //         stroke-linecap="round"
+          //         stroke-linejoin="round"
+          //         className="lucide lucide-chevron-right"
+          //       >
+          //         <path d="m9 18 6-6-6-6" />
+          //       </svg>{" "}
+          //     </button>
+          //   </div>
+          //   <div className="w-[70%] pt-8 mx-auto">
+          //     {/* <TextToSpeech content={chapterData?.content} text={chapterData?.content} /> */}
+          //     <TTS content={chapterData?.content} />{" "}
+          //     {/*text-to-speech and highlight*/}
+          //   </div>
+          // </div>
+
+          // <div className="bg-black mx-4 md:mx-36">
+          //   <div className="flex flex-col justify-center items-center pt-8">
+          //     <h1 className="text-3xl md:text-6xl text-white">
+          //       {chapterDetail[0]?.title}
+          //     </h1>
+          //     <h3 className="text-xl md:text-3xl text-gray-400 pt-4">
+          //       <span>{subTitle}</span>
+          //     </h3>
+          //   </div>
+          //   <div className="flex flex-col md:flex-row gap-3 justify-center pt-10">
+          //     <button
+          //       className="bg-[#138e00] h-10 px-4 flex items-center text-lg rounded-lg text-white w-full md:w-50"
+          //       onClick={prevChap}
+          //     >
+          //       <svg
+          //         xmlns="http://www.w3.org/2000/svg"
+          //         width="24"
+          //         height="24"
+          //         viewBox="0 0 24 24"
+          //         fill="none"
+          //         stroke="currentColor"
+          //         stroke-width="2"
+          //         stroke-linecap="round"
+          //         stroke-linejoin="round"
+          //         className="lucide lucide-chevron-left"
+          //       >
+          //         <path d="m15 18-6-6 6-6" />
+          //       </svg>
+          //       Previous Chapter
+          //     </button>
+          //     <select
+          //       name="chapterList"
+          //       id="chapterList"
+          //       className="bg-[#138e00] w-full md:w-[200px] rounded-lg text-white justify-center"
+          //       value={currentChap}
+          //       onChange={handleChapter}
+          //     >
+          //       {chapterDetail[0]?.chapters?.map((item, index) => (
+          //         <option value={item} key={index + 1}>
+          //           {`Chapter_${index + 1}`}
+          //         </option>
+          //       ))}
+          //     </select>
+          //     <button
+          //       className="bg-[#138e00] h-10 px-4 flex items-center text-lg rounded-lg text-white w-full md:w-50"
+          //       onClick={nextChap}
+          //     >
+          //       Next Chapter
+          //       <svg
+          //         xmlns="http://www.w3.org/2000/svg"
+          //         width="24"
+          //         height="24"
+          //         viewBox="0 0 24 24"
+          //         fill="none"
+          //         stroke="currentColor"
+          //         stroke-width="2"
+          //         stroke-linecap="round"
+          //         stroke-linejoin="round"
+          //         className="lucide lucide-chevron-right"
+          //       >
+          //         <path d="m9 18 6-6-6-6" />
+          //       </svg>
+          //     </button>
+          //   </div>
+          //   <div className="w-full md:w-[70%] pt-8 mx-auto">
+          //     <TTS content={chapterData?.content} />
+          //   </div>
+          // </div>
+
+          <div className="bg-black mx-4 md:mx-36">
             <div className="flex flex-col justify-center items-center pt-8">
-              <h1 className="text-6xl text-white ">
+              <h1 className="text-3xl md:text-6xl text-white">
                 {chapterDetail[0]?.title}
               </h1>
-              <h3 className="text-3xl text-gray-400 pt-4">
+              <h3 className="text-xl md:text-3xl text-gray-400 pt-4">
                 <span>{subTitle}</span>
               </h3>
             </div>
-            <div className="flex gap-3 justify-center pt-10">
+            <div className="flex gap-3 justify-center flex-wrap pt-10">
               <button
-                className="bg-[#138e00] h-10 px-4 flex items-center text-lg rounded-lg text-white w-50"
+                className="bg-[#138e00] h-10 px-4 flex items-center text-lg rounded-lg text-white"
                 onClick={prevChap}
               >
-                {" "}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
@@ -382,33 +527,26 @@ const NovelPage = () => {
                   className="lucide lucide-chevron-left"
                 >
                   <path d="m15 18-6-6 6-6" />
-                </svg>{" "}
+                </svg>
                 Previous Chapter
               </button>
-
               <select
                 name="chapterList"
                 id="chapterList"
-                className="bg-[#138e00] w-[200px] rounded-lg text-white justify-center"
+                className="bg-[#138e00] w-[200px] rounded-lg text-white"
                 value={currentChap}
-                onChange={() => handleChapter()}
+                onChange={handleChapter}
               >
                 {chapterDetail[0]?.chapters?.map((item, index) => (
                   <option value={item} key={index + 1}>
-                    {/* {item.replace(
-                      "http://apimanga.mangasocial.online/rnovel/" + slug + "/",
-                      ""
-                    )} */}
                     {`Chapter_${index + 1}`}
                   </option>
                 ))}
               </select>
-
               <button
-                className="bg-[#138e00] h-10 px-4 flex items-center text-lg rounded-lg text-white w-50"
+                className="bg-[#138e00] h-10 px-4 flex items-center text-lg rounded-lg text-white"
                 onClick={nextChap}
               >
-                {" "}
                 Next Chapter
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -423,13 +561,11 @@ const NovelPage = () => {
                   className="lucide lucide-chevron-right"
                 >
                   <path d="m9 18 6-6-6-6" />
-                </svg>{" "}
+                </svg>
               </button>
             </div>
-            <div className="w-[70%] pt-8 mx-auto">
-              {/* <TextToSpeech content={chapterData?.content} text={chapterData?.content} /> */}
-              <TTS content={chapterData?.content} />{" "}
-              {/*text-to-speech and highlight*/}
+            <div className="w-full md:w-[70%] pt-8 mx-auto">
+              <TTS content={chapterData?.content} />
             </div>
           </div>
         )}

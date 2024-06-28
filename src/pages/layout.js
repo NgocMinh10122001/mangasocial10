@@ -31,6 +31,7 @@ import { IoNewspaperOutline } from "react-icons/io5";
 import { RiSettingsFill } from "react-icons/ri";
 import { FaBook } from "react-icons/fa6";
 import { FaGoogleDrive } from "react-icons/fa";
+import { HiOutlineSwitchHorizontal } from "react-icons/hi";
 
 let path = "";
 let arr_id_manga = [""];
@@ -50,6 +51,8 @@ export default function Layout() {
   const [open, setOpen] = useState(false);
   const [checkSearch, setCheckSearch] = useState(false);
   const [url, setURL] = useState("");
+  const [isMenuVisible, setIsMenuVisible] = useState(true); 
+ const [showMenu, setShowMenu] = useState(true);
   const sv = useSelector((state) => state.server.sv);
   const loading = useSelector((state) => state.server.loading);
   const navigate = useNavigate();
@@ -337,6 +340,12 @@ export default function Layout() {
     dispatch(setIsLoading(true));
   }, []);
 
+    const toggleMenu = () => {
+      const show = !showMenu;
+      setShowMenu(show);
+      console.log(showMenu);
+    };
+
   const closeModal = () => {
     setIsModalOpen(false);
   };
@@ -346,44 +355,49 @@ export default function Layout() {
   }
   return (
     <>
-      <div className="header-top max-[435px]:hidden">
-        <div onClick={() => navigate(`/` + sv)}>
-          <div className="title text-white">
+      <div className="header-top padding-[2rem]  max-[435px]:hidden ">
+        <div className="flex justify-start items-center text-white group-hover:text-red-700 ">
+          <div
+            onClick={() => navigate(`/` + sv)}
+            className="title inline-flex justify-start items-center text-white space-x-2 cursor-pointer"
+          >
             <img
               className="img-manga"
               src="/images/logo-thinkdiff.png"
               alt=""
             ></img>
-            <h3>MangaSocial</h3>
+            <h3 className="">MangaSocial</h3>
           </div>
         </div>
-        <div className="menu-header">
-          <div onClick={() => navigate(`/` + sv)}>
-            <div
-              className="comic"
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
-            >
-              <p>Comic</p>
-              <img
-                className="arrow-img"
-                src={
-                  isHovered
-                    ? "/images/Polygon cam.svg"
-                    : "/images/Polygon 1.svg"
-                }
-                alt="Arrow"
-              />
+
+        {showMenu ? (
+          <div className={`menu-header`}>
+            <div onClick={() => navigate(`/` + sv)}>
+              <div
+                className="comic"
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+              >
+                <p>Comic</p>
+                <img
+                  className="arrow-img"
+                  src={
+                    isHovered
+                      ? "/images/Polygon cam.svg"
+                      : "/images/Polygon 1.svg"
+                  }
+                  alt="Arrow"
+                />
+              </div>
             </div>
-          </div>
 
-          <div onClick={() => navigate("/" + sv + "/genres")}>
-            <p>Genres</p>
-          </div>
+            <div onClick={() => navigate("/" + sv + "/genres")}>
+              <p>Genres</p>
+            </div>
 
-          <p>Popular</p>
+            <p>Popular</p>
 
-          {/* <div
+            {/* <div
             className="server"
             onMouseEnter={handleServerMouseEnter}
             onMouseLeave={handleServerMouseLeave}
@@ -399,63 +413,63 @@ export default function Layout() {
               alt="Arrow"
             />
           </div> */}
-          <div className="dropdown relative">
-            <button ref={submenuRef} onClick={() => handleOpen()}>
-              Server
-            </button>
-            {open ? (
-              <ul
-                className="menu grid grid-cols-2"
-                onClick={() => handleOpen()}
-              >
-                {serverName &&
-                  serverName.length > 0 &&
-                  serverName.map((item) => (
-                    <li
-                      key={item.sv}
-                      className="menu-item flex justify-start items-center pe-2"
-                      onClick={() => navigate("/" + item.sv)}
-                    >
-                      <button onClick={() => dispatch(changeServer(item.sv))}>
-                        {item.name}
-                      </button>
-                      <div className="">{item.icon}</div>
-                    </li>
-                  ))}
-              </ul>
-            ) : null}
+            <div className="dropdown relative">
+              <button ref={submenuRef} onClick={() => handleOpen()}>
+                Server
+              </button>
+              {open ? (
+                <ul
+                  className="menu grid grid-cols-2"
+                  onClick={() => handleOpen()}
+                >
+                  {serverName &&
+                    serverName.length > 0 &&
+                    serverName.map((item) => (
+                      <li
+                        key={item.sv}
+                        className="menu-item flex justify-start items-center pe-2"
+                        onClick={() => navigate("/" + item.sv)}
+                      >
+                        <button onClick={() => dispatch(changeServer(item.sv))}>
+                          {item.name}
+                        </button>
+                        <div className="">{item.icon}</div>
+                      </li>
+                    ))}
+                </ul>
+              ) : null}
 
-            {open ? (
-              ""
-            ) : (
-              <>
-                {serverName.map((item) =>
-                  item.sv === sv ? (
-                    <div
-                      key={item.sv}
-                      className="text-red-700 text-base tracking-wide font-normal absolute top-full w-full flex justify-start items-center gap-[6px]"
-                    >
-                      <span>{item.name}</span>
-                      <div>{item.icon}</div>
-                    </div>
-                  ) : (
-                    ""
-                  )
-                )}
-              </>
-            )}
-          </div>
-          {/* SERVER LIST       index    link
+              {open ? (
+                ""
+              ) : (
+                <>
+                  {serverName.map((item) =>
+                    item.sv === sv ? (
+                      <div
+                        key={item.sv}
+                        className="text-red-700 text-base tracking-wide font-normal absolute top-full w-full flex justify-start items-center gap-[6px]"
+                      >
+                        <span>{item.name}</span>
+                        <div>{item.icon}</div>
+                      </div>
+                    ) : (
+                      ""
+                    )
+                  )}
+                </>
+              )}
+            </div>
+            {/* SERVER LIST       index    link
           --------------------------NOVEL------------------------------------
                                         "https://www.ninemanga.com",
                                         "https://mangajar.com/",
                                   11    "https://www.novelhall.com"
-                                        "https://azoranov.com/series/",         
+                                        "https://azoranov.com/series/",
                                    4    "https://bestlightnovel.com/",
                                   12    "https://mto.to/",
                                         "https://ru.ninemanga.com",
                                    9    "https://swatmanga.net",
-                --------------------MANGA-----------------------------                        
+                --------------------MANGA-----------------------------
                                   14    "https://br.ninemanga.com",
                                   13    "https://de.ninemanga.com",
                                   16    "https://es.ninemanga.com",
@@ -464,112 +478,132 @@ export default function Layout() {
                                    5    "https://mangajar.com/manga",
                                    8    "https://mangajar.com",
                               *    6    "https://mangakomi.io/",
-                              *    2    "https://mangareader.cc",   
-                                   7    "https://readm.org/",   
+                              *    2    "https://mangareader.cc",
+                                   7    "https://readm.org/",
                                    1    "https://ww5.manganelo.tv",
                                    0    "https://www.mangainn.net",
-                                        
+
     */}
 
-          <div
-            onClick={() => {
-              dispatch(changeServer(4));
+            <div
+              onClick={() => {
+                dispatch(changeServer(4));
 
-              navigate("/" + 4 + "/novel");
-            }}
-            // onClick={() => dispatch(changeServer(4))}
-          >
-            {/* redirect to server novel : bestlightnovel.com*/}
-            <p className="novel">Novel</p>
-          </div>
-          <div onClick={() => navigate("/" + sv + `/contact-us`)}>
-            <p className="contact">Contact us</p>
-          </div>
-          <div onClick={() => navigate("/" + sv + `/policy`)}>
-            <p className="policy">Policy</p>
-          </div>
-          <div
-            to={`https://apps.apple.com/us/app/manga-reader-mangakomi-online/id6446646720`}
-          >
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/6/67/App_Store_%28iOS%29.svg"
-              alt=""
-              className="w-5 h-5 lg:w-12 lg:h-12 hover:scale-105 transition-all cursor-pointer"
-            />
-          </div>
-        </div>
-        <div className="avatar_search">
-          <CiSearch
-            color="red"
-            size={32}
-            onClick={handleSearch}
-            className="mr-2 cursor-pointer"
-          />
-          <input
-            className="w-full border-none outline-none bg-transparent opacity-100"
-            placeholder="Search..."
-            name="content"
-            onChange={handleOnChange}
-            onKeyDown={handleSearch}
-          />
-          {!isLogin ? (
-            <div className="flex justify-center align-middle items-center ml-4">
-              <Link to={`/login`}>
-                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
-                  Login
-                </button>
-              </Link>
+                navigate("/" + 4 + "/novel");
+              }}
+              // onClick={() => dispatch(changeServer(4))}
+            >
+              {/* redirect to server novel : bestlightnovel.com*/}
+              <p className="novel">Novel</p>
             </div>
-          ) : (
-            // <div to="/user-profile">
-            //     <div className="avatar">
-            //         <img src="/images/usersquare.svg" alt="usersquare"></img>
-            //     </div>
-            // </div>
-            <SubMenu />
-          )}
-          {/*  */}
-          {checkSearch ? (
-            <div className="h-80 w-[17rem] bg-[#DADADA] absolute mt-[375px] ml-[50px] rounded-lg border-double flex justify-center flex-col items-center overflow-y-auto ">
-              <hr className="mt-[150px]" />
-              {searchData ? (
-                searchData.slice(0, 3).map((item, index) => (
-                  <div
-                    key={index}
-                    className="w-[90%] h-full border-double border-red-900 rounded-lg flex border-4 cursor-pointer  "
-                  >
-                    <img
-                      className="w-1/3 h-[69%] py-2 rounded-lg"
-                      src={item.poster}
-                      alt=""
-                    />
+            <div onClick={() => navigate("/" + sv + `/contact-us`)}>
+              <p className="contact">Contact us</p>
+            </div>
+            <div onClick={() => navigate("/" + sv + `/policy`)}>
+              <p className="policy">Policy</p>
+            </div>
+            <div
+              to={`https://apps.apple.com/us/app/manga-reader-mangakomi-online/id6446646720`}
+            >
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/6/67/App_Store_%28iOS%29.svg"
+                alt=""
+                className="w-5 h-5 lg:w-12 lg:h-12 hover:scale-105 transition-all cursor-pointer"
+              />
+            </div>
+            <button
+              className="title font-semibold text-2xl hover:text-red-700 text-white"
+              onClick={() => toggleMenu()}
+            >
+              <HiOutlineSwitchHorizontal />
+            </button>
+          </div>
+        ) : (
+          ""
+        )}
+        {showMenu ? (
+          ""
+        ) : (
+          <div className={`avatar_search`}>
+            <CiSearch
+              color="red"
+              size={32}
+              onClick={handleSearch}
+              className="mr-2 cursor-pointer"
+            />
+            <input
+              className="w-full border-none outline-none bg-transparent opacity-100"
+              placeholder="Search..."
+              name="content"
+              onChange={handleOnChange}
+              onKeyDown={handleSearch}
+            />
+
+            {!isLogin ? (
+              <div className="flex justify-center align-middle items-center ml-4">
+                <Link to={`/login`}>
+                  <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                    Login
+                  </button>
+                </Link>
+              </div>
+            ) : (
+              // <div to="/user-profile">
+              //     <div className="avatar">
+              //         <img src="/images/usersquare.svg" alt="usersquare"></img>
+              //     </div>
+              // </div>
+              <SubMenu />
+            )}
+            {/*  */}
+            {checkSearch ? (
+              <div className="h-80 w-[17rem] bg-[#DADADA] absolute mt-[375px] ml-[50px] rounded-lg border-double flex justify-center flex-col items-center overflow-y-auto ">
+                <hr className="mt-[150px]" />
+                {searchData ? (
+                  searchData.slice(0, 3).map((item, index) => (
                     <div
-                      to={"/" + sv + `/chapter/` + arr_path[index]}
-                      onClick={() =>
-                        navigate("/ + sv + /chapter/" + arr_path[index])
-                      }
-                      className="flex"
+                      key={index}
+                      className="w-[90%] h-full border-double border-red-900 rounded-lg flex border-4 cursor-pointer  "
                     >
-                      <div className="text-lg flex flex-col ml-6 justify-center">
-                        <div>{item.title}</div>
-                        <div>Rate:{item.rate}</div>
-                        <div>Views: {item.views}</div>
+                      <img
+                        className="w-1/3 h-[69%] py-2 rounded-lg"
+                        src={item.poster}
+                        alt=""
+                      />
+                      <div
+                        to={"/" + sv + `/chapter/` + arr_path[index]}
+                        onClick={() =>
+                          navigate("/ + sv + /chapter/" + arr_path[index])
+                        }
+                        className="flex"
+                      >
+                        <div className="text-lg flex flex-col ml-6 justify-center">
+                          <div>{item.title}</div>
+                          <div>Rate:{item.rate}</div>
+                          <div>Views: {item.views}</div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))
-              ) : (
-                <p>Not found @@</p>
-              )}
+                  ))
+                ) : (
+                  <p>Not found @@</p>
+                )}
 
-              <div className="text-white border-5 border-white bg-blue-400 rounded-lg h-6 w-24 flex text-center content-center justify-center my-2">
-                <button onClick={() => handleCloseSearch()}>Close</button>
+                <div className="text-white border-5 border-white bg-blue-400 rounded-lg h-6 w-24 flex text-center content-center justify-center my-2">
+                  <button onClick={() => handleCloseSearch()}>Close</button>
+                </div>
               </div>
-            </div>
-          ) : null}
-        </div>
+            ) : null}
+            <button
+              className="title font-semibold text-2xl hover:text-red-700 text-white"
+              onClick={() => toggleMenu()}
+            >
+              <HiOutlineSwitchHorizontal />
+            </button>
+          </div>
+        )}
       </div>
-      <div className="header-top 2 hidden !bg-black !w-full !h-fit max-[435px]:block">
+      <div className="header-top 2 hidden !bg-black !w-full !h-fit">
         <div className="avatar_search max-[435px]:!px-4 max-[435px]:!py-4 max-[435px]:!ml-0  w-full flex-col !gap-4 !items-start">
           {!isLogin ? (
             <div className="flex justify-between w-full align-middle items-center ml-4 max-[435px]:!ml-0">

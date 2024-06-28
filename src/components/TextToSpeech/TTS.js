@@ -38,9 +38,77 @@ export default function App({ content }) {
   });
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", rowGap: "1rem" }}>
-      <div className="flex gap-2 justify-center items-center">
-      <label className="text-white">
+    // <div className={'w-[100%]'} style={{ display: "flex", flexDirection: "column", rowGap: "1rem" }}>
+    //   <div className="flex gap-2 justify-center items-center">
+    //   <label className="text-white">
+    //       Pitch:
+    //       <input
+    //         type="range"
+    //         min="0.0"
+    //         max="3"
+    //         step="0.1"
+    //         value={pitch}
+    //         onChange={handlePitchChange}
+    //       />
+    //     </label>
+
+    //     <br />
+
+    //     <label className="text-white">
+    //       Speed:
+    //       <input
+    //         type="range"
+    //         min="0.5"
+    //         max="2"
+    //         step="0.1"
+    //         value={rate}
+    //         onChange={handleRateChange}
+    //       />
+    //     </label>
+    //     <br />
+    //     <label className="text-white">
+    //       Volume:
+    //       <input
+    //         type="range"
+    //         min="0"
+    //         max="1"
+    //         step="0.1"
+    //         value={volume}
+    //         onChange={handleVolumeChange}
+    //       />
+    //     </label>
+
+    //     <br />
+
+    //     <label className="text-white flex items-center gap-2">
+    //       Voice:
+    //       <select
+    //         value={voice?.name}
+    //         onChange={handleVoiceChange}
+    //         className="text-white bg-[#138e00]"
+    //       >
+    //         {window.speechSynthesis.getVoices().map((voice) => (
+    //           <option key={voice.name} value={voice.name}>
+    //             {voice.name}
+    //           </option>
+    //         ))}
+    //       </select>
+    //     </label>
+    //     <br />
+    //     {speechStatus !== "started" ? (
+    //       <button className="text-white bg-[#138e00] p-2 rounded-lg " onClick={start}>
+    //         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-play"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+    //       </button>
+    //     ) : (
+    //       <button className="text-white bg-[#138e00] p-2 rounded-lg " onClick={pause}><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pause"><rect width="4" height="16" x="6" y="4"/><rect width="4" height="16" x="14" y="4"/></svg></button>
+    //     )}
+    //     <button className="text-white bg-[#138e00] p-2 rounded-lg " onClick={stop}><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-stop-circle"><circle cx="12" cy="12" r="10"/><rect width="6" height="6" x="9" y="9"/></svg></button>
+    //   </div>
+    //   <Text />
+    // </div>
+    <div className="w-full flex flex-col gap-4 p-4">
+      <div className="flex flex-col md:flex-row gap-4 justify-center items-center">
+        <label className="text-white flex flex-col items-center">
           Pitch:
           <input
             type="range"
@@ -49,12 +117,10 @@ export default function App({ content }) {
             step="0.1"
             value={pitch}
             onChange={handlePitchChange}
+            className="w-full"
           />
         </label>
-
-        <br />
-
-        <label className="text-white">
+        <label className="text-white flex flex-col items-center">
           Speed:
           <input
             type="range"
@@ -63,10 +129,10 @@ export default function App({ content }) {
             step="0.1"
             value={rate}
             onChange={handleRateChange}
+            className="w-full"
           />
         </label>
-        <br />
-        <label className="text-white">
+        <label className="text-white flex flex-col items-center">
           Volume:
           <input
             type="range"
@@ -75,17 +141,15 @@ export default function App({ content }) {
             step="0.1"
             value={volume}
             onChange={handleVolumeChange}
+            className="w-full"
           />
         </label>
-
-        <br />
-
-        <label className="text-white flex items-center gap-2">
+        <label className="text-white flex flex-col items-center">
           Voice:
           <select
             value={voice?.name}
             onChange={handleVoiceChange}
-            className="text-white bg-[#138e00]"
+            className="text-white bg-[#138e00] rounded w-full"
           >
             {window.speechSynthesis.getVoices().map((voice) => (
               <option key={voice.name} value={voice.name}>
@@ -94,15 +158,70 @@ export default function App({ content }) {
             ))}
           </select>
         </label>
-        <br />
+      </div>
+      <div className="flex justify-center items-center gap-4">
         {speechStatus !== "started" ? (
-          <button className="text-white bg-[#138e00] p-2 rounded-lg " onClick={start}>
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-play"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          <button
+            className="text-white bg-[#138e00] p-2 rounded-lg"
+            onClick={start}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="lucide lucide-play"
+            >
+              <polygon points="5 3 19 12 5 21 5 3" />
+            </svg>
           </button>
         ) : (
-          <button className="text-white bg-[#138e00] p-2 rounded-lg " onClick={pause}><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pause"><rect width="4" height="16" x="6" y="4"/><rect width="4" height="16" x="14" y="4"/></svg></button>
+          <button
+            className="text-white bg-[#138e00] p-2 rounded-lg"
+            onClick={pause}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="lucide lucide-pause"
+            >
+              <rect width="4" height="16" x="6" y="4" />
+              <rect width="4" height="16" x="14" y="4" />
+            </svg>
+          </button>
         )}
-        <button className="text-white bg-[#138e00] p-2 rounded-lg " onClick={stop}><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-stop-circle"><circle cx="12" cy="12" r="10"/><rect width="6" height="6" x="9" y="9"/></svg></button>
+        <button
+          className="text-white bg-[#138e00] p-2 rounded-lg"
+          onClick={stop}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="lucide lucide-stop-circle"
+          >
+            <circle cx="12" cy="12" r="10" />
+            <rect width="6" height="6" x="9" y="9" />
+          </svg>
+        </button>
       </div>
       <Text />
     </div>
