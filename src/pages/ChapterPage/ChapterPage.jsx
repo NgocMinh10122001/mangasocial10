@@ -1,4 +1,3 @@
-
 // export default ChapterPage;
 import React, { useEffect, useState } from "react";
 import "./ChapterPage.scss";
@@ -108,9 +107,7 @@ const ChapterPage = () => {
     fetchListComment()
   }, []);
 
-  useEffect(() => {
-
-  },[])
+  useEffect(() => {}, []);
 
   const handleSeeMore = () => {
     setVisibleChapterCount((prevCount) => prevCount + 10);

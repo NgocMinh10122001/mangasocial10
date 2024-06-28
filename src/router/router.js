@@ -136,7 +136,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/test",
-    element: <ItemManga />,
+    element: <ItemManga />, 
   },
 ]);
 export default router;

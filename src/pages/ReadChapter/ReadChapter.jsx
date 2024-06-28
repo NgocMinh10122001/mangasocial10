@@ -86,6 +86,7 @@ const ReadChapter = () => {
      
       if (readmode) { const response = await axios.get(
           `https://apimanga.mangasocial.online/web/rmanga/${sv}/${slug}/`
+<<<<<<< HEAD
         );
       // console.log("check rs", response.data.chapters);
       
@@ -114,6 +115,8 @@ const ReadChapter = () => {
       else { 
         const response = await axios.get(
           `https://apimanga.mangasocial.online/rmanga/${slug}`
+=======
+>>>>>>> responsive-manga-novel
         );
       // console.log("check rs", response.data.chapters);
       
@@ -121,6 +124,32 @@ const ReadChapter = () => {
       const keys = Object.values(response.data.chapters);
 
       // console.log("check rs",keys);
+<<<<<<< HEAD
+=======
+
+
+     const getChapterFromUrl = (url) => {
+    const parts = url.split('/');
+    return parts[parts.length - 2];
+  };
+      
+
+      // console.log("check key val",getChapterFromUrl(keys[0]) );
+        const values = keys.map((item) => getChapterFromUrl(item)
+        )
+        setListChapter(values);
+        console.log(values); }
+      else { 
+        const response = await axios.get(
+          `https://apimanga.mangasocial.online/rmanga/${slug}`
+        );
+      // console.log("check rs", response.data.chapters);
+      
+      
+      const keys = Object.values(response.data.chapters);
+
+      // console.log("check rs",keys);
+>>>>>>> responsive-manga-novel
 
 
       const getChapterFromUrl = (url) => {
@@ -217,14 +246,22 @@ const ReadChapter = () => {
       setLoading(true);
       navigate(`/${sv}/chapter/${slug}/${next}/`);
       setChooseChapter(next);
+<<<<<<< HEAD
       // console.log(slug, next);
+=======
+      console.log(slug, next);
+>>>>>>> responsive-manga-novel
       }
       else { 
         const next = listChapter[currentChapter + 1];
       setLoading(true);
       navigate(`/${sv}/chapter/${slug}/${next}/`);
       setChooseChapter(next);
+<<<<<<< HEAD
       // console.log(slug, next);
+=======
+      console.log(slug, next);
+>>>>>>> responsive-manga-novel
       }
     } else {
       alert("End of manga!!!");
