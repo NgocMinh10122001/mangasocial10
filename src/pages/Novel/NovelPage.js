@@ -159,7 +159,7 @@ const NovelPage = () => {
           <img
             src={chapterDetail[0]?.poster}
             alt=""
-            className=" h-[203px] w-[330px]  max-[435px]:w-hidden max-[435px]:h-auto max-[435px]:w-[100%]    md:h-[649px] md:w-[433px] bg-cover object-cover bg-center rounded-[8px]"
+            className=" h-[203px] w-[330px]  max-[435px]:w-hidden max-[435px]:h-auto max-[435px]:w-[100%] md:h-[649px] md:w-[433px] bg-cover object-cover bg-center rounded-[8px]"
           />
           {chapterDetail?.r18 ? (
             <div className="absolute top-0 right-5  hidden md:block ">
