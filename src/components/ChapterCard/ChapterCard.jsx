@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-const ChapterCard = ({ chapter, title, poster, des, slug, chapterLink }) => {
+const ChapterCard = ({ chapter, title, poster, des, slug, chapterLink,chapterName }) => {
   // console.log("check link", chapterLink);
   const sv = useSelector((state) => state.server.sv);
   const readmode = useSelector((state) => state.ReadMode.readmode);
@@ -11,19 +11,31 @@ const ChapterCard = ({ chapter, title, poster, des, slug, chapterLink }) => {
     `http://apimanga.mangasocial.online/rmanga/${slug}/`,
     ""
   );
+<<<<<<< HEAD
   const chapterNumberReadMode = chapterLink;
   console.log("chapter", chapterLink);
   const getChapterFromUrl = (url) => {
     const parts = url.split("/");
+=======
+  const chapterNumberReadMode = chapterLink
+  // console.log("chapter",chapterLink);
+   const getChapterFromUrl = (url) => {
+    const parts = url.split('/');
+>>>>>>> ff26d11cb02a4966ed65f5a8687be321d2e418b4
     return parts[parts.length - 1];
+   };
+   const getChapterFromUrl2 = (url) => {
+    const parts = url.split('/');
+    return parts[parts.length - 2];
   };
-  console.log(getChapterFromUrl(chapterNumberReadMode));
+  // console.log("check slug", chapterLink)
 
   const truncatedDes = des.length > 30 ? `${des.slice(0, 30)}...` : des;
   const truncatedTitle = title.length > 20 ? `${title.slice(0, 20)}...` : title;
 
   return (
     <>
+<<<<<<< HEAD
       <NavLink
         to={`/${sv}/chapter/${slug}/${getChapterFromUrl(
           chapterNumberReadMode
@@ -46,6 +58,25 @@ const ChapterCard = ({ chapter, title, poster, des, slug, chapterLink }) => {
               </div>
               <div className="text-sm md:text-base font-medium leading-5 md:leading-6 text-gray-400">
                 12/07/2023
+=======
+     
+        <NavLink to={`/${sv}/chapter/${slug}/${readmode ?getChapterFromUrl2(chapterNumberReadMode) :getChapterFromUrl(chapterNumberReadMode)}`}>
+          <div className=" flex items-center gap-[239px] cursor-pointer py-[24px] px-[48px] hover:bg-[#000] border-b-2 border-gray-500 rounded-xl">
+            {/* chapter info */}
+            <div className="flex items-center gap-[12px] ">
+              <img
+                src={poster}
+                alt=""
+                className="h-[172px] w-[172px] bg-cover bg-no-repeat rounded-xl bg-center"
+              />
+              <div>
+                <div className="text-[24px] font-semibold leading-[32px] text-white ">
+                  {`${title} - ${chapterName} `}
+                </div>
+                <div className="text-[22px] font-semibold leading-[28px] text-white ">
+                  12/07/2023
+                </div>
+>>>>>>> ff26d11cb02a4966ed65f5a8687be321d2e418b4
               </div>
             </div>
           </div>

@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import CardManga from "../../components/cardManga";
+import CardNovel from "../../components/cardNovel";
 
 const MangaCategory = () => {
   const [manga, setManga] = useState([]);
@@ -42,7 +42,7 @@ const MangaCategory = () => {
       <div className="grid grid-cols-5 gap-[20px]">
         {console.log("chek manga", manga)}
         {manga.slice(0, 20).map((item, index) => (
-          <CardManga
+          <CardNovel
             key={index}
             poster={item?.poster}
             title={item?.title}

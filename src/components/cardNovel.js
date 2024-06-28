@@ -2,32 +2,11 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-const CardManga = ({
-  poster,
-  title,
-  rate,
-  update,
-  chapter,
-  path_segment,
-  chapterLink,
-}) => {
+const CardNovel = ({ poster, title, rate, update, chapter, path_segment }) => {
   const sv = useSelector((state) => state.server.sv);
-  const readmode = useSelector((state) => state.ReadMode.readmode);
-  const chapterNumberReadMode = chapterLink ? chapterLink : "minhdz";
-  // console.log("check link", chapterNumberReadMode);
-  // console.log("chapter",chapterLink);
-  const getChapterFromUrl = (url) => {
-    const parts = url.split("/");
-    return parts[parts.length - 1];
-  };
-  const getChapterFromUrl2 = (url) => {
-    const parts = url.split("/");
-    return parts[parts.length - 2];
-  };
 
-  // console.log("check link", chapterNumberReadMode);
   return (
-    <NavLink to={`/${sv}/chapter/${path_segment}`}>
+    <NavLink to={`/${sv}/novel/${path_segment}`}>
       <div className=" cursor-pointer">
         <div className="rounded-xl group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl hover:shadow-black/30">
           <div className="w-full h-[300px] max-[435px]:h-[160px]">
@@ -44,17 +23,7 @@ const CardManga = ({
             <p className="text-[#FFFFFF] lg:text-[16px] max-[435px]:w-full  2xl:text-[18px] leading-10  font-semibold overflow-hidden whitespace-normal w-[200px]   max-[435px]:leading-[1.75rem]">
               {title}
             </p>
-            <NavLink
-              // to={`
-              // /${
-              //   readmode
-              //     ? getChapterFromUrl2(chapterNumberReadMode)
-              //     : getChapterFromUrl(chapterNumberReadMode)
-              // }`}
-              to={`/${sv}/chapter/${path_segment}/${getChapterFromUrl(
-                chapterNumberReadMode
-              )}`}
-            >
+            <NavLink to={`/${sv}/chapter/${path_segment}/${chapter}`}>
               <p className="lg:text-[16px] 2xl:text-[18px] max-[435px]:text-[13px] leading-8 font-semibold  mt-3 max-[435px]:mt-1">
                 Chapter: {chapter}
               </p>
@@ -87,4 +56,4 @@ const CardManga = ({
   );
 };
 
-export default CardManga;
+export default CardNovel;

@@ -16,6 +16,7 @@ export default function BestComicOfWeek() {
                         title={item?.title_manga}
                         rate={item?.rate}
                         update={item?.time_release}
+                        chapterLink={item.url_chapter}
                         path_segment={item?.path_segment_manga}
                     />
                 ))}

@@ -17,10 +17,12 @@ const ChapterPage = () => {
   const [showTab, setShowTab] = useState(true);
   const [chapterDetail, setChapterDetail] = useState([]);
   const [listChapter, setListChapter] = useState([]);
+
   const [visibleChapterCount, setVisibleChapterCount] = useState(12);
   const [showFullDescription, setShowFullDescription] = useState(false);
   const [comment, setComment] = useState("");
-  console.log("check comment", comment);
+  const [commentDetail, setCommentDetail]= useState([])
+  // console.log("check comment", comment);
   const [loading, setLoading] = useState(true);
 
   const params = useParams();
@@ -28,8 +30,13 @@ const ChapterPage = () => {
   const sv = useSelector((state) => state.server.sv);
   const readmode = useSelector((state) => state.ReadMode.readmode);
   const user_id = sessionStorage.getItem("user_id");
+<<<<<<< HEAD
   const [active, setActive] = useState(false);
 
+=======
+  const [active, setActive] = useState(false)
+  // console.log("check read mode", readmode)
+>>>>>>> ff26d11cb02a4966ed65f5a8687be321d2e418b4
   const handleActive = (string) => {
     if (string === "list") {
       setActive(!active);
@@ -48,8 +55,14 @@ const ChapterPage = () => {
         `https://apimanga.mangasocial.online/cmanga/${slug}/${user_id}/`,
         { content: comment }
       );
-      console.log("response:", res);
-      console.log("comment:", comment);
+      // console.log("response:", res);
+      // console.log("comment:", comment);
+      if (res) { 
+        let resc = await axios.get(`https://apimanga.mangasocial.online/cmanga/${slug}`)
+        setComment("")
+
+        if (resc) setCommentDetail(resc.data)
+      }
     } catch (error) {
       console.log(error);
       console.log("comment:", comment);
@@ -65,7 +78,7 @@ const ChapterPage = () => {
         );
         setChapterDetail(response.data);
         setListChapter(response.data.chapters);
-        console.log("chapter detail:", response.data);
+        // setCommentDetail(response.data.comment)
         setLoading(false);
       } else {
         const response = await axios.get(
@@ -73,7 +86,6 @@ const ChapterPage = () => {
         );
         setChapterDetail(response.data);
         setListChapter(response.data.chapters);
-        console.log("chapter detail:", response.data);
         setLoading(false);
       }
     } catch (error) {
@@ -81,9 +93,19 @@ const ChapterPage = () => {
       console.log("slug:", slug);
     }
   };
+<<<<<<< HEAD
+=======
+
+  const fetchListComment = async () => { 
+    let resc = await axios.get(`https://apimanga.mangasocial.online/cmanga/${slug}`)
+    if(resc) setCommentDetail(resc.data)
+  }
+ 
+>>>>>>> ff26d11cb02a4966ed65f5a8687be321d2e418b4
 
   useEffect(() => {
     fetchChapterDetail();
+    fetchListComment()
   }, []);
 
   useEffect(() => {
@@ -110,14 +132,31 @@ const ChapterPage = () => {
   });
 
   const arrChapterLink = Object.keys(listChapter);
+
+
+
+
   const linkList = arrChapterLink.map(function (link) {
     return listChapter[link];
   });
 
+<<<<<<< HEAD
   const getChapterFromUrl = (url) => {
     const parts = url.split("/");
+=======
+
+
+
+    const getChapterFromUrl = (url) => {
+    const parts = url.split('/');
+>>>>>>> ff26d11cb02a4966ed65f5a8687be321d2e418b4
     return parts[parts.length - 1];
   };
+   const getChapterFromUrl2 = (url) => {
+    const parts = url.split('/');
+    return parts[parts.length - 2];
+   };
+  
   const viewsString = chapterDetail?.views || "";
   const startIndex = viewsString.lastIndexOf("has ") + 4;
   const viewsPart = viewsString.substring(startIndex);
@@ -252,6 +291,7 @@ const ChapterPage = () => {
                     alt=""
                     className="h-[144px] w-[144px]"
                   />
+<<<<<<< HEAD
                   <div className="h-[64px] w-[125px] text-white font-semibold text-[24px] leading-[32px] absolute top-[30px] left-[10px]  text-center">
                     New Chapter
                   </div>
@@ -264,6 +304,105 @@ const ChapterPage = () => {
               {/* name && tương tác */}
               <div className="flex flex-col gap-[8px] md:gap-[21px]">
                 <div className="font-semibold text-[14px] leading-[20px] md:text-[45px] md:leading-[52px] text-white">
+=======
+                  <div>{`${viewsString} views`}</div>
+                </div>
+                <div className="flex items-center gap-2 font-medium text-[11px] leading-[16px] md:font-semibold md:text-[22px] md:leading-[28px] text-white ">
+                  <img
+                    src="/images/ChapterPage/mdi_like.png"
+                    alt=""
+                    className="h-[32px] w-[32px] hidden md:block"
+                  />
+                  <div>27.8K like</div>
+                </div>
+                <div className="flex items-center gap-2 font-medium text-[11px] leading-[16px] md:font-semibold md:text-[22px] md:leading-[28px] text-white ">
+                  <img
+                    src="/images/ChapterPage/jam_files-f.png"
+                    alt=""
+                    className="h-[32px] w-[32px] hidden md:block"
+                  />
+                  <div>{`${readmode ? Object.keys(chapterDetail?.chapters ?? {}).length ?? [] : chapterDetail?.chapters?.length} chapter `} </div>
+                </div>
+              </div>
+            </div>
+
+            {/* server && button */}
+            <div className="flex flex-col gap-[40px]">
+              {/* button */}
+              <div className="flex  gap-5">
+                <Link to={`/${sv}/chapter/${slug}/${readmode ? getChapterFromUrl2(linkList[0]?? "") : getChapterFromUrl(linkList[0]?? "")}`} className=" hover:text-white p-[8px]  rounded-[12px] md:px-[52px] md:py-[26px]  bg-[#FF2020]  text-white md:rounded-[67px] ">
+                  <div className="font-bold text-[12px] leading-[16px] md:text-[36px] md:leading-[44px] ">
+                    Read now
+                  </div>
+                </Link>
+                <button className={ ` p-[8px]  rounded-[12px] text-black md:px-[52px] md:py-[26px]   ${active ? "bg-[#FF2020]": "bg-[#496EF1]"}  md:text-white md:rounded-[67px]`} onClick={() => handleActive("list")}>
+                  <div className="font-bold text-[12px] leading-[16px] md:text-[36px] md:leading-[44px] flex gap-1 md:gap-3 " >
+                    <div> My List </div>
+                    <img
+                      src="/images/ChapterPage/uil_plus.png"
+                      alt=""
+                      className="h-[20px] w-[20px] md:h-[48px] md:w-[48px] bg-cover object-cover "
+                    />
+                  </div>
+                </button>
+                <button className=" p-[8px]  rounded-[12px] md:px-[52px] md:py-[26px] bg-[#F45F17]  text-white md:rounded-[67px]">
+                  <div className="font-bold text-[12px] leading-[16px] md:text-[36px] md:leading-[44px] flex gap-1 md:gap-3 ">
+                    <div>{chapterDetail?.rate}</div>
+                    <img
+                      src="/images/ChapterPage/Star 3.png"
+                      className="h-[20px] w-[20px] md:h-[48px] md:w-[48px] bg-cover object-cover"
+                      alt=""
+                    />
+                  </div>
+                </button>
+              </div>
+              {/* chọn server */}
+              <div className="flex flex-col gap-[10px]">
+                <div className=" font-bold text-[12px] leading-[16px]  md:text-[28px] md:leading-[36px] text-white ">
+                  Server
+                </div>
+                <div className="flex flex-wrap items-center justify-between">
+                  {listServer.map((item, index) => (
+                    <img
+                      key={index}
+                      src={item?.src}
+                      alt={item?.title}
+                      title={item?.title}
+                      className="w-[32px] h-[23px]  md:h-[48px]  md:w-[67px] cursor-pointer hover:opacity-80"
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
+            <div className="flex flex-col gap-[8px] md:gap-[40px]">
+              {/* info chapter */}
+              <div className="flex flex-col gap-[8px] md:gap-[16px]">
+                <div className="text-[#9E9E9E] font-normal text-[12px] leading-[16px] md:text-[24px]  md:leading-[36px] flex items-center gap-2">
+                  Author:
+                  <div className="text-white">
+                    {loading ? "Loading..." : chapterDetail?.author}
+                  </div>
+                </div>
+                <div className="text-[#9E9E9E] font-normal text-[12px] leading-[16px] md:text-[24px]  md:leading-[36px] flex items-center gap-2">
+                  Artist:
+                  <div className="text-white">
+                    {loading ? "Loading..." : "Unkown"}
+                  </div>
+                </div>
+                <div className="text-[#9E9E9E] font-normal text-[12px] leading-[16px] md:text-[24px]  md:leading-[36px] flex flex-wrap items-center gap-2">
+                  Genres:
+                  <div className="text-white">{chapterDetail?.categories}</div>
+                </div>
+                <div className="text-[#9E9E9E] font-normal text-[12px] leading-[16px] md:text-[24px]  md:leading-[36px] flex items-center gap-2">
+                  Age:
+                  <div className="text-white">
+                    {loading ? "Loading..." : "18+"}
+                  </div>
+                </div>
+                {/* desc */}
+                <div className="text-[#9E9E9E] font-normal text-[12px] leading-[16px] md:text-[24px]  md:leading-[36px] flex gap-2">
+                  Description:
+>>>>>>> ff26d11cb02a4966ed65f5a8687be321d2e418b4
                   {loading ? (
                     <Loading
                       type={"bars"}
@@ -492,9 +631,15 @@ const ChapterPage = () => {
                     {linkList
                       .slice(0, visibleChapterCount)
                       .map((item, index) => (
+<<<<<<< HEAD
                         <div className="my-2 " key={index}>
+=======
+                        <div key={index}>
+                          {/* {console.log("check link", item)} */}
+>>>>>>> ff26d11cb02a4966ed65f5a8687be321d2e418b4
                           <ChapterCard
                             chapterLink={item}
+                            chapterName={ arrChapterLink[index]}
                             title={chapterDetail?.title}
                             des={chapterDetail?.description}
                             poster={chapterDetail?.poster}
@@ -515,6 +660,7 @@ const ChapterPage = () => {
                 </div>
               </div>
             )}
+<<<<<<< HEAD
             {active && (
               <div className="text-white bg-[#000] w-full flex py-[50px] px-[100px] justify-center">
                 My list
@@ -558,6 +704,47 @@ const ChapterPage = () => {
                               Comment
                             </button>
                           </div>
+=======
+            {showTab && active && <div className="text-white bg-[#000] w-full flex py-[50px] px-[100px] justify-center">My list</div> }
+        </div>
+      )}
+
+      <div className="flex justify-center bg-black h-[1000vh] w-full">
+        {!showTab && (
+          <div className="flex flex-col items-center w-full mt-8 ">
+            <CMT_list cmt_arr={commentDetail || []} />
+            {/* logined user comment */}
+            {sessionStorage.getItem("user_email") ? (
+              <div className="w-full flex justify-center">
+                <div className="antialiased   mt-8 w-full px-[14px] md:px-[141px] ">
+                  <div className="space-y-4">
+                    <div className="flex">
+                      <div className="flex-shrink-0 mr-3">
+                        <img
+                          className="mt-2 rounded-full w-8 h-8 sm:w-10 sm:h-10"
+                          src="https://images.unsplash.com/photo-1604426633861-11b2faead63c?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=200&h=200&q=80"
+                          alt=""
+                        />
+                      </div>
+                      <div className="flex-1 border rounded-lg px-4 py-2 pb-4 leading-relaxed">
+                        <div className="flex items-center ">
+                          <strong className="text-white flex items-center ">
+                            {sessionStorage.getItem("user_email")}
+                          </strong>{" "}
+                        </div>
+                        <div className="flex flex-row gap-6">
+                          <input
+                            className="text-lg text-white bg-slate-500 h-32  w-full rounded-lg my-2"
+                            value={comment}
+                            onChange={(e) => commentOnchange(e)}
+                          ></input>
+                          <button
+                            className="bg-slate-500 rounded-lg m-2 w-[20%] text-white font-semibold"
+                            onClick={() => handleSendComment()}
+                          >
+                            Comment
+                          </button>
+>>>>>>> ff26d11cb02a4966ed65f5a8687be321d2e418b4
                         </div>
                       </div>
                     </div>

@@ -19,6 +19,7 @@ const FreeComic = () => {
           title={item?.title_manga}
           rate={item?.rate}
           update={item.time_release}
+          chapterLink={item.url_chapter}
           path_segment={extractNovelId(item.url_manga)}
         />
       ))}
