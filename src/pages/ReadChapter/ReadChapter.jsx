@@ -17,6 +17,8 @@ const ReadChapter = () => {
   const { slug, id } = params;
   const [chapterDetail, setChapterDetail] = useState([]);
   const [listChapter, setListChapter] = useState([]);
+  const [listNameChapter, setListNameChapter] = useState([]);
+
   const [chooseChapter, setChooseChapter] = useState("");
   const [loading, setLoading] = useState(true);
 
@@ -25,6 +27,7 @@ const ReadChapter = () => {
   const navigate = useNavigate();
   const fetchChapter = async () => {
     try {
+      
       if (readmode) {
         const response = await axios.get(
           `https://apimanga.mangasocial.online/web/rmanga/${sv}/${slug}/${id}`
@@ -33,8 +36,9 @@ const ReadChapter = () => {
         setChapterDetail(response.data);
         setLoading(false);
         // console.log(response.data);
-      } else {
-        const response = await axios.get(
+       }
+      else {
+         const response = await axios.get(
           `https://apimanga.mangasocial.online/rmanga/${slug}/${id}`
         );
 
@@ -42,6 +46,7 @@ const ReadChapter = () => {
         setLoading(false);
         // console.log(response.data);
       }
+      
     } catch (error) {
       console.log("error", error);
     }
@@ -78,45 +83,59 @@ const ReadChapter = () => {
   };
   const fetchListChapter = async () => {
     try {
-      if (readmode) {
-        const response = await axios.get(
+     
+      if (readmode) { const response = await axios.get(
           `https://apimanga.mangasocial.online/web/rmanga/${sv}/${slug}/`
         );
-        // console.log("check rs", response.data.chapters);
+      // console.log("check rs", response.data.chapters);
+      
+      
+        const arrValues = Object.values(response.data.chapters);
+        const arrKeys = Object.keys(response.data.chapters);
 
-        const keys = Object.values(response.data.chapters);
+        
 
-        // console.log("check rs",keys);
+      // console.log("check rs",keys);
 
-        const getChapterFromUrl = (url) => {
-          const parts = url.split("/");
-          return parts[parts.length - 2];
-        };
 
-        // console.log("check key val",getChapterFromUrl(keys[0]) );
-        const values = keys.map((item) => getChapterFromUrl(item));
+     const getChapterFromUrl = (url) => {
+    const parts = url.split('/');
+    return parts[parts.length - 2];
+  };
+      setListNameChapter(arrKeys)
+      
+
+      // console.log("check key val",getChapterFromUrl(keys[0]) );
+        const values = arrValues.map((item) => getChapterFromUrl(item)
+        )
         setListChapter(values);
-        console.log(values);
-      } else {
+        // console.log(values);
+      }
+      else { 
         const response = await axios.get(
           `https://apimanga.mangasocial.online/rmanga/${slug}`
         );
-        // console.log("check rs", response.data.chapters);
+      // console.log("check rs", response.data.chapters);
+      
+      
+      const keys = Object.values(response.data.chapters);
 
-        const keys = Object.values(response.data.chapters);
+      // console.log("check rs",keys);
 
-        // console.log("check rs",keys);
 
-        const getChapterFromUrl = (url) => {
-          const parts = url.split("/");
-          return parts[parts.length - 1];
-        };
+      const getChapterFromUrl = (url) => {
+    const parts = url.split('/');
+    return parts[parts.length - 1];
+      };
+      
 
-        // console.log("check key val",getChapterFromUrl(keys[0]) );
-        const values = keys.map((item) => getChapterFromUrl(item));
+      // console.log("check key val",getChapterFromUrl(keys[0]) );
+      const values = keys.map((item) => getChapterFromUrl(item))
         setListChapter(values);
-        console.log(values);
+        console.log(values); 
+
       }
+      
     } catch (error) {
       console.log(error);
     }
@@ -135,8 +154,9 @@ const ReadChapter = () => {
   }, [slug, id]);
 
   const handleChapter = (e) => {
-    if (readmode) {
-      let selectChapter = document.getElementById("chapterList");
+    
+    if (readmode) { 
+        let selectChapter = document.getElementById("chapterList");
       let selectedChapter =
         selectChapter.options[selectChapter.selectedIndex].value;
       console.log(selectedChapter);
@@ -146,8 +166,8 @@ const ReadChapter = () => {
         ""
       );
       navigate(`/${sv}/chapter/${slug}/${linkChapter}`);
-    } else {
-      let selectChapter = document.getElementById("chapterList");
+    }
+    else {  let selectChapter = document.getElementById("chapterList");
       let selectedChapter =
         selectChapter.options[selectChapter.selectedIndex].value;
       console.log(selectedChapter);
@@ -156,34 +176,35 @@ const ReadChapter = () => {
         `http://apimanga.mangasocial.online/rmanga/${slug}/`,
         ""
       );
-      navigate(`/${sv}/chapter/${slug}/${linkChapter}`);
-    }
+      navigate(`/${sv}/chapter/${slug}/${linkChapter}`); }
+    
   };
 
   let currentChapter = listChapter.indexOf(id);
-  console.log(currentChapter);
+  // console.log(currentChapter);
 
   const prevChapter = () => {
     if (currentChapter > 0) {
-      if (readmode) {
-        const prev = listChapter[currentChapter - 1].replace(
-          `http://apimanga.mangasocial.online/web/rmanga/${sv}/${slug}/`,
-          ""
-        );
-        currentChapter--;
-        navigate(`/${sv}/chapter/${slug}/${prev}`);
-        setChooseChapter(prev);
-        console.log(currentChapter);
-      } else {
-        const prev = listChapter[currentChapter - 1].replace(
-          `http://apimanga.mangasocial.online/rmanga/${slug}/`,
-          ""
-        );
-        currentChapter--;
-        navigate(`/${sv}/chapter/${slug}/${prev}`);
-        setChooseChapter(prev);
-        console.log(currentChapter);
+      if (readmode) { 
+ const prev = listChapter[currentChapter - 1].replace(
+        `http://apimanga.mangasocial.online/web/rmanga/${sv}/${slug}/`,
+        ""
+      );
+      currentChapter--;
+      navigate(`/${sv}/chapter/${slug}/${prev}`);
+      setChooseChapter(prev);
+      console.log(currentChapter);
       }
+      else {
+        const prev = listChapter[currentChapter - 1].replace(
+        `http://apimanga.mangasocial.online/rmanga/${slug}/`,
+        ""
+      );
+      currentChapter--;
+      navigate(`/${sv}/chapter/${slug}/${prev}`);
+      setChooseChapter(prev);
+      console.log(currentChapter);
+       }
     } else {
       alert("What!!???");
     }
@@ -191,18 +212,19 @@ const ReadChapter = () => {
 
   const nextChap = () => {
     if (currentChapter + 2 <= listChapter.length) {
-      if (readmode) {
+      if (readmode) { 
+         const next = listChapter[currentChapter + 1];
+      setLoading(true);
+      navigate(`/${sv}/chapter/${slug}/${next}/`);
+      setChooseChapter(next);
+      // console.log(slug, next);
+      }
+      else { 
         const next = listChapter[currentChapter + 1];
-        setLoading(true);
-        navigate(`/${sv}/chapter/${slug}/${next}/`);
-        setChooseChapter(next);
-        console.log(slug, next);
-      } else {
-        const next = listChapter[currentChapter + 1];
-        setLoading(true);
-        navigate(`/${sv}/chapter/${slug}/${next}/`);
-        setChooseChapter(next);
-        console.log(slug, next);
+      setLoading(true);
+      navigate(`/${sv}/chapter/${slug}/${next}/`);
+      setChooseChapter(next);
+      // console.log(slug, next);
       }
     } else {
       alert("End of manga!!!");
@@ -214,10 +236,7 @@ const ReadChapter = () => {
       <div className="flex flex-col container gap-5">
         <div className="">
           <h1 className="uppercase font-bold text-3xl">
-            {chapterDetail?.title} -{" "}
-            {readmode
-              ? chapterDetail?.chapter_title
-              : chapterDetail?.chapter_name}
+            {chapterDetail?.title} - {readmode ? chapterDetail?.chapter_title: chapterDetail?.chapter_name}
           </h1>
         </div>
 
@@ -238,9 +257,10 @@ const ReadChapter = () => {
               onChange={(e) => handleChapter(e)}
               value={id}
             >
+             
               {listChapter?.map((item, index) => (
                 <option key={index} value={item}>
-                  {item}
+                  {listNameChapter[index]}
                 </option>
               ))}
             </select>
@@ -298,10 +318,13 @@ const ReadChapter = () => {
               onChange={() => handleChapter()}
               value={id}
             >
-              <option>Select Chapter</option>
+              
+              <option >
+                  Select Chapter
+                </option>
               {listChapter?.map((item, index) => (
                 <option key={index} value={item}>
-                  {item}
+                  {listNameChapter[index]}
                 </option>
               ))}
             </select>

@@ -31,7 +31,6 @@ import { IoNewspaperOutline } from "react-icons/io5";
 import { RiSettingsFill } from "react-icons/ri";
 import { FaBook } from "react-icons/fa6";
 import { FaGoogleDrive } from "react-icons/fa";
-import { HiOutlineSwitchHorizontal } from "react-icons/hi";
 
 let path = "";
 let arr_id_manga = [""];
@@ -51,12 +50,9 @@ export default function Layout() {
   const [open, setOpen] = useState(false);
   const [checkSearch, setCheckSearch] = useState(false);
   const [url, setURL] = useState("");
-  const [isMenuVisible, setIsMenuVisible] = useState(true);
-  const [showMenu, setShowMenu] = useState(true);
   const sv = useSelector((state) => state.server.sv);
   const loading = useSelector((state) => state.server.loading);
   const navigate = useNavigate();
-
 
   //  14    "https://br.ninemanga.com",
   //                                 13    "https://de.ninemanga.com",
@@ -341,22 +337,6 @@ export default function Layout() {
     dispatch(setIsLoading(true));
   }, []);
 
-  useEffect(() => {
-    const handleSize = () => {
-      setIsMenuVisible(window.innerWidth <= 1328);
-    };
-    window.addEventListener("resize", handleSize);
-  return () => {
-    window.removeEventListener("resize", handleSize);
-  };
-  }, [])
-
-  const toggleMenu = () => {
-    const show = !showMenu;
-    setShowMenu(show);
-    console.log(showMenu);
-  };
-
   const closeModal = () => {
     setIsModalOpen(false);
   };
@@ -366,22 +346,18 @@ export default function Layout() {
   }
   return (
     <>
-      <div className="header-top padding-[2rem]  max-[435px]:hidden ">
-        <div className="flex justify-start items-center text-white group-hover:text-red-700 ">
-          <div
-            onClick={() => navigate(`/` + sv)}
-            className="title inline-flex justify-start items-center text-white space-x-2 cursor-pointer"
-          >
+      <div className="header-top max-[435px]:hidden">
+        <div onClick={() => navigate(`/` + sv)}>
+          <div className="title text-white">
             <img
               className="img-manga"
               src="/images/logo-thinkdiff.png"
               alt=""
             ></img>
-            <h3 className="">MangaSocial</h3>
+            <h3>MangaSocial</h3>
           </div>
         </div>
-
-        <div className={` menu-header`}>
+        <div className="menu-header">
           <div onClick={() => navigate(`/` + sv)}>
             <div
               className="comic"
@@ -474,12 +450,12 @@ export default function Layout() {
                                         "https://www.ninemanga.com",
                                         "https://mangajar.com/",
                                   11    "https://www.novelhall.com"
-                                        "https://azoranov.com/series/",
+                                        "https://azoranov.com/series/",         
                                    4    "https://bestlightnovel.com/",
                                   12    "https://mto.to/",
                                         "https://ru.ninemanga.com",
                                    9    "https://swatmanga.net",
-                --------------------MANGA-----------------------------
+                --------------------MANGA-----------------------------                        
                                   14    "https://br.ninemanga.com",
                                   13    "https://de.ninemanga.com",
                                   16    "https://es.ninemanga.com",
@@ -488,11 +464,11 @@ export default function Layout() {
                                    5    "https://mangajar.com/manga",
                                    8    "https://mangajar.com",
                               *    6    "https://mangakomi.io/",
-                              *    2    "https://mangareader.cc",
-                                   7    "https://readm.org/",
+                              *    2    "https://mangareader.cc",   
+                                   7    "https://readm.org/",   
                                    1    "https://ww5.manganelo.tv",
                                    0    "https://www.mangainn.net",
-
+                                        
     */}
 
           <div
@@ -522,8 +498,7 @@ export default function Layout() {
             />
           </div>
         </div>
-
-        <div className={`avatar_search`}>
+        <div className="avatar_search">
           <CiSearch
             color="red"
             size={32}
@@ -537,7 +512,6 @@ export default function Layout() {
             onChange={handleOnChange}
             onKeyDown={handleSearch}
           />
-
           {!isLogin ? (
             <div className="flex justify-center align-middle items-center ml-4">
               <Link to={`/login`}>
@@ -595,7 +569,7 @@ export default function Layout() {
           ) : null}
         </div>
       </div>
-      <div className="header-top 2 hidden !bg-black !w-full max-[435px]:block !h-fit ">
+      <div className="header-top 2 hidden !bg-black !w-full !h-fit max-[435px]:block">
         <div className="avatar_search max-[435px]:!px-4 max-[435px]:!py-4 max-[435px]:!ml-0  w-full flex-col !gap-4 !items-start">
           {!isLogin ? (
             <div className="flex justify-between w-full align-middle items-center ml-4 max-[435px]:!ml-0">

@@ -21,12 +21,12 @@ const Page_NewRelease = () => {
           newRelease.map((item, index) => (
             <CardManga
               key={index}
-              poster={item?.image_poster_link_goc}
-              title={item?.title_manga}
-              rate={item?.rate}
-              update={item.time_release}
-              chapterLink={item.url_chapter}
-              path_segment={item?.path_segment_manga}
+              poster={item?.image_poster_link_goc || ""}
+              title={item?.title_manga || ""}
+              rate={item?.rate || ""}
+              update={item.time_release || ""}
+              chapterLink={item.url_chapter || ""}
+              path_segment={item?.path_segment_manga || ""}
             />
           ))}
       </div>
