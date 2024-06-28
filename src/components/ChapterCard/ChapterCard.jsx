@@ -21,7 +21,7 @@ const ChapterCard = ({ chapter, title, poster, des, slug, chapterLink,chapterNam
     const parts = url.split('/');
     return parts[parts.length - 2];
   };
-  console.log("check slug", chapterLink)
+  // console.log("check slug", chapterLink)
 
   const truncatedDes = des.length > 50 ? `${des.slice(0, 50)}...` : des;
   return (

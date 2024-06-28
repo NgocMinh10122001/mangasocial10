@@ -14,6 +14,7 @@ const CardManga = ({
   const sv = useSelector((state) => state.server.sv);
   const readmode = useSelector((state) => state.ReadMode.readmode);
   const chapterNumberReadMode = chapterLink ? chapterLink : "minhdz";
+  // console.log("check link", chapterNumberReadMode);
   // console.log("chapter",chapterLink);
   const getChapterFromUrl = (url) => {
     const parts = url.split("/");
@@ -45,13 +46,14 @@ const CardManga = ({
             </p>
             <NavLink
               // to={`
-              // /${sv}/chapter/${path_segment}/${
+              // /${
               //   readmode
               //     ? getChapterFromUrl2(chapterNumberReadMode)
               //     : getChapterFromUrl(chapterNumberReadMode)
               // }`}
-              to={`
-             `}
+              to={`/${sv}/chapter/${path_segment}/${getChapterFromUrl(
+                chapterNumberReadMode
+              )}`}
             >
               <p className="lg:text-[16px] 2xl:text-[18px] max-[435px]:text-[13px] leading-8 font-semibold  mt-3 max-[435px]:mt-1">
                 Chapter: {chapter}

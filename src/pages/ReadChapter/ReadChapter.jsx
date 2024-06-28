@@ -17,6 +17,8 @@ const ReadChapter = () => {
   const { slug, id } = params;
   const [chapterDetail, setChapterDetail] = useState([]);
   const [listChapter, setListChapter] = useState([]);
+  const [listNameChapter, setListNameChapter] = useState([]);
+
   const [chooseChapter, setChooseChapter] = useState("");
   const [loading, setLoading] = useState(true);
 
@@ -88,7 +90,10 @@ const ReadChapter = () => {
       // console.log("check rs", response.data.chapters);
       
       
-      const keys = Object.values(response.data.chapters);
+        const arrValues = Object.values(response.data.chapters);
+        const arrKeys = Object.keys(response.data.chapters);
+
+        
 
       // console.log("check rs",keys);
 
@@ -97,13 +102,15 @@ const ReadChapter = () => {
     const parts = url.split('/');
     return parts[parts.length - 2];
   };
+      setListNameChapter(arrKeys)
       
 
       // console.log("check key val",getChapterFromUrl(keys[0]) );
-        const values = keys.map((item) => getChapterFromUrl(item)
+        const values = arrValues.map((item) => getChapterFromUrl(item)
         )
         setListChapter(values);
-        console.log(values); }
+        // console.log(values);
+      }
       else { 
         const response = await axios.get(
           `https://apimanga.mangasocial.online/rmanga/${slug}`
@@ -174,7 +181,7 @@ const ReadChapter = () => {
   };
 
   let currentChapter = listChapter.indexOf(id);
-  console.log(currentChapter);
+  // console.log(currentChapter);
 
   const prevChapter = () => {
     if (currentChapter > 0) {
@@ -210,14 +217,14 @@ const ReadChapter = () => {
       setLoading(true);
       navigate(`/${sv}/chapter/${slug}/${next}/`);
       setChooseChapter(next);
-      console.log(slug, next);
+      // console.log(slug, next);
       }
       else { 
         const next = listChapter[currentChapter + 1];
       setLoading(true);
       navigate(`/${sv}/chapter/${slug}/${next}/`);
       setChooseChapter(next);
-      console.log(slug, next);
+      // console.log(slug, next);
       }
     } else {
       alert("End of manga!!!");
@@ -253,7 +260,7 @@ const ReadChapter = () => {
              
               {listChapter?.map((item, index) => (
                 <option key={index} value={item}>
-                  {item}
+                  {listNameChapter[index]}
                 </option>
               ))}
             </select>
@@ -317,7 +324,7 @@ const ReadChapter = () => {
                 </option>
               {listChapter?.map((item, index) => (
                 <option key={index} value={item}>
-                  {item}
+                  {listNameChapter[index]}
                 </option>
               ))}
             </select>
