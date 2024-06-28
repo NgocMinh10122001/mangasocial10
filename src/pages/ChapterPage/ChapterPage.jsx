@@ -119,7 +119,7 @@ const ChapterPage = () => {
   const startIndex = viewsString.lastIndexOf("has ") + 4;
   const viewsPart = viewsString.substring(startIndex);
   const truncatedDescription =
-    chapterDetail?.description?.slice(0, 20) + "... ";
+    chapterDetail?.description?.slice(0, 100) + "... ";
   const fullDescription = chapterDetail?.description;
 
   let listServer = [
@@ -140,7 +140,7 @@ const ChapterPage = () => {
           style={{
             backgroundImage: "url('/images/ChapterPage/bia.png')",
             background:
-              "linear-gradient(0deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 100%), linear-gradient(0deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 100%), url('/images/ChapterPage/bia.png'), lightgray 50% / cover no-repeat",
+              "black",
           }}
         >
           {loading ? (
@@ -475,7 +475,7 @@ const ChapterPage = () => {
               //   </div>
               // </div>
               <div className="bg-[#000] flex py-[20px] md:py-[50px] px-[20px] w-[100%] sm:px-[40px] md:px-[0px] justify-center">
-                <div className="bg-[#000] py-[20px] px-[24px] sm:px-[0px] md:px-[48px] w-full max-w-[1200px]">
+                <div className="bg-[#000] py-[20px] px-[24px] sm:px-[0px] md:px-[48px] w-full max-w-[100%]">
                   <div className="flex items-center gap-2 font-semibold text-[18px] sm:text-[20px] md:text-[22px] leading-[22px] sm:leading-[24px] md:leading-[28px] text-white">
                     <img
                       src="/images/ChapterPage/jam_files-f.png"

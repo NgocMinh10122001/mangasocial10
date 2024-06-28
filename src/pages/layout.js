@@ -51,11 +51,12 @@ export default function Layout() {
   const [open, setOpen] = useState(false);
   const [checkSearch, setCheckSearch] = useState(false);
   const [url, setURL] = useState("");
-  const [isMenuVisible, setIsMenuVisible] = useState(true); 
- const [showMenu, setShowMenu] = useState(true);
+  const [isMenuVisible, setIsMenuVisible] = useState(true);
+  const [showMenu, setShowMenu] = useState(true);
   const sv = useSelector((state) => state.server.sv);
   const loading = useSelector((state) => state.server.loading);
   const navigate = useNavigate();
+
 
   //  14    "https://br.ninemanga.com",
   //                                 13    "https://de.ninemanga.com",
@@ -340,11 +341,21 @@ export default function Layout() {
     dispatch(setIsLoading(true));
   }, []);
 
-    const toggleMenu = () => {
-      const show = !showMenu;
-      setShowMenu(show);
-      console.log(showMenu);
+  useEffect(() => {
+    const handleSize = () => {
+      setIsMenuVisible(window.innerWidth <= 1328);
     };
+    window.addEventListener("resize", handleSize);
+  return () => {
+    window.removeEventListener("resize", handleSize);
+  };
+  }, [])
+
+  const toggleMenu = () => {
+    const show = !showMenu;
+    setShowMenu(show);
+    console.log(showMenu);
+  };
 
   const closeModal = () => {
     setIsModalOpen(false);
@@ -370,34 +381,33 @@ export default function Layout() {
           </div>
         </div>
 
-        {showMenu ? (
-          <div className={`menu-header`}>
-            <div onClick={() => navigate(`/` + sv)}>
-              <div
-                className="comic"
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
-              >
-                <p>Comic</p>
-                <img
-                  className="arrow-img"
-                  src={
-                    isHovered
-                      ? "/images/Polygon cam.svg"
-                      : "/images/Polygon 1.svg"
-                  }
-                  alt="Arrow"
-                />
-              </div>
+        <div className={` menu-header`}>
+          <div onClick={() => navigate(`/` + sv)}>
+            <div
+              className="comic"
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+            >
+              <p>Comic</p>
+              <img
+                className="arrow-img"
+                src={
+                  isHovered
+                    ? "/images/Polygon cam.svg"
+                    : "/images/Polygon 1.svg"
+                }
+                alt="Arrow"
+              />
             </div>
+          </div>
 
-            <div onClick={() => navigate("/" + sv + "/genres")}>
-              <p>Genres</p>
-            </div>
+          <div onClick={() => navigate("/" + sv + "/genres")}>
+            <p>Genres</p>
+          </div>
 
-            <p>Popular</p>
+          <p>Popular</p>
 
-            {/* <div
+          {/* <div
             className="server"
             onMouseEnter={handleServerMouseEnter}
             onMouseLeave={handleServerMouseLeave}
@@ -413,53 +423,53 @@ export default function Layout() {
               alt="Arrow"
             />
           </div> */}
-            <div className="dropdown relative">
-              <button ref={submenuRef} onClick={() => handleOpen()}>
-                Server
-              </button>
-              {open ? (
-                <ul
-                  className="menu grid grid-cols-2"
-                  onClick={() => handleOpen()}
-                >
-                  {serverName &&
-                    serverName.length > 0 &&
-                    serverName.map((item) => (
-                      <li
-                        key={item.sv}
-                        className="menu-item flex justify-start items-center pe-2"
-                        onClick={() => navigate("/" + item.sv)}
-                      >
-                        <button onClick={() => dispatch(changeServer(item.sv))}>
-                          {item.name}
-                        </button>
-                        <div className="">{item.icon}</div>
-                      </li>
-                    ))}
-                </ul>
-              ) : null}
+          <div className="dropdown relative">
+            <button ref={submenuRef} onClick={() => handleOpen()}>
+              Server
+            </button>
+            {open ? (
+              <ul
+                className="menu grid grid-cols-2"
+                onClick={() => handleOpen()}
+              >
+                {serverName &&
+                  serverName.length > 0 &&
+                  serverName.map((item) => (
+                    <li
+                      key={item.sv}
+                      className="menu-item flex justify-start items-center pe-2"
+                      onClick={() => navigate("/" + item.sv)}
+                    >
+                      <button onClick={() => dispatch(changeServer(item.sv))}>
+                        {item.name}
+                      </button>
+                      <div className="">{item.icon}</div>
+                    </li>
+                  ))}
+              </ul>
+            ) : null}
 
-              {open ? (
-                ""
-              ) : (
-                <>
-                  {serverName.map((item) =>
-                    item.sv === sv ? (
-                      <div
-                        key={item.sv}
-                        className="text-red-700 text-base tracking-wide font-normal absolute top-full w-full flex justify-start items-center gap-[6px]"
-                      >
-                        <span>{item.name}</span>
-                        <div>{item.icon}</div>
-                      </div>
-                    ) : (
-                      ""
-                    )
-                  )}
-                </>
-              )}
-            </div>
-            {/* SERVER LIST       index    link
+            {open ? (
+              ""
+            ) : (
+              <>
+                {serverName.map((item) =>
+                  item.sv === sv ? (
+                    <div
+                      key={item.sv}
+                      className="text-red-700 text-base tracking-wide font-normal absolute top-full w-full flex justify-start items-center gap-[6px]"
+                    >
+                      <span>{item.name}</span>
+                      <div>{item.icon}</div>
+                    </div>
+                  ) : (
+                    ""
+                  )
+                )}
+              </>
+            )}
+          </div>
+          {/* SERVER LIST       index    link
           --------------------------NOVEL------------------------------------
                                         "https://www.ninemanga.com",
                                         "https://mangajar.com/",
@@ -485,125 +495,107 @@ export default function Layout() {
 
     */}
 
-            <div
-              onClick={() => {
-                dispatch(changeServer(4));
+          <div
+            onClick={() => {
+              dispatch(changeServer(4));
 
-                navigate("/" + 4 + "/novel");
-              }}
-              // onClick={() => dispatch(changeServer(4))}
-            >
-              {/* redirect to server novel : bestlightnovel.com*/}
-              <p className="novel">Novel</p>
-            </div>
-            <div onClick={() => navigate("/" + sv + `/contact-us`)}>
-              <p className="contact">Contact us</p>
-            </div>
-            <div onClick={() => navigate("/" + sv + `/policy`)}>
-              <p className="policy">Policy</p>
-            </div>
-            <div
-              to={`https://apps.apple.com/us/app/manga-reader-mangakomi-online/id6446646720`}
-            >
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/6/67/App_Store_%28iOS%29.svg"
-                alt=""
-                className="w-5 h-5 lg:w-12 lg:h-12 hover:scale-105 transition-all cursor-pointer"
-              />
-            </div>
-            <button
-              className="title font-semibold text-2xl hover:text-red-700 text-white"
-              onClick={() => toggleMenu()}
-            >
-              <HiOutlineSwitchHorizontal />
-            </button>
+              navigate("/" + 4 + "/novel");
+            }}
+            // onClick={() => dispatch(changeServer(4))}
+          >
+            {/* redirect to server novel : bestlightnovel.com*/}
+            <p className="novel">Novel</p>
           </div>
-        ) : (
-          ""
-        )}
-        {showMenu ? (
-          ""
-        ) : (
-          <div className={`avatar_search`}>
-            <CiSearch
-              color="red"
-              size={32}
-              onClick={handleSearch}
-              className="mr-2 cursor-pointer"
+          <div onClick={() => navigate("/" + sv + `/contact-us`)}>
+            <p className="contact">Contact us</p>
+          </div>
+          <div onClick={() => navigate("/" + sv + `/policy`)}>
+            <p className="policy">Policy</p>
+          </div>
+          <div
+            to={`https://apps.apple.com/us/app/manga-reader-mangakomi-online/id6446646720`}
+          >
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/6/67/App_Store_%28iOS%29.svg"
+              alt=""
+              className="w-5 h-5 lg:w-12 lg:h-12 hover:scale-105 transition-all cursor-pointer"
             />
-            <input
-              className="w-full border-none outline-none bg-transparent opacity-100"
-              placeholder="Search..."
-              name="content"
-              onChange={handleOnChange}
-              onKeyDown={handleSearch}
-            />
+          </div>
+        </div>
 
-            {!isLogin ? (
-              <div className="flex justify-center align-middle items-center ml-4">
-                <Link to={`/login`}>
-                  <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
-                    Login
-                  </button>
-                </Link>
-              </div>
-            ) : (
-              // <div to="/user-profile">
-              //     <div className="avatar">
-              //         <img src="/images/usersquare.svg" alt="usersquare"></img>
-              //     </div>
-              // </div>
-              <SubMenu />
-            )}
-            {/*  */}
-            {checkSearch ? (
-              <div className="h-80 w-[17rem] bg-[#DADADA] absolute mt-[375px] ml-[50px] rounded-lg border-double flex justify-center flex-col items-center overflow-y-auto ">
-                <hr className="mt-[150px]" />
-                {searchData ? (
-                  searchData.slice(0, 3).map((item, index) => (
+        <div className={`avatar_search`}>
+          <CiSearch
+            color="red"
+            size={32}
+            onClick={handleSearch}
+            className="mr-2 cursor-pointer"
+          />
+          <input
+            className="w-full border-none outline-none bg-transparent opacity-100"
+            placeholder="Search..."
+            name="content"
+            onChange={handleOnChange}
+            onKeyDown={handleSearch}
+          />
+
+          {!isLogin ? (
+            <div className="flex justify-center align-middle items-center ml-4">
+              <Link to={`/login`}>
+                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                  Login
+                </button>
+              </Link>
+            </div>
+          ) : (
+            // <div to="/user-profile">
+            //     <div className="avatar">
+            //         <img src="/images/usersquare.svg" alt="usersquare"></img>
+            //     </div>
+            // </div>
+            <SubMenu />
+          )}
+          {/*  */}
+          {checkSearch ? (
+            <div className="h-80 w-[17rem] bg-[#DADADA] absolute mt-[375px] ml-[50px] rounded-lg border-double flex justify-center flex-col items-center overflow-y-auto ">
+              <hr className="mt-[150px]" />
+              {searchData ? (
+                searchData.slice(0, 3).map((item, index) => (
+                  <div
+                    key={index}
+                    className="w-[90%] h-full border-double border-red-900 rounded-lg flex border-4 cursor-pointer  "
+                  >
+                    <img
+                      className="w-1/3 h-[69%] py-2 rounded-lg"
+                      src={item.poster}
+                      alt=""
+                    />
                     <div
-                      key={index}
-                      className="w-[90%] h-full border-double border-red-900 rounded-lg flex border-4 cursor-pointer  "
+                      to={"/" + sv + `/chapter/` + arr_path[index]}
+                      onClick={() =>
+                        navigate("/ + sv + /chapter/" + arr_path[index])
+                      }
+                      className="flex"
                     >
-                      <img
-                        className="w-1/3 h-[69%] py-2 rounded-lg"
-                        src={item.poster}
-                        alt=""
-                      />
-                      <div
-                        to={"/" + sv + `/chapter/` + arr_path[index]}
-                        onClick={() =>
-                          navigate("/ + sv + /chapter/" + arr_path[index])
-                        }
-                        className="flex"
-                      >
-                        <div className="text-lg flex flex-col ml-6 justify-center">
-                          <div>{item.title}</div>
-                          <div>Rate:{item.rate}</div>
-                          <div>Views: {item.views}</div>
-                        </div>
+                      <div className="text-lg flex flex-col ml-6 justify-center">
+                        <div>{item.title}</div>
+                        <div>Rate:{item.rate}</div>
+                        <div>Views: {item.views}</div>
                       </div>
                     </div>
-                  ))
-                ) : (
-                  <p>Not found @@</p>
-                )}
+                  </div>
+                ))
+              ) : (
+                <p>Not found @@</p>
+              )}
 
-                <div className="text-white border-5 border-white bg-blue-400 rounded-lg h-6 w-24 flex text-center content-center justify-center my-2">
-                  <button onClick={() => handleCloseSearch()}>Close</button>
-                </div>
+              <div className="text-white border-5 border-white bg-blue-400 rounded-lg h-6 w-24 flex text-center content-center justify-center my-2">
+                <button onClick={() => handleCloseSearch()}>Close</button>
               </div>
-            ) : null}
-            <button
-              className="title font-semibold text-2xl hover:text-red-700 text-white"
-              onClick={() => toggleMenu()}
-            >
-              <HiOutlineSwitchHorizontal />
-            </button>
-          </div>
-        )}
+            </div>
+          ) : null}
+        </div>
       </div>
-      <div className="header-top 2 hidden !bg-black !w-full !h-fit">
+      <div className="header-top 2 hidden !bg-black !w-full max-[435px]:block !h-fit ">
         <div className="avatar_search max-[435px]:!px-4 max-[435px]:!py-4 max-[435px]:!ml-0  w-full flex-col !gap-4 !items-start">
           {!isLogin ? (
             <div className="flex justify-between w-full align-middle items-center ml-4 max-[435px]:!ml-0">

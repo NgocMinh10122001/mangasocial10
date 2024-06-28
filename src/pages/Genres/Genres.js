@@ -72,7 +72,7 @@ const Page_Genres = () => {
       </div>
 
       <div className="flex items-center justify-center">
-        <div className="grid grid-cols-4 gap-7">
+        <div className="grid grid-cols-4 max-[435px]:grid-cols-2 px-4 gap-7">
           {getRandomGenres(genres, 8)?.map((item, index) => (
             <NavLink to={item?.category_name.toLowerCase()} key={index}>
               <div className="rounded-xl group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl hover:shadow-black/30">
@@ -100,7 +100,7 @@ const Page_Genres = () => {
 
       <div className="Wapper_Genres-footer">
         <h1 className="font-bold text-[57px]">Most Searched Topics</h1>
-        <div className="Wapper_Genres-footer-tag pb-[20px]">
+        <div className=" mb-3 Wapper_Genres-footer-tag pb-[20px]">
           <p>naruto</p>
           <p>naruto</p>
           <p>naruto</p>
