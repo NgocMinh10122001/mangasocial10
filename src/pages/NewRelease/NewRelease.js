@@ -16,16 +16,19 @@ const Page_NewRelease = () => {
         </h2>
       </div>
       <div className="grid grid-cols-7 2xl:grid-cols-10 gap-[20px]">
-        {newRelease.map((item, index) => (
-          <CardManga
-            key={index}
-            poster={item?.image_poster_link_goc}
-            title={item?.title_manga}
-            rate={item?.rate}
-            update={item.time_release}
-            path_segment={item?.path_segment_manga}
-          />
-        ))}
+        {newRelease &&
+          newRelease.length > 0 &&
+          newRelease.map((item, index) => (
+            <CardManga
+              key={index}
+              poster={item?.image_poster_link_goc}
+              title={item?.title_manga}
+              rate={item?.rate}
+              update={item.time_release}
+              chapterLink={item.url_chapter}
+              path_segment={item?.path_segment_manga}
+            />
+          ))}
       </div>
     </div>
   );
