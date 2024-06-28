@@ -118,9 +118,8 @@ const ReadChapter = () => {
       // console.log("check rs", response.data.chapters);
       
       
-      const keys = Object.values(response.data.chapters);
+       const arrValues = Object.values(response.data.chapters);
 
-      // console.log("check rs",keys);
 
 
       const getChapterFromUrl = (url) => {
@@ -130,8 +129,9 @@ const ReadChapter = () => {
       
 
       // console.log("check key val",getChapterFromUrl(keys[0]) );
-      const values = keys.map((item) => getChapterFromUrl(item))
+      const values = arrValues.map((item) => getChapterFromUrl(item))
         setListChapter(values);
+        setListNameChapter(values)
         console.log(values); 
 
       }

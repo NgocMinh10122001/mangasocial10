@@ -23,15 +23,11 @@ const ChapterCard = ({ chapter, title, poster, des, slug, chapterLink,chapterNam
   };
   // console.log("check slug", chapterLink)
 
-  const truncatedDes = des.length > 30 ? `${des.slice(0, 30)}...` : des;
-  const truncatedTitle = title.length > 20 ? `${title.slice(0, 20)}...` : title;
-
+  const truncatedDes = des.length > 50 ? `${des.slice(0, 50)}...` : des;
   return (
     <>
       <NavLink
-        to={`/${sv}/chapter/${slug}/${getChapterFromUrl(
-          chapterNumberReadMode
-        )}`}
+       to={`/${sv}/chapter/${slug}/${readmode ?getChapterFromUrl2(chapterNumberReadMode) :getChapterFromUrl(chapterNumberReadMode)}`}
         className=" bg-[#4a4a4a] block w-[100%] p-3 hover:bg-[#1a1a1a] rounded-xl my-5 transition-all duration-200"
       >
         <div className="flex md:flex-row items-center gap-4 md:gap-[80px] my-3  cursor-pointer py-4 md:py-8 px-2 md:px-12 transition-all duration-200">

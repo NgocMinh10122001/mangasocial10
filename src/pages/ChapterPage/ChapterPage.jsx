@@ -466,7 +466,7 @@ const ChapterPage = () => {
                         <div className="my-2 " key={index}>
                           <ChapterCard
                             chapterLink={item}
-                            chapterName={ arrChapterLink[index]}
+                            chapterName={readmode? arrChapterLink[index]: getChapterFromUrl(item)}
                             title={chapterDetail?.title}
                             des={chapterDetail?.description}
                             poster={chapterDetail?.poster}
