@@ -161,8 +161,7 @@ const ChapterPage = () => {
         className=" w-[100%] h-full bg-cover bg-center bg-no-repeat md:flex md:gap-30 px-[14px] pt-[14px] md:px-[141px] md:pt-[48px] gap-10"
         style={{
           backgroundImage: "url('/images/ChapterPage/bia.png')",
-          background:
-              "black",
+          background: "black",
         }}
       >
         {loading ? (
@@ -174,59 +173,32 @@ const ChapterPage = () => {
             text="Loading Poster..."
           />
         ) : (
-            <div
-              className="relative background-container-chapter-page"
-              // style={{
-              //   backgroundImage:
-              //     window.innerWidth <= 435
-              //       ? `url(${chapterDetail.poster})`
-              //       : "none",
-              //   backgroundPosition:
-              //     window.innerWidth <= 435 ? "top center" : "center",
-              //   backgroundSize: window.innerWidth <= 435 ? "100vh" : "auto",
-              //   height: window.innerWidth <= 435 ? "100vh" : "auto",
-              //   backgroundRepeat:
-              //     window.innerWidth <= 435 ? "no-repeat" : "no-repeat",
-              // }}
-            >
+          <div
+            className="relative background-container-chapter-page"
+            // style={{
+            //   backgroundImage:
+            //     window.innerWidth <= 435
+            //       ? `url(${chapterDetail.poster})`
+            //       : "none",
+            //   backgroundPosition:
+            //     window.innerWidth <= 435 ? "top center" : "center",
+            //   backgroundSize: window.innerWidth <= 435 ? "100vh" : "auto",
+            //   height: window.innerWidth <= 435 ? "100vh" : "auto",
+            //   backgroundRepeat:
+            //     window.innerWidth <= 435 ? "no-repeat" : "no-repeat",
+            // }}
+          >
             <img
               src={chapterDetail?.poster}
               alt=""
-                className=" h-[203px] w-[330px]  max-[435px]:w-hidden max-[435px]:h-auto max-[435px]:w-[100%]    md:h-[649px] md:w-[433px] bg-cover object-cover bg-center rounded-[8px]"
+              className=" h-[203px] w-[330px]  max-[435px]:w-hidden max-[435px]:h-auto max-[435px]:w-[100%]    md:h-[649px] md:w-[433px] bg-cover object-cover bg-center rounded-[8px]"
             />
-              {/* <img
+            {/* <img
               src={chapterDetail?.poster}
               alt=""
               className=" max-[435px]:h-[100%] w-[330px] h max-[435px]:w-full  md:h-[649px] md:w-[433px] bg-cover object-fit:cover bg-center rounded-[8px]"
             />   */}
-              {loading ? (
-                "Loading..."
-              ) : (
-                <p
-                  className={`text-2xl leading-[1.5em] hidden max-[435px]:block font-semibold  absolute bottom-0 left-0 w-[65%]
-    pb-3 text-white ${
-      showFullDescription
-        ? "overflow-y-auto "
-        : "overflow-y-hidden max-h-[60px]"
-    }`}
-                  style={{
-                    color: "white", // Adjust this color if needed
-                    background: "rgba(0, 0, 0, 0.6)", // Black background with opacity
-                    scrollbarWidth: "0.1px",
-                    height: "10em",
-                    backgroundColor: "transparent",
-                  }}
-                >
-                  {showFullDescription ? fullDescription : truncatedDescription}
-                  {!showFullDescription && (
-                    <button onClick={() => setShowFullDescription(true)}>
-                      <div className=" underline  underline-offset-4">
-                        See All
-                      </div>
-                    </button>
-                  )}
-                </p>
-              )}
+
             <div className="absolute top-0 right-5  hidden md:block ">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -278,8 +250,8 @@ const ChapterPage = () => {
             </div>
           </div>
         )}
-          <div className="flex flex-col py-2  mt-3 gap-[8px] md:gap-5">
-            <div className="flex flex-col gap-[8px] py-3 md:gap-[40px]">
+        <div className="flex flex-col py-2  mt-3 gap-[8px] md:gap-5">
+          <div className="flex flex-col gap-[8px] py-3 md:gap-[40px]">
             {/* name && tương tác */}
             <div className="flex flex-col gap-[8px] md:gap-[21px]">
               <div className="font-semibold text-[14px] leading-[20px] md:text-[45px] md:leading-[52px] text-white">
@@ -318,7 +290,14 @@ const ChapterPage = () => {
                     alt=""
                     className="h-[32px] w-[32px] hidden md:block"
                   />
-                  <div>{`${readmode ? Object.keys(chapterDetail?.chapters ?? {}).length ?? [] : chapterDetail?.chapters?.length} chapter `} </div>
+                  <div>
+                    {`${
+                      readmode
+                        ? Object.keys(chapterDetail?.chapters ?? {}).length ??
+                          []
+                        : chapterDetail?.chapters?.length
+                    } chapter `}{" "}
+                  </div>
                 </div>
               </div>
             </div>
@@ -327,13 +306,25 @@ const ChapterPage = () => {
             <div className="flex flex-col gap-[40px]">
               {/* button */}
               <div className="flex  gap-5">
-                <Link to={`/${sv}/chapter/${slug}/${readmode ? getChapterFromUrl2(linkList[0]?? "") : getChapterFromUrl(linkList[0]?? "")}`} className=" hover:text-white p-[8px]  rounded-[12px] md:px-[52px] md:py-[26px]  bg-[#FF2020]  text-white md:rounded-[67px] ">
+                <Link
+                  to={`/${sv}/chapter/${slug}/${
+                    readmode
+                      ? getChapterFromUrl2(linkList[0] ?? "")
+                      : getChapterFromUrl(linkList[0] ?? "")
+                  }`}
+                  className=" hover:text-white p-[8px]  rounded-[12px] md:px-[52px] md:py-[26px]  bg-[#FF2020]  text-white md:rounded-[67px] "
+                >
                   <div className="font-bold text-[12px] leading-[16px] md:text-[36px] md:leading-[44px] ">
                     Read now
                   </div>
                 </Link>
-                <button className={ ` p-[8px]  rounded-[12px] text-black md:px-[52px] md:py-[26px]   ${active ? "bg-[#FF2020]": "bg-[#496EF1]"}  md:text-white md:rounded-[67px]`} onClick={() => handleActive("list")}>
-                  <div className="font-bold text-[12px] leading-[16px] md:text-[36px] md:leading-[44px] flex gap-1 md:gap-3 " >
+                <button
+                  className={` p-[8px]  rounded-[12px] text-black md:px-[52px] md:py-[26px]   ${
+                    active ? "bg-[#FF2020]" : "bg-[#496EF1]"
+                  }  md:text-white md:rounded-[67px]`}
+                  onClick={() => handleActive("list")}
+                >
+                  <div className="font-bold text-[12px] leading-[16px] md:text-[36px] md:leading-[44px] flex gap-1 md:gap-3 ">
                     <div> My List </div>
                     <img
                       src="/images/ChapterPage/uil_plus.png"
@@ -365,8 +356,8 @@ const ChapterPage = () => {
                       src={item?.src}
                       alt={item?.title}
                       title={item?.title}
-                        className="w-1/6 md:w-[16.666%] h-auto cursor-pointer hover:opacity-80"
-                        style={{ maxWidth: "67px", height: "auto" }}
+                      className="w-1/6 md:w-[16.666%] h-auto cursor-pointer hover:opacity-80"
+                      style={{ maxWidth: "67px", height: "auto" }}
                     />
                   ))}
                 </div>
@@ -398,7 +389,7 @@ const ChapterPage = () => {
                   </div>
                 </div>
                 {/* desc */}
-                  <div className="text-[#9E9E9E] max-[435px]:hidden font-normal text-[12px] leading-[16px] md:text-[24px]  md:leading-[36px] flex gap-2">
+                <div className="text-[#9E9E9E] font-normal text-[12px] leading-[16px] md:text-[24px]  md:leading-[36px] flex gap-2">
                   Description:
                   {loading ? (
                     "Loading..."
@@ -427,7 +418,7 @@ const ChapterPage = () => {
           className={` ${showTab ? "tabbtn" : " none-tab "} `}
           onClick={handleShowTab}
         >
-          { active ? "My List": "Chapter"}
+          {active ? "My List" : "Chapter"}
         </div>
         <div
           className={` ${!showTab ? "tabbtn" : " none-tab "} `}
@@ -449,16 +440,15 @@ const ChapterPage = () => {
         <div>
           {showTab && active === false && (
             <div className="bg-[#000] flex py-[20px] md:py-[50px] px-[20px] w-[100%] sm:px-[40px] md:px-[0px] justify-center">
-                <div className="bg-[#000] py-[20px] px-[24px] sm:px-[0px] md:px-[48px] w-full max-w-[100%]">
-                  <div className="flex items-center gap-2 font-semibold text-[18px] sm:text-[20px] md:text-[22px] leading-[22px] sm:leading-[24px] md:leading-[28px] text-white"></div>
+              <div className="bg-[#000] py-[20px] px-[24px] sm:px-[0px] md:px-[48px] w-full max-w-[100%]">
+                <div className="flex items-center gap-2 font-semibold text-[18px] sm:text-[20px] md:text-[22px] leading-[22px] sm:leading-[24px] md:leading-[28px] text-white">
                   <img
                     src="/images/ChapterPage/jam_files-f.png"
                     alt=""
-                      className="h-[24px] sm:h-[28px] md:h-[32px] w-[24px] sm:w-[28px] md:w-[32px]"
+                    className="h-[24px] sm:h-[28px] md:h-[32px] w-[24px] sm:w-[28px] md:w-[32px]"
                   />
                   <div>{Object.keys(listChapter).length} chapters</div>
-                </div>
-               
+                </div>               
                   <div className="px-2 py-4">
                     {linkList
                       .slice(0, visibleChapterCount)
@@ -476,18 +466,23 @@ const ChapterPage = () => {
                       ))}
                   </div>
               
+
                 <div className="text-center mt-5">
                   <button
-                      className="font-semibold text-[24px] sm:text-[28px] md:text-[32px] leading-[30px] sm:leading-[36px] md:leading-[40px] text-white"
+                    className="font-semibold text-[24px] sm:text-[28px] md:text-[32px] leading-[30px] sm:leading-[36px] md:leading-[40px] text-white"
                     onClick={handleSeeMore}
                   >
                     See More
                   </button>
                 </div>
               </div>
-           
-            )}
-            {showTab && active && <div className="text-white bg-[#000] w-full flex py-[50px] px-[100px] justify-center">My list</div> }
+            </div>
+          )}
+          {showTab && active && (
+            <div className="text-white bg-[#000] w-full flex py-[50px] px-[100px] justify-center">
+              My list
+            </div>
+          )}
         </div>
       )}
 
@@ -547,7 +542,6 @@ const ChapterPage = () => {
         )}
       </div>
     </div>
-   
   );
 };
 
