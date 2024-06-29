@@ -35,26 +35,26 @@ const ChapterCard = ({ chapter, title, poster, des, slug, chapterLink,chapterNam
         className=" bg-[#4a4a4a] block w-[100%] p-3 hover:bg-[#1a1a1a] rounded-xl my-5 transition-all duration-200"
       >
         <div className="flex md:flex-row items-center gap-4 md:gap-[80px] my-3  cursor-pointer py-4 md:py-8 px-2 md:px-12 transition-all duration-200">
-            {/* chapter info */}
+          {/* chapter info */}
           <div className="flex items-center gap-4 md:gap-12 w-full md:w-auto">
-              <img
-                src={poster}
-                alt=""
+            <img
+              src={poster}
+              alt=""
               className="h-24 md:h-[150px] w-24 md:w-[150px] object-cover rounded-xl"
-              />
-              <div>
+            />
+            <div>
               <div className="text-base md:text-xl py-1 md:py-2 font-semibold whitespace-nowrap leading-5 md:leading-7 text-white">
                 <span className="underline decoration-1 whitespace-nowrap">
                   {`${title} - ${chapterName} `}
                 </span>
-                </div>
+              </div>
               <div className="text-sm md:text-base font-medium leading-5 md:leading-6 text-gray-400">
-                  12/07/2023
-                </div>
+                12/07/2023
               </div>
             </div>
-          <div className="flex flex-col md:flex-row items-start md:items-center justify-between w-full gap-2 md:gap-0">
-            <div className="text-2xl hidden md:block md:text-xl leading-5 md:leading-6 font-medium text-gray-300 w-full md:w-3/4">
+          </div>
+          <div className="flex flex-col md:flex-row ps-8 items-start md:items-center justify-between w-full md:gap-0">
+            <div className="text-xl block text-center max-[435px]:hidden md:text-2  xl leading-5 md:leading-6 font-medium text-gray-300 w-full md:w-3/4 ">
               {truncatedDes}
             </div>
             {user_id ? (
@@ -67,12 +67,11 @@ const ChapterCard = ({ chapter, title, poster, des, slug, chapterLink,chapterNam
               </div>
             )}
           </div>
-          <div className="text-sm md:hidden md:text-base leading-5 md:leading-6 font-medium text-gray-300 w-full">
+        </div>
+        <div className="text-xl hidden max-[435px]:block md:text-base leading-5 md:leading-6 font-medium text-gray-300 w-full">
           {truncatedDes}
         </div>
-        </div>
-        </NavLink>
-      
+      </NavLink>
     </>
   );
 };
