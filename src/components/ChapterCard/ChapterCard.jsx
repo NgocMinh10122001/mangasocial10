@@ -41,7 +41,7 @@ const ChapterCard = ({ chapter, title, poster, des, slug, chapterLink,chapterNam
             <div>
               <div className="text-base md:text-xl py-1 md:py-2 font-semibold whitespace-nowrap leading-5 md:leading-7 text-white">
                 <span className="underline decoration-1 whitespace-nowrap">
-                  {`${title} - ${chapterName} `}
+                  { ` ${chapterName} `}
                 </span>
               </div>
               <div className="text-sm md:text-base font-medium leading-5 md:leading-6 text-gray-400">

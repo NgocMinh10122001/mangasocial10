@@ -448,7 +448,7 @@ const ChapterPage = () => {
                     className="h-[24px] sm:h-[28px] md:h-[32px] w-[24px] sm:w-[28px] md:w-[32px]"
                   />
                   <div>{Object.keys(listChapter).length} chapters</div>
-                </div>               
+                </div>            
                   <div className="px-2 py-4">
                     {linkList
                       .slice(0, visibleChapterCount)

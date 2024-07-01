@@ -1,6 +1,7 @@
 import { useState, useContext, useRef } from "react";
 import { div, Link, NavLink, Outlet, useParams } from "react-router-dom";
 import SubMenu from "../components/SubMenu/SubMenu";
+import Dropdown from "../components/Dropdown/Dropdown";
 import platform from "platform";
 import ios from "../pages/img/ios.png";
 import adroi from "../pages/img/adroi.png";
@@ -31,7 +32,7 @@ import { IoNewspaperOutline } from "react-icons/io5";
 import { RiSettingsFill } from "react-icons/ri";
 import { FaBook } from "react-icons/fa6";
 import { FaGoogleDrive } from "react-icons/fa";
-import { HiOutlineSwitchHorizontal } from "react-icons/hi";
+
 
 let path = "";
 let arr_id_manga = [""];
@@ -53,6 +54,9 @@ export default function Layout() {
   const [url, setURL] = useState("");
   const [isMenuVisible, setIsMenuVisible] = useState(true);
   const [showMenu, setShowMenu] = useState(true);
+  const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth > 1800);
+
+  
   const sv = useSelector((state) => state.server.sv);
   const loading = useSelector((state) => state.server.loading);
   const navigate = useNavigate();
@@ -236,6 +240,18 @@ export default function Layout() {
       document.removeEventListener("click", handleClickOutside);
     };
   }, []);
+  useEffect(() => {
+    const handleResize = () => {
+      setIsLargeScreen(window.innerWidth > 1800);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup listener on unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   // useEffect(() => {
   //   navigate("/" + sv);
   // }, []);
@@ -380,33 +396,36 @@ export default function Layout() {
           </div>
         </div>
 
-        <div className={` menu-header`}>
-          <div onClick={() => navigate(`/` + sv)}>
-            <div
-              className="comic"
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
-            >
-              <p>Comic</p>
-              <img
-                className="arrow-img"
-                src={
-                  isHovered
-                    ? "/images/Polygon cam.svg"
-                    : "/images/Polygon 1.svg"
-                }
-                alt="Arrow"
-              />
+        <Dropdown/>
+
+        {isLargeScreen && (
+          <div className={` menu-header`}>
+            <div onClick={() => navigate(`/` + sv)}>
+              <div
+                className="comic"
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+              >
+                <p>Comic</p>
+                <img
+                  className="arrow-img"
+                  src={
+                    isHovered
+                      ? "/images/Polygon cam.svg"
+                      : "/images/Polygon 1.svg"
+                  }
+                  alt="Arrow"
+                />
+              </div>
             </div>
-          </div>
 
-          <div onClick={() => navigate("/" + sv + "/genres")}>
-            <p>Genres</p>
-          </div>
+            <div onClick={() => navigate("/" + sv + "/genres")}>
+              <p>Genres</p>
+            </div>
 
-          <p>Popular</p>
+            <p>Popular</p>
 
-          {/* <div
+            {/* <div
             className="server"
             onMouseEnter={handleServerMouseEnter}
             onMouseLeave={handleServerMouseLeave}
@@ -422,53 +441,53 @@ export default function Layout() {
               alt="Arrow"
             />
           </div> */}
-          <div className="dropdown relative">
-            <button ref={submenuRef} onClick={() => handleOpen()}>
-              Server
-            </button>
-            {open ? (
-              <ul
-                className="menu grid grid-cols-2"
-                onClick={() => handleOpen()}
-              >
-                {serverName &&
-                  serverName.length > 0 &&
-                  serverName.map((item) => (
-                    <li
-                      key={item.sv}
-                      className="menu-item flex justify-start items-center pe-2"
-                      onClick={() => navigate("/" + item.sv)}
-                    >
-                      <button onClick={() => dispatch(changeServer(item.sv))}>
-                        {item.name}
-                      </button>
-                      <div className="">{item.icon}</div>
-                    </li>
-                  ))}
-              </ul>
-            ) : null}
+            <div className="dropdown relative">
+              <button ref={submenuRef} onClick={() => handleOpen()}>
+                Server
+              </button>
+              {open ? (
+                <ul
+                  className="menu grid grid-cols-2"
+                  onClick={() => handleOpen()}
+                >
+                  {serverName &&
+                    serverName.length > 0 &&
+                    serverName.map((item) => (
+                      <li
+                        key={item.sv}
+                        className="menu-item flex justify-start items-center pe-2"
+                        onClick={() => navigate("/" + item.sv)}
+                      >
+                        <button onClick={() => dispatch(changeServer(item.sv))}>
+                          {item.name}
+                        </button>
+                        <div className="">{item.icon}</div>
+                      </li>
+                    ))}
+                </ul>
+              ) : null}
 
-            {open ? (
-              ""
-            ) : (
-              <>
-                {serverName.map((item) =>
-                  item.sv === sv ? (
-                    <div
-                      key={item.sv}
-                      className="text-red-700 text-base tracking-wide font-normal absolute top-full w-full flex justify-start items-center gap-[6px]"
-                    >
-                      <span>{item.name}</span>
-                      <div>{item.icon}</div>
-                    </div>
-                  ) : (
-                    ""
-                  )
-                )}
-              </>
-            )}
-          </div>
-          {/* SERVER LIST       index    link
+              {open ? (
+                ""
+              ) : (
+                <>
+                  {serverName.map((item) =>
+                    item.sv === sv ? (
+                      <div
+                        key={item.sv}
+                        className="text-red-700 text-base tracking-wide font-normal absolute top-full w-full flex justify-start items-center gap-[6px]"
+                      >
+                        <span>{item.name}</span>
+                        <div>{item.icon}</div>
+                      </div>
+                    ) : (
+                      ""
+                    )
+                  )}
+                </>
+              )}
+            </div>
+            {/* SERVER LIST       index    link
           --------------------------NOVEL------------------------------------
                                         "https://www.ninemanga.com",
                                         "https://mangajar.com/",
@@ -494,33 +513,34 @@ export default function Layout() {
                                         
     */}
 
-          <div
-            onClick={() => {
-              dispatch(changeServer(4));
+            <div
+              onClick={() => {
+                dispatch(changeServer(4));
 
-              navigate("/" + 4 + "/novel");
-            }}
-            // onClick={() => dispatch(changeServer(4))}
-          >
-            {/* redirect to server novel : bestlightnovel.com*/}
-            <p className="novel">Novel</p>
+                navigate("/" + 4 + "/novel");
+              }}
+              // onClick={() => dispatch(changeServer(4))}
+            >
+              {/* redirect to server novel : bestlightnovel.com*/}
+              <p className="novel">Novel</p>
+            </div>
+            <div onClick={() => navigate("/" + sv + `/contact-us`)}>
+              <p className="contact">Contact us</p>
+            </div>
+            <div onClick={() => navigate("/" + sv + `/policy`)}>
+              <p className="policy">Policy</p>
+            </div>
+            <div
+              to={`https://apps.apple.com/us/app/manga-reader-mangakomi-online/id6446646720`}
+            >
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/6/67/App_Store_%28iOS%29.svg"
+                alt=""
+                className="w-5 h-5 lg:w-12 lg:h-12 hover:scale-105 transition-all cursor-pointer"
+              />
+            </div>
           </div>
-          <div onClick={() => navigate("/" + sv + `/contact-us`)}>
-            <p className="contact">Contact us</p>
-          </div>
-          <div onClick={() => navigate("/" + sv + `/policy`)}>
-            <p className="policy">Policy</p>
-          </div>
-          <div
-            to={`https://apps.apple.com/us/app/manga-reader-mangakomi-online/id6446646720`}
-          >
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/6/67/App_Store_%28iOS%29.svg"
-              alt=""
-              className="w-5 h-5 lg:w-12 lg:h-12 hover:scale-105 transition-all cursor-pointer"
-            />
-          </div>
-        </div>
+        )}
 
         <div className={`avatar_search`}>
           <CiSearch
