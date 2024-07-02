@@ -24,6 +24,12 @@ const CardManga = ({
     const parts = url.split("/");
     return parts[parts.length - 2];
   };
+  const truncateTile = (title, maxLength ) => {
+    if(title.length > maxLength){
+      return `${title.slice(0, maxLength)}......`
+    }
+    return title;
+  }
 
   // console.log("check link", chapterNumberReadMode);
   return (
@@ -40,9 +46,9 @@ const CardManga = ({
         </div>
 
         <div className="text-[#FFFFFF]">
-          <div className="mt-5 max-[435px]:mt-1 max-[435px]:w-full ">
+          <div className="mt-3 max-[435px]:mt-1 max-[435px]:w-full ">
             <p className="text-[#FFFFFF] lg:text-[16px] max-[435px]:w-full  2xl:text-[18px] leading-10  font-semibold overflow-hidden whitespace-normal w-[200px]   max-[435px]:leading-[1.75rem]">
-              {title}
+              {truncateTile(title, 16)}
             </p>
             <NavLink
               // to={`
@@ -75,8 +81,8 @@ const CardManga = ({
           )}
 
           {update && (
-            <div className="px-[10px] py-[5px] max-[435px]:w-full bg-[#363636] w-max rounded-[33px] mt-3 max-[435px]:mt-2 max-[435px]:py-[0px] max-[435px]:px-[0px]">
-              <p className="max-[435px]:w-full max-[435px]:truncate max-[435px]:text-center lg:text-[16px] 2xl:text-[18px] max-[435px]:text-[12px] leading-8 font-semibold">
+            <div className=" max-[435px]:w-full bg-[#363636] w-max rounded-[20px] mt-3 max-[435px]:mt-2 max-[435px]:py-[0px] max-[435px]:px-[0px]">
+              <p className="max-[435px]:w-full max-[435px]:truncate max-[435px]:text-center text-normal 2xl:text-[18px] max-[435px]:text-[12px] leading-8 font-semibold">
                 Update: {update}
               </p>
             </div>

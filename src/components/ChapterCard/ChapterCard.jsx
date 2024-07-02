@@ -49,8 +49,8 @@ const ChapterCard = ({ chapter, title, poster, des, slug, chapterLink,chapterNam
               </div>
             </div>
           </div>
-          <div className="flex flex-col md:flex-row ps-8 items-start md:items-center justify-between w-full md:gap-0">
-            <div className="text-xl block text-center max-[435px]:hidden md:text-2  xl leading-5 md:leading-6 font-medium text-gray-300 w-full md:w-3/4 ">
+          <div className="flex md:flex-row ps-8 items-start md:items-center justify-between w-full md:gap-0">
+            <div className="text-xl block text-center max-[480px]:hidden md:text-2  xl leading-5 md:leading-6 font-medium text-gray-300 w-full md:w-3/4 ">
               {truncatedDes}
             </div>
             {user_id ? (
@@ -64,7 +64,7 @@ const ChapterCard = ({ chapter, title, poster, des, slug, chapterLink,chapterNam
             )}
           </div>
         </div>
-        <div className="text-xl hidden max-[435px]:block md:text-base leading-5 md:leading-6 font-medium text-gray-300 w-full">
+        <div className="text-xl hidden max-[480px]:block md:text-base leading-5 md:leading-6 font-medium text-gray-300 w-full">
           {truncatedDes}
         </div>
       </NavLink>

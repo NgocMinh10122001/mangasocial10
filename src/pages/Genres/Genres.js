@@ -70,7 +70,7 @@ const Page_Genres = () => {
         </div>
       </div>
       <div className="Wapper_Genres-title">
-        <h1 className="font-bold text-[57px]">Genres</h1>
+        <h1 className="font-bold text-3xl ">Genres</h1>
       </div>
 
       <div className="flex items-center justify-center">
@@ -101,8 +101,8 @@ const Page_Genres = () => {
       </div>
 
       <div className="Wapper_Genres-footer">
-        <h1 className="font-bold text-[57px]">Most Searched Topics</h1>
-        <div className=" mb-3 Wapper_Genres-footer-tag pb-[20px]">
+        <h1 className="font-bold text-3xl">Most Searched Topics</h1>
+        <div className=" mb-5 mt-3 flex gap-2 text-white pb-[50px]">
           <p>naruto</p>
           <p>naruto</p>
           <p>naruto</p>

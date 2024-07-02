@@ -32,7 +32,8 @@ import { IoNewspaperOutline } from "react-icons/io5";
 import { RiSettingsFill } from "react-icons/ri";
 import { FaBook } from "react-icons/fa6";
 import { FaGoogleDrive } from "react-icons/fa";
-
+import styles from './layout.module.scss'
+;
 
 let path = "";
 let arr_id_manga = [""];
@@ -54,7 +55,7 @@ export default function Layout() {
   const [url, setURL] = useState("");
   const [isMenuVisible, setIsMenuVisible] = useState(true);
   const [showMenu, setShowMenu] = useState(true);
-  const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth > 1800);
+  const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth >= 1150);
 
   
   const sv = useSelector((state) => state.server.sv);
@@ -78,137 +79,137 @@ export default function Layout() {
       sv: 0,
       name: "mangainn.net",
       icon: (
-        <US title="Vietnamese" className="max-[435px]:h-5 max-[435px]:w-5 " />
+        <US title="Vietnamese" className="max-[480px]:h-5 max-[480px]:w-5 " />
       ),
     },
     {
       sv: 1,
       name: "ww5.manganelo.tv",
       icon: (
-        <JP title="Vietnamese" className="max-[435px]:h-5 max-[435px]:w-5" />
+        <JP title="Vietnamese" className="max-[480px]:h-5 max-[480px]:w-5" />
       ),
     },
     {
       sv: 2,
       name: "mangareader.cc",
       icon: (
-        <JP title="Vietnamese" className="max-[435px]:h-5 max-[435px]:w-5" />
+        <JP title="Vietnamese" className="max-[480px]:h-5 max-[480px]:w-5" />
       ),
     },
     {
       sv: 3,
       name: "ninemanga.com",
       icon: (
-        <JP title="Vietnamese" className="max-[435px]:h-5 max-[435px]:w-5" />
+        <JP title="Vietnamese" className="max-[480px]:h-5 max-[480px]:w-5" />
       ),
     },
     {
       sv: 4,
       name: "bestlightnovel.com",
       icon: (
-        <XK title="Vietnamese" className="max-[435px]:h-5 max-[435px]:w-5" />
+        <XK title="Vietnamese" className="max-[480px]:h-5 max-[480px]:w-5" />
       ),
     },
     {
       sv: 5,
       name: "mangajar.com/manga",
       icon: (
-        <EU title="Vietnamese" className="max-[435px]:h-5 max-[435px]:w-5" />
+        <EU title="Vietnamese" className="max-[480px]:h-5 max-[480px]:w-5" />
       ),
     },
     {
       sv: 6,
       name: "mangakomi.io",
       icon: (
-        <US title="Vietnamese" className="max-[435px]:h-5 max-[435px]:w-5" />
+        <US title="Vietnamese" className="max-[480px]:h-5 max-[480px]:w-5" />
       ),
     },
     {
       sv: 7,
       name: "readm.org",
       icon: (
-        <EU title="Vietnamese" className="max-[435px]:h-5 max-[435px]:w-5" />
+        <EU title="Vietnamese" className="max-[480px]:h-5 max-[480px]:w-5" />
       ),
     },
     // {
     //   sv: 8,
     //   name: "mangajar.com",
-    //   icon: <XK title="Vietnamese" className="max-[435px]:h-5 max-[435px]:w-5" />,
+    //   icon: <XK title="Vietnamese" className="max-[480px]:h-5 max-[480px]:w-5" />,
     // },
     {
       sv: 9,
       name: "swatmanga.com",
       icon: (
-        <EU title="Vietnamese" className="max-[435px]:h-5 max-[435px]:w-5" />
+        <EU title="Vietnamese" className="max-[480px]:h-5 max-[480px]:w-5" />
       ),
     },
     {
       sv: 10,
       name: "mangajar.com",
       icon: (
-        <JP title="Vietnamese" className="max-[435px]:h-5 max-[435px]:w-5" />
+        <JP title="Vietnamese" className="max-[480px]:h-5 max-[480px]:w-5" />
       ),
     },
     {
       sv: 11,
       name: "novelhall.com",
       icon: (
-        <JP title="Vietnamese" className="max-[435px]:h-5 max-[435px]:w-5" />
+        <JP title="Vietnamese" className="max-[480px]:h-5 max-[480px]:w-5" />
       ),
     },
     {
       sv: 12,
       name: "mto.com",
       icon: (
-        <JP title="Vietnamese" className="max-[435px]:h-5 max-[435px]:w-5" />
+        <JP title="Vietnamese" className="max-[480px]:h-5 max-[480px]:w-5" />
       ),
     },
     {
       sv: 13,
       name: "de.ninemanga.com",
       icon: (
-        <JP title="Vietnamese" className="max-[435px]:h-5 max-[435px]:w-5" />
+        <JP title="Vietnamese" className="max-[480px]:h-5 max-[480px]:w-5" />
       ),
     },
     {
       sv: 14,
       name: "br.ninemanga.com",
       icon: (
-        <JP title="Vietnamese" className="max-[435px]:h-5 max-[435px]:w-5" />
+        <JP title="Vietnamese" className="max-[480px]:h-5 max-[480px]:w-5" />
       ),
     },
     {
       sv: 15,
       name: "ru.ninemanga.com",
       icon: (
-        <RU title="Vietnamese" className="max-[435px]:h-5 max-[435px]:w-5" />
+        <RU title="Vietnamese" className="max-[480px]:h-5 max-[480px]:w-5" />
       ),
     },
     {
       sv: 16,
       name: "es.ninemanga.com",
       icon: (
-        <JP title="Vietnamese" className="max-[435px]:h-5 max-[435px]:w-5" />
+        <JP title="Vietnamese" className="max-[480px]:h-5 max-[480px]:w-5" />
       ),
     },
     {
       sv: 17,
       name: "fr.ninemanga.com",
       icon: (
-        <FR title="Vietnamese" className="max-[435px]:h-5 max-[435px]:w-5" />
+        <FR title="Vietnamese" className="max-[480px]:h-5 max-[480px]:w-5" />
       ),
     },
     {
       sv: 18,
       name: "it.ninemanga.com",
       icon: (
-        <US title="Vietnamese" className="max-[435px]:h-5 max-[435px]:w-5" />
+        <US title="Vietnamese" className="max-[480px]:h-5 max-[480px]:w-5" />
       ),
     },
     // {
     //   sv: 19,
     //   name: "azoranov.com/series/",
-    //   icon: <US title="Vietnamese" className="max-[435px]:h-5 max-[435px]:w-5" />,
+    //   icon: <US title="Vietnamese" className="max-[480px]:h-5 max-[480px]:w-5" />,
     // },
   ];
 
@@ -242,7 +243,7 @@ export default function Layout() {
   }, []);
   useEffect(() => {
     const handleResize = () => {
-      setIsLargeScreen(window.innerWidth > 1800);
+      setIsLargeScreen(window.innerWidth >= 1150);
     };
 
     window.addEventListener("resize", handleResize);
@@ -356,15 +357,8 @@ export default function Layout() {
     dispatch(setIsLoading(true));
   }, []);
 
-  useEffect(() => {
-    const handleSize = () => {
-      setIsMenuVisible(window.innerWidth <= 1328);
-    };
-    window.addEventListener("resize", handleSize);
-    return () => {
-      window.removeEventListener("resize", handleSize);
-    };
-  }, []);
+
+
 
   const toggleMenu = () => {
     const show = !showMenu;
@@ -381,34 +375,35 @@ export default function Layout() {
   }
   return (
     <>
-      <div className="header-top padding-[2rem]  max-[435px]:hidden ">
-        <div className="flex justify-start items-center text-white group-hover:text-red-700 ">
+      <div className="flex px-3 items-center justify-between py-4 bg-gray-800  max-[480px]:hidden ">
+        <div className="flex items-center space-x-2 group-hover:text-red-700 ">
           <div
             onClick={() => navigate(`/` + sv)}
             className="title inline-flex justify-start items-center text-white space-x-2 cursor-pointer"
           >
             <img
-              className="img-manga"
+              className="img-manga max-[725px]:!hidden"
               src="/images/logo-thinkdiff.png"
               alt=""
             ></img>
             <h3 className="">MangaSocial</h3>
           </div>
+          {isLargeScreen ? "" : <Dropdown />}
         </div>
 
-        <Dropdown/>
-
         {isLargeScreen && (
-          <div className={` menu-header`}>
-            <div onClick={() => navigate(`/` + sv)}>
+          <div
+            className={`hidden md:flex cursor-pointer space-x-8 text-white `}
+          >
+            <div onClick={() => navigate(`/` + sv)} className="">
               <div
-                className="comic"
+                className="comic flex justify-between gap-2 items-center  "
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
               >
                 <p>Comic</p>
                 <img
-                  className="arrow-img"
+                  className="arrow-img w-[1rem]"
                   src={
                     isHovered
                       ? "/images/Polygon cam.svg"
@@ -419,11 +414,14 @@ export default function Layout() {
               </div>
             </div>
 
-            <div onClick={() => navigate("/" + sv + "/genres")}>
+            <div
+              className="cursor-pointer"
+              onClick={() => navigate("/" + sv + "/genres")}
+            >
               <p>Genres</p>
             </div>
 
-            <p>Popular</p>
+            <p className="cursor-pointer">Popular</p>
 
             {/* <div
             className="server"
@@ -441,7 +439,7 @@ export default function Layout() {
               alt="Arrow"
             />
           </div> */}
-            <div className="dropdown relative">
+            <div className="dropdown relative cursor-pointer">
               <button ref={submenuRef} onClick={() => handleOpen()}>
                 Server
               </button>
@@ -514,6 +512,7 @@ export default function Layout() {
     */}
 
             <div
+              className="cursor-pointer"
               onClick={() => {
                 dispatch(changeServer(4));
 
@@ -524,25 +523,32 @@ export default function Layout() {
               {/* redirect to server novel : bestlightnovel.com*/}
               <p className="novel">Novel</p>
             </div>
-            <div onClick={() => navigate("/" + sv + `/contact-us`)}>
+            <div
+              className="cursor-pointer"
+              onClick={() => navigate("/" + sv + `/contact-us`)}
+            >
               <p className="contact">Contact us</p>
             </div>
-            <div onClick={() => navigate("/" + sv + `/policy`)}>
+            <div
+              className="cursor-pointer"
+              onClick={() => navigate("/" + sv + `/policy`)}
+            >
               <p className="policy">Policy</p>
             </div>
-            <div
-              to={`https://apps.apple.com/us/app/manga-reader-mangakomi-online/id6446646720`}
+            <a
+              target="_blank"
+              href={`https://apps.apple.com/us/app/manga-reader-mangakomi-online/id6446646720`}
             >
               <img
                 src="https://upload.wikimedia.org/wikipedia/commons/6/67/App_Store_%28iOS%29.svg"
                 alt=""
                 className="w-5 h-5 lg:w-12 lg:h-12 hover:scale-105 transition-all cursor-pointer"
               />
-            </div>
+            </a>
           </div>
         )}
 
-        <div className={`avatar_search`}>
+        <div className={`flex items-center space-x-2`}>
           <CiSearch
             color="red"
             size={32}
@@ -550,7 +556,7 @@ export default function Layout() {
             className="mr-2 cursor-pointer"
           />
           <input
-            className="w-full border-none outline-none bg-transparent opacity-100"
+            className="rounded-full px-4 py-2 text-gray-800"
             placeholder="Search..."
             name="content"
             onChange={handleOnChange}
@@ -613,15 +619,15 @@ export default function Layout() {
           ) : null}
         </div>
       </div>
-      <div className="header-top 2 hidden !bg-black !w-full max-[435px]:block !h-fit ">
-        <div className="avatar_search max-[435px]:!px-4 max-[435px]:!py-4 max-[435px]:!ml-0  w-full flex-col !gap-4 !items-start">
+      <div className="header-top 2 hidden max-[480px]:block !bg-black !w-full !h-fit ">
+        <div className="avatar_search max-[480px]:!px-4 max-[480px]:!py-4 max-[480px]:!ml-0  w-full flex-col !gap-4 !items-start">
           {!isLogin ? (
-            <div className="flex justify-between w-full align-middle items-center ml-4 max-[435px]:!ml-0">
+            <div className="flex justify-between w-full py-3 align-middle items-center ml-4 max-[480px]:!ml-0">
               <p className="text-white italic text-4xl font-semibold">
                 Manga Social
               </p>
               <Link to={`/login`}>
-                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4  max-[435px]:text-base rounded-full">
+                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4  max-[480px]:text-base rounded-full">
                   Login
                 </button>
               </Link>
@@ -632,11 +638,11 @@ export default function Layout() {
             //         <img src="/images/usersquare.svg" alt="usersquare"></img>
             //     </div>
             // </div>
-            <div className="max-[435px]:flex max-[435px]:justify-between max-[435px]:items-center w-full">
+            <div className="max-[480px]:flex max-[480px]:justify-between max-[480px]:items-center w-full">
               <SubMenu />
               <IoSettingsSharp
                 size={40}
-                className="text-white hidden max-[435px]:block"
+                className="text-white hidden max-[480px]:block"
               />
             </div>
           )}
@@ -648,7 +654,7 @@ export default function Layout() {
               className="mr-2 cursor-pointer"
             /> */}
             <input
-              className=" border-none outline-none !bg-[#4A4A4A] max-[435px]:!text-white opacity-100 !w-[100%] !h-[50px] !text-sm !rounded-3xl max-[435px]:!ps-6"
+              className=" border-none outline-none !bg-[#4A4A4A] max-[480px]:!text-white opacity-100 !w-[100%] !h-[50px] !text-sm !rounded-3xl max-[480px]:!ps-6"
               placeholder="Search..."
               name="content"
               onChange={handleOnChange}
@@ -696,8 +702,8 @@ export default function Layout() {
           ) : null}
         </div>
       </div>
-      <div className="header-mobile  w-full z-[999] py-2 px-0 bg-[#F45F17] fixed bottom-0 right-0 hidden max-[435px]:block">
-        <ul className="flex justify-center items-center gap-14">
+      <div className="header-mobile  w-full z-[999] py-2 pe-2 bg-[#F45F17] fixed bottom-0 right-0 hidden max-[480px]:block">
+        <ul className="flex justify-between items-center ">
           <li className="">
             <Link
               to={`/${sv}`}
@@ -722,7 +728,7 @@ export default function Layout() {
           </li>
           <li className="">
             <button
-              className="flex flex-col gap-1 justify-center items-center w-full h-full"
+              className="flex flex-col gap-1 items-center justify-center w-full h-full"
               ref={submenuRef}
               onClick={() => handleOpen()}
             >
@@ -749,11 +755,11 @@ export default function Layout() {
                   </>
                 )}
               </div>
-              <div className="dropdown max-[435px]:static text-sm max-[435px]:hover:!text-white">
-                <div className="!text-white hover:!text-white">Server</div>
+              {/* <div className="dropdown max-[480px]:static text-sm max-[480px]:hover:!text-white">
+                <div className="!text-white hover:!text-white ">Server</div>
                 {open ? (
                   <ul
-                    className="menu max-[435px]:absolute grid grid-cols-2 max-[435px]:bottom-[90%] max-[435px]:!left-0 max-[435px]:right-0 max-[435px]:w-full z-[999]"
+                    className="menu max-[480px]:absolute w-auto grid grid-cols-2 max-[480px]:bottom-[90%] max-[480px]:!left-0 max-[480px]:right-0 max-[480px]:w-[100vh] z-[999]"
                     onClick={() => handleOpen()}
                   >
                     {serverName &&
@@ -761,7 +767,7 @@ export default function Layout() {
                       serverName.map((item) => (
                         <li
                           key={item.sv}
-                          className="menu-item flex justify-start  items-center pe-2"
+                          className="menu-item flex justify-start  items-center p-2"
                           onClick={() => navigate("/" + item.sv)}
                         >
                           <button
@@ -774,7 +780,87 @@ export default function Layout() {
                       ))}
                   </ul>
                 ) : null}
+              </div> */}
+              <div className="dropdown max-[480px]:static text-sm max-[480px]:hover:!text-white">
+                <div className="!text-white hover:!text-white ">Server</div>
+                {open && (
+                  <ul
+                    className="menu absolute top-0 left-0 transform -translate-y-full  grid grid-cols-2 w-auto bg-white shadow-lg max-[480px]:absolute max-[480px]:w-full z-[999]"
+                    onClick={() => handleOpen()}
+                  >
+                    {serverName &&
+                      serverName.length > 0 &&
+                      serverName.map((item) => (
+                        <li
+                          key={item.sv}
+                          className="menu-item flex justify-start items-center p-2 hover:bg-gray-200"
+                          onClick={() => navigate("/" + item.sv)}
+                        >
+                          <button
+                            className="text-left w-full"
+                            onClick={() => dispatch(changeServer(item.sv))}
+                          >
+                            {item.name}
+                          </button>
+                          <div className="ml-2">{item.icon}</div>
+                        </li>
+                      ))}
+                  </ul>
+                )}
               </div>
+              {/* <div className="dropdown relative text-sm max-[480px]:static max-[480px]:hover:text-white">
+                <div className="text-white hover:text-white">Server</div>
+                {open ? (
+                  <ul
+                    className="menu absolute max-[480px]:static max-[480px]:bottom-[90%] max-[480px]:left-0 max-[480px]:right-0 max-[480px]:w-[100vw] z-[999] w-auto grid grid-cols-2"
+                    onClick={() => handleOpen()}
+                  >
+                    {serverName &&
+                      serverName.length > 0 &&
+                      serverName.map((item) => (
+                        <li
+                          key={item.sv}
+                          className="menu-item flex justify-start items-center p-2"
+                          onClick={() => navigate("/" + item.sv)}
+                        >
+                          <button
+                            onClick={() => dispatch(changeServer(item.sv))}
+                          >
+                            {item.name}
+                          </button>
+                          <div>{item.icon}</div>
+                        </li>
+                      ))}
+                  </ul>
+                ) : null}
+              </div> */}
+              {/* <div className="dropdown max-[480px]:static text-sm max-[480px]:hover:text-white">
+                <div className="text-white hover:text-white">Server</div>
+                {open && (
+                  <ul
+                    className="menu absolute top-0 left-0 transform -translate-y-full w-auto grid grid-cols-2 bg-white shadow-lg max-[480px]:static max-[480px]:w-full z-[999]"
+                    onClick={() => handleOpen()}
+                  >
+                    {serverName &&
+                      serverName.length > 0 &&
+                      serverName.map((item) => (
+                        <li
+                          key={item.sv}
+                          className="menu-item flex justify-start items-center p-2 hover:bg-gray-200"
+                          onClick={() => navigate("/" + item.sv)}
+                        >
+                          <button
+                            className="text-left w-full"
+                            onClick={() => dispatch(changeServer(item.sv))}
+                          >
+                            {item.name}
+                          </button>
+                          <div className="ml-2">{item.icon}</div>
+                        </li>
+                      ))}
+                  </ul>
+                )}
+              </div> */}
             </button>
           </li>
           <li className="">
