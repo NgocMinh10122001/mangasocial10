@@ -24,12 +24,12 @@ const CardManga = ({
     const parts = url.split("/");
     return parts[parts.length - 2];
   };
-  const truncateTile = (title, maxLength ) => {
-    if(title.length > maxLength){
-      return `${title.slice(0, maxLength)}......`
+  const truncateTile = (title, maxLength) => {
+    if (title.length > maxLength) {
+      return `${title.slice(0, maxLength)}......`;
     }
     return title;
-  }
+  };
 
   // console.log("check link", chapterNumberReadMode);
   return (

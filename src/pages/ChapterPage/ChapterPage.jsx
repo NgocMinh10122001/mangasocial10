@@ -74,12 +74,23 @@ const ChapterPage = () => {
         // setCommentDetail(response.data.comment)
         setLoading(false);
       } else {
-        const response = await axios.get(
+        if (sv === 4) { 
+           const response = await axios.get(
+          `https://apimanga.mangasocial.online/web/rnovel/${sv}/${slug}/`
+           );
+          console.log("check res4", response);
+        setChapterDetail(response.data);
+        setListChapter(response.data.chapters);
+        setLoading(false);
+        }
+        else { 
+          const response = await axios.get(
           `https://apimanga.mangasocial.online/web/rmanga/${sv}/${slug}/`
         );
         setChapterDetail(response.data);
         setListChapter(response.data.chapters);
         setLoading(false);
+        }
       }
     } catch (error) {
       console.log(error);
@@ -260,7 +271,7 @@ const ChapterPage = () => {
                   width={100}
                 />
               ) : (
-                chapterDetail?.title
+                chapterDetail?.title || chapterDetail?.title_novel
               )}
             </div>
             {/* tương tác */}
@@ -301,14 +312,7 @@ const ChapterPage = () => {
           <div className="flex flex-col gap-[40px]">
             {/* button */}
             <div className="flex gap-4 mt-5">
-              <Link
-                to={`/${sv}/chapter/${slug}/${
-                  readmode
-                    ? getChapterFromUrl2(linkList[0] ?? "")
-                    : getChapterFromUrl(linkList[0] ?? "")
-                }`}
-                className=" hover:text-white p-[8px]  rounded-[12px] mid:px-[52px] md:py-[26px]  bg-[#FF2020]  text-white md:rounded-[67px] "
-              >
+               <Link to={`/${sv}/${sv === 4  || sv === 11  ? "novel" : "chapter"}/${slug}/${readmode ? getChapterFromUrl2(linkList[0]?? "") : getChapterFromUrl(linkList[0]?? "")}`} className=" hover:text-white p-[8px]  rounded-[12px] md:px-[52px] md:py-[26px]  bg-[#FF2020]  text-white md:rounded-[67px] ">
                 <div className="font-bold whitespace-nowrap text-[12px] leading-[16px] md:text-[36px] md:leading-[44px] ">
                   Read now
                 </div>
@@ -391,7 +395,7 @@ const ChapterPage = () => {
                 </div>
                 <div className="text-[#9E9E9E] font-normal text-[12px] leading-[16px] md:text-[24px]  md:leading-[36px] flex flex-wrap items-center gap-2">
                   Genres:
-                  <div className="text-white">{chapterDetail?.categories}</div>
+                  <div className="text-white">{chapterDetail?.categories || chapterDetail?.catergories}</div>
                 </div>
                 <div className="text-[#9E9E9E] font-normal text-[12px] leading-[16px] md:text-[24px]  md:leading-[36px] flex items-center gap-2">
                   Age:
@@ -471,7 +475,7 @@ const ChapterPage = () => {
                             ? arrChapterLink[index]
                             : getChapterFromUrl(item)
                         }
-                        title={chapterDetail?.title}
+                        title={chapterDetail?.title || chapterDetail?.title_novel}
                         des={chapterDetail?.description}
                         poster={chapterDetail?.poster}
                         slug={slug}
