@@ -14,11 +14,8 @@ const Comments = () => {
     <div>
       <div className="comments max-[600px]:!m-0 max-[600px]:px-4 max-[600px]:pb-4 max-[600px]:!gap-6 max-[600px]:!flex max-[600px]:!flex-col">
         {cmt?.map((item, index) => (
-          <div>
-            <div
-              className="item-comments max-[600px]:!m-0 max-[600px]:!flex max-[600px]:!flex-col max-[600px]:!items-start"
-              key={index}
-            >
+          <div key={index}>
+            <div className="item-comments max-[600px]:!m-0 max-[600px]:!flex max-[600px]:!flex-col max-[600px]:!items-start">
               <div className="left-comment max-[600px]:flex max-[600px]:flex-col max-[600px]:gap-2">
                 <div className="topic-comic max-[600px]:!gap-0">
                   <div className="wrap-mask  max-[600px]:!bg-transparent max-[600px]:!p-0 max-[600px]:!object-contain max-[600px]:flex max-[600px]:items-center max-[600px]:!w-0 max-[600px]:!h-0">
