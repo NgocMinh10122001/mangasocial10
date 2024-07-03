@@ -74,7 +74,11 @@ const ToggleReadMode = () => {
   };
   return (
     <>
-      <div className="bg-red-300 w-40 h-40 rounded-full flex flex-col gap-2 justify-center items-center fixed bottom-20 right-4 z-100">
+      <div
+        className={`bg-red-300 ${
+          id_user() !== 0 ? "" : "hidden"
+        } w-40 h-40 rounded-full flex flex-col gap-2 justify-center items-center fixed bottom-20 right-4 z-100`}
+      >
         <p>Read Mode: {readmode == true ? "On" : "Off"}</p>
         {readmode == true ? (
           <input

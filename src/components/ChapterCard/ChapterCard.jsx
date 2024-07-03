@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-const ChapterCard = ({ chapter, title, poster, des, slug, chapterLink,chapterName }) => {
+const ChapterCard = ({ chapter, title, poster, des, slug, chapterLink,chapterName, genre }) => {
   // console.log("check link", chapterLink);
   const sv = useSelector((state) => state.server.sv);
   const readmode = useSelector((state) => state.ReadMode.readmode);
@@ -26,7 +26,7 @@ const ChapterCard = ({ chapter, title, poster, des, slug, chapterLink,chapterNam
   const truncatedDes = des.length > 50 ? `${des.slice(0, 50)}...` : des;
   return (
     <>
-      <NavLink to={`/${sv}/${sv === 4  || sv === 11  ? "novel" : "chapter"}/${slug}/${readmode ?getChapterFromUrl2(chapterNumberReadMode) :getChapterFromUrl(chapterNumberReadMode)}`}>
+       <NavLink to={`/${sv}/${genre === "manga" ? "chapter" : "novel"}/${slug}/${readmode ?getChapterFromUrl2(chapterNumberReadMode) :getChapterFromUrl(chapterNumberReadMode)}`}>
         <div className="flex md:flex-row items-center gap-4 md:gap-[80px] my-3  cursor-pointer py-4 md:py-8 px-2 md:px-12 transition-all duration-200">
           {/* chapter info */}
           <div className="flex items-center gap-4 md:gap-12 w-full md:w-auto">

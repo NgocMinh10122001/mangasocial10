@@ -628,7 +628,7 @@ export default function Layout() {
             <SubMenu />
           )}
           {/*  */}
-          {checkSearch ? (
+          {checkSearch && input.content && input !== "" ? (
             <div className="h-80 w-[17rem] bg-[#DADADA] absolute mt-[375px] ml-[50px] rounded-lg border-double flex justify-center flex-col items-center overflow-y-auto ">
               <hr className="mt-[150px]" />
               {searchData ? (
@@ -711,7 +711,7 @@ export default function Layout() {
             />
           </div>
           {/*  */}
-          {checkSearch ? (
+          {checkSearch && input.content && input.content !== "" ? (
             <div className="h-80 w-[17rem] bg-[#DADADA] absolute mt-[375px] ml-[50px] rounded-lg border-double flex justify-center flex-col items-center overflow-y-auto ">
               <hr className="mt-[150px]" />
               {searchData ? (
