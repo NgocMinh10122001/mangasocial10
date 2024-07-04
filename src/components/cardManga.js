@@ -67,6 +67,8 @@ const CardManga = ({
               }/${path_segment}/${
                 getChapterFromUrl(chapterNumberReadMode) === "None"
                   ? ""
+                  : chapterNumberReadMode.includes("web")
+                  ? getChapterFromUrl2(chapterNumberReadMode)
                   : getChapterFromUrl(chapterNumberReadMode)
               }`}
             >
