@@ -487,7 +487,7 @@ const ChapterPage = () => {
 
                 <div className="text-center mt-5">
                   <button
-                    className="font-semibold text-[24px] sm:text-[28px] md:text-[32px] leading-[30px] sm:leading-[36px] md:leading-[40px] text-white"
+                    className={ `${comment !== "" ? "bg-slate-500 hover:cursor-pointer":"bg-slate-700 hover:cursor-not-allowed"} rounded-lg m-2 w-[20%] text-white font-semibold`}
                     onClick={handleSeeMore}
                   >
                     See More
