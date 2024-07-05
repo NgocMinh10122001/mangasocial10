@@ -58,6 +58,7 @@ export default function Layout() {
   const [showMenu, setShowMenu] = useState(true);
   const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth >= 1150);
 
+
   const sv = useSelector((state) => state.server.sv);
   const loading = useSelector((state) => state.server.loading);
   const navigate = useNavigate();
@@ -304,6 +305,7 @@ export default function Layout() {
     };
 
     window.addEventListener("resize", handleResize);
+
 
     // Cleanup listener on unmount
     return () => {
@@ -637,11 +639,11 @@ export default function Layout() {
             <SubMenu />
           )}
           {/*  */}
-          {checkSearch && input.content && input !== ""  ? (
+          {checkSearch && input.content && input !== "" ? (
             <div
               className={
                 styles.search +
-                " h-80 w-[17rem] bg-[#DADADA] absolute mt-[375px] ml-[50px] rounded-lg border-double flex justify-center flex-col items-center overflow-y-auto "
+                " h-80 w-[17rem] bg-[#DADADA] absolute top-[50px] max-[480px]:!hidden rounded-lg border-double flex justify-center flex-col items-center overflow-y-auto "
               }
             >
               <hr className="mt-[150px]" />
@@ -726,7 +728,7 @@ export default function Layout() {
           </div>
           {/*  */}
           {checkSearch && input.content && input.content !== "" ? (
-            <div className="h-80 w-[17rem] bg-[#DADADA] absolute mt-[375px] ml-[50px] rounded-lg border-double flex justify-center flex-col items-center overflow-y-auto ">
+            <div className="h-80 w-[17rem] bg-[#DADADA] absolute mt-[150px] ml-[20px] rounded-lg border-double flex justify-center flex-col items-center overflow-y-auto ">
               <hr className="mt-[150px]" />
               {searchData ? (
                 searchData.slice(0, 3).map((item, index) => (
@@ -758,12 +760,13 @@ export default function Layout() {
                 <p>Not found @@</p>
               )}
 
-              <div className="text-white border-5 border-white bg-blue-400 rounded-lg h-6 w-24 flex text-center content-center justify-center my-2">
+              <div className="text-white border-5 border-white bg-blue-400 rounded-lg h-auto w-24 flex text-center content-center justify-center my-2">
                 <button onClick={() => handleCloseSearch()}>Close</button>
               </div>
             </div>
           ) : null}
         </div>
+        
       </div>
       <div className="header-mobile  w-full z-[999] py-2 pe-2 bg-[#F45F17] fixed bottom-0 right-0 hidden max-[480px]:block">
         <ul className="flex w-full justify-between items-center ">
