@@ -606,7 +606,7 @@ export default function Layout() {
           </div>
         )}
 
-        <div className={`flex items-center space-x-2`}>
+        <div className={`flex relative items-center space-x-2`}>
           <CiSearch
             color="red"
             size={32}
