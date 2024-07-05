@@ -25,6 +25,23 @@ div {
   background-color: black;
   width: 100%;
 }
+.slider-container{
+  &::-webkit-scrollbar {
+      width: 12px;
+      height: 12px;
+  
+    }
+  &::-webkit-scrollbar-thumb {
+    background-color: #1a202c;
+    border-radius: 10px;
+    border: 0.1px solid #2d3748;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+}
+
 
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=Poppins:wght@200;300&display=swap");
 @import "navigation";

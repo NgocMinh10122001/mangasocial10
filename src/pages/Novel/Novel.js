@@ -64,57 +64,80 @@ const Novel = () => {
         </div>
       </div>
       <div className="cont">
-        <div className="title-released-comic ">
-          <h2>New Released Novel</h2>
+        <div className="title-released-comic   max-[480px]:px-4">
+          <div className="max-[480px]:!text-2xl  text-5xl max-[738px]:text-[34px]  max-[480px]:relative text-white font-semibold">
+            New Released Novel
+            <div className="hidden max-[480px]:block w-[100px] h-[7px] bg-[#F45F17] -top-[40%] rounded-[35px] left-0 absolute "></div>
+          </div>
           <NavLink to="/newRelease">
-            <p>See all</p>
+            <p className="max-[480px]:!text-xl max-[738px]:text-[29px]">
+              See all
+            </p>
           </NavLink>
         </div>
         <NovelList index={1} />
 
-        <div className="title-released-comic">
-          <h2>Recent Novel</h2>
+        <div className="title-released-comic max-[480px]:px-4">
+          <div className="max-[480px]:!text-2xl  text-5xl max-[738px]:text-[34px] max-[480px]:relative text-white font-semibold">
+            Recent Novel
+            <div className="hidden max-[480px]:block w-[100px] h-[7px] bg-[#F45F17] -top-[40%] rounded-[35px] left-0 absolute "></div>
+          </div>
           <NavLink to="/recent">
-            <p>See all</p>
+            <p className="max-[480px]:!text-xl">See all</p>
           </NavLink>
         </div>
         <NovelList index={1} />
 
-        <div className="title-released-comic">
-          <h2>Recommended Novel</h2>
+        <div className="title-released-comic max-[480px]:px-4">
+          <div className="max-[480px]:!text-2xl  text-5xl max-[738px]:text-[34px] max-[480px]:relative text-white font-semibold">
+            Recommended Novel
+            <div className="hidden max-[480px]:block w-[100px] h-[7px] bg-[#F45F17] -top-[40%] rounded-[35px] left-0 absolute "></div>
+          </div>
           <NavLink to="/recommended">
-            <p>See all</p>
+            <p className="max-[480px]:!text-xl">See all</p>
           </NavLink>
         </div>
         <NovelList index={2} />
 
-        <div className="title-released-comic">
-          <h2>Comming Soon Novel</h2>
+        <div className="title-released-comic max-[480px]:px-4">
+          <div className="max-[480px]:!text-2xl  text-5xl max-[738px]:text-[34px] max-[480px]:relative text-white font-semibold">
+            Comming Soon Novel
+            <div className="hidden max-[480px]:block w-[100px] h-[7px] bg-[#F45F17] -top-[40%] rounded-[35px] left-0 absolute "></div>
+          </div>
           <NavLink to="/commingsoon">
-            <p>See all</p>
+            <p className="max-[480px]:!text-xl">See all</p>
           </NavLink>
         </div>
         <NovelList index={3} />
 
-        <div className="title-released-comic">
-          <h2>Top 15 Best Novel of the Week</h2>
+        <div className="title-released-comic max-[480px]:px-4">
+          <div className="max-[480px]:!text-2xl  text-5xl max-[738px]:text-[34px] max-[480px]:relative text-white font-semibold">
+            Top 15 Best Novel of the Week
+            <div className="hidden max-[480px]:block w-[100px] h-[7px] bg-[#F45F17] -top-[40%] rounded-[35px] left-0 absolute "></div>
+          </div>
           <NavLink>
-            <p>See all</p>
+            <p className="max-[480px]:!text-xl">See all</p>
           </NavLink>
         </div>
         <Top15Comics index={4} />
 
-        <div className="title-released-comic">
-          <h2>Comedy Novel</h2>
+        <div className="title-released-comic max-[480px]:px-4">
+          <div className="max-[480px]:!text-2xl  text-5xl max-[738px]:text-[34px] max-[480px]:relative text-white font-semibold">
+            Comedy Novel
+            <div className="hidden max-[480px]:block w-[100px] h-[7px] bg-[#F45F17] -top-[40%] rounded-[35px] left-0 absolute "></div>
+          </div>
           <NavLink>
-            <p>See all</p>
+            <p className="max-[480px]:!text-xl">See all</p>
           </NavLink>
         </div>
         <NovelList index={5} />
-        <div className="title-released-comic">
-          <h2>Free Novel</h2>
+        <div className="title-released-comic max-[480px]:px-4 mb-[100px]">
+          <div className="max-[480px]:!text-2xl  text-5xl max-[738px]:text-[34px] max-[480px]:relative text-white font-semibold">
+            Free Novel
+            <div className="hidden max-[480px]:block w-[100px] h-[7px] bg-[#F45F17] -top-[40%] rounded-[35px] left-0 absolute "></div>
+          </div>
           <NavLink to={`/`}>
-            <p>See all</p>
+            <p className="max-[480px]:!text-xl">See all</p>
           </NavLink>
         </div>
         <NovelList index={6} />

@@ -752,7 +752,7 @@ export default function Layout() {
         </div>
       </div>
       <div className="header-mobile  w-full z-[999] py-2 pe-2 bg-[#F45F17] fixed bottom-0 right-0 hidden max-[480px]:block">
-        <ul className="flex justify-between items-center ">
+        <ul className="flex w-full justify-between items-center ">
           <li className="">
             <Link
               to={`/${sv}`}
@@ -830,11 +830,11 @@ export default function Layout() {
                   </ul>
                 ) : null}
               </div> */}
-              <div className="dropdown max-[480px]:static text-sm max-[480px]:hover:!text-white">
+              <div className="dropdown relative max-[480px]:static text-sm max-[480px]:hover:!text-white">
                 <div className="!text-white hover:!text-white ">Server</div>
                 {open && (
                   <ul
-                    className="menu absolute top-0 left-0 transform -translate-y-full  grid grid-cols-2 w-auto bg-white shadow-lg max-[480px]:absolute max-[480px]:w-full z-[999]"
+                    className="menu slider-container absolute top-[-34px] left-0 bg-black transform -translate-y-full overflow-x-auto -translate-x-[50%] min-w-[330px] grid grid-cols-2 shadow-lg max-[480px]:absolute max-[480px]:w-full z-[999]"
                     onClick={() => handleOpen()}
                   >
                     {serverName &&
@@ -842,16 +842,16 @@ export default function Layout() {
                       serverName.map((item) => (
                         <li
                           key={item.sv}
-                          className="menu-item flex justify-start items-center p-2 hover:bg-gray-200"
+                          className="menu-item slider-item flex justiyf-start items-center p-2 hover:bg-gray-200"
                           onClick={() => navigate("/" + item.sv)}
                         >
                           <button
-                            className="text-left w-full"
+                            className="text-left w-full flex justify-start items-center"
                             onClick={() => dispatch(changeServer(item.sv))}
                           >
                             {item.name}
+                            <div className="ml-2">{item.icon}</div>
                           </button>
-                          <div className="ml-2">{item.icon}</div>
                         </li>
                       ))}
                   </ul>
