@@ -184,34 +184,18 @@ const NovelPageGenre = () => {
   ];
 
   return (
-    <div style={{ zoom: 0.9 }}>
-      <div
-        className=" w-[100%] h-full bg-cover bg-center bg-no-repeat md:flex md:gap-30 px-[14px] pt-[14px] md:px-[141px] md:pt-[48px] gap-10"
-        style={{
-          backgroundImage: "url('/images/ChapterPage/bia.png')",
-          background:
-            "linear-gradient(0deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 100%), linear-gradient(0deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 100%), url('/images/ChapterPage/bia.png'), lightgray 50% / cover no-repeat",
-        }}
-      >
-        <div className="relative">
-          <img
-            src={chapterDetail[0]?.poster || chapterDetail.poster}
-            alt=""
-            className=" h-[203px] w-[330px] md:h-[649px] md:w-[433px] bg-cover object-cover bg-center rounded-[8px]"
-          />
-          {chapterDetail?.r18 ? (
-            <div className="absolute top-0 right-5  hidden md:block ">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="118"
-                height="118"
-                viewBox="0 0 118 118"
-                fill="none"
-              >
-                <path
-                  d="M0 0H118V59C118 91.5848 91.5848 118 59 118C26.4152 118 0 91.5848 0 59V0Z"
-                  fill="#1E1E1E"
-                />
+    <div className="w-full bg-black" style={{ zoom: 0.9 }}>
+      {/*----------------- info chapter ----------------*/}
+      <div className=" mx-20 max-[480px]:mx-2 text-left w-100vh flex max-[768px]:flex-row max-[480px]:flex-col gap-1 p-4  px-4  bg-black">
+        <div className=" ps-3 pb-5">
+          <div className="relative max-[480px]:w-full">
+            <img
+              src={chapterDetail[0]?.poster || chapterDetail.poster}
+              alt=""
+              className=" w-100% min-w-[430px] h-auto sm:w-[100vw] md:h-[649px] md:w-[433px] max-[1250px]:min-w-[320px] max-[739px]:min-w-[270px] bg-cover object-cover bg-center rounded-[8px]"
+            />
+            {chapterDetail?.r18 ? (
+              <div className="absolute top-0 right-5  hidden md:block ">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="118"
@@ -220,45 +204,59 @@ const NovelPageGenre = () => {
                   fill="none"
                 >
                   <path
-                    d="M0 0H118V59C118 91.5848 91.5848 118 59 118C26.4152 118 0 91.5848 0 27.8K like59V0Z"
+                    d="M0 0H118V59C118 91.5848 91.5848 118 59 118C26.4152 118 0 91.5848 0 59V0Z"
                     fill="#1E1E1E"
                   />
-                  <text
-                    x="10%"
-                    y="50%"
-                    fontSize="57px"
-                    fontWeight="bold"
-                    fill="white"
-                    tex="middle"
-                    dominantBaseline="middle"
-                  ></text>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="118"
+                    height="118"
+                    viewBox="0 0 118 118"
+                    fill="none"
+                  >
+                    <path
+                      d="M0 0H118V59C118 91.5848 91.5848 118 59 118C26.4152 118 0 91.5848 0 27.8K like59V0Z"
+                      fill="#1E1E1E"
+                    />
+                    <text
+                      x="10%"
+                      y="50%"
+                      fontSize="57px"
+                      fontWeight="bold"
+                      fill="white"
+                      tex="middle"
+                      dominantBaseline="middle"
+                    ></text>
+                  </svg>
                 </svg>
-              </svg>
-            </div>
-          ) : null}
-          <div className="absolute top-0 left-0 hidden md:block ">
-            <div className="relative ">
-              <img
-                src="/images/ChapterPage/Star 1.png"
-                alt=""
-                className="h-[144px] w-[144px]"
-              />
-              <div className="h-[64px] w-[125px] text-white font-semibold text-[24px] leading-[32px] absolute top-[30px] left-[10px]  text-center">
-                New Chapter
+              </div>
+            ) : null}
+            <div className="absolute top-0 left-0 hidden md:block ">
+              <div className="relative ">
+                <img
+                  src="/images/ChapterPage/Star 1.png"
+                  alt=""
+                  className="h-[144px] w-[144px]"
+                />
+                <div className="h-[64px] w-[125px] text-white font-semibold text-[24px] leading-[32px] absolute top-[30px] left-[10px]  text-center">
+                  New Chapter
+                </div>
               </div>
             </div>
           </div>
         </div>
-        <div className="flex flex-col gap-[8px] md:gap-5">
-          <div className="flex flex-col gap-[8px] md:gap-[40px]">
+        {/* cột  ------------------------2 */}
+        <div className=" ml-4 text-white">
+          {/* ------------------title------------ */}
+          <div className="flex flex-col gap-[8px] md:gap-[21px]">
             {/* name && tương tác */}
             <div className="flex flex-col gap-[8px] md:gap-[21px]">
-              <div className="font-semibold text-[14px] leading-[20px] md:text-[45px] md:leading-[52px] text-white">
+              <div className="font-semibold text-[14px] md:text-3xl md:leading-[2] text-white">
                 {chapterDetail[0]?.title || chapterDetail.title_novel}
               </div>
               {/* tương tác */}
               <div className="flex items-center gap-4">
-                <div className="flex items-center gap-2 font-medium text-[11px] leading-[16px]  md:font-semibold md:text-[22px] md:leading-[28px] text-white ">
+                <div className="flex items-center gap-2 font-medium text-[11px] leading-[16px]  md:font-semibold md:text-[22px] md:leading-[28px] text-white">
                   <img
                     src="/images/ChapterPage/carbon_view-filled.png"
                     alt=""
@@ -289,55 +287,56 @@ const NovelPageGenre = () => {
                 </div>
               </div>
             </div>
+          </div>
 
-            {/* server && button */}
-            <div className="flex flex-col gap-[40px]">
-              {/* button */}
-              <div className="flex  gap-5">
-                <button className=" p-[8px]  rounded-[12px] md:px-[52px] md:py-[26px]  bg-[#FF2020]  text-white md:rounded-[67px] ">
-                  <div className="font-bold text-[12px] leading-[16px] md:text-[36px] md:leading-[44px] ">
-                    Read now
-                  </div>
-                </button>
-                <button className=" p-[8px]  rounded-[12px] text-black md:px-[52px] md:py-[26px]   bg-[#496EF1]  md:text-white md:rounded-[67px]">
-                  <div className="font-bold text-[12px] leading-[16px] md:text-[36px] md:leading-[44px] flex gap-1 md:gap-3 ">
-                    <div> My List </div>
-                    <img
-                      src="/images/ChapterPage/uil_plus.png"
-                      alt=""
-                      className="h-[20px] w-[20px] md:h-[48px] md:w-[48px] bg-cover object-cover "
-                    />
-                  </div>
-                </button>
-                <button className=" p-[8px]  rounded-[12px] md:px-[52px] md:py-[26px] bg-[#F45F17]  text-white md:rounded-[67px]">
-                  <div className="font-bold text-[12px] leading-[16px] md:text-[36px] md:leading-[44px] flex gap-1 md:gap-3 ">
-                    <div>{chapterDetail[0]?.rate}</div>
-                    <img
-                      src="/images/ChapterPage/Star 3.png"
-                      className="h-[20px] w-[20px] md:h-[48px] md:w-[48px] bg-cover object-cover"
-                      alt=""
-                    />
-                  </div>
-                </button>
+          <div className="flex flex-col gap-[40px]">
+            {/* button */}
+            <div className="flex gap-4 mt-5">
+              <button className="  hover:text-white p-[8px]  rounded-[12px] md:px-[52px] md:py-[26px]  bg-[#FF2020]  text-white md:rounded-[67px] ">
+                <div className="font-bold whitespace-nowrap text-[12px] leading-[16px] md:text-[36px] md:leading-[44px]">
+                  Read now
+                </div>
+              </button>
+              <button className=" p-[8px] rounded-[12px] text-black md:px-[52px] md:py-[26px]  bg-[#496EF1]  md:text-white md:rounded-[67px]">
+                <div className="font-bold text-[12px] whitespace-nowrap leading-[16px] md:text-[36px] md:leading-[44px] flex gap-1 md:gap-3">
+                  <div> My List </div>
+                  <img
+                    src="/images/ChapterPage/uil_plus.png"
+                    alt=""
+                    className="h-[20px] w-[20px] md:h-[48px] md:w-[48px] bg-cover object-cover "
+                  />
+                </div>
+              </button>
+
+              <button className=" p-[8px]  rounded-[12px] md:px-[2rem] md:py-[1rem] bg-[#F45F17]  text-white md:rounded-[67px]">
+                <div className="font-bold text-[12px] leading-[16px] md:text-[36px] md:leading-[44px] flex gap-1 md:gap-3 ">
+                  <div>{chapterDetail[0]?.rate}</div>
+                  <img
+                    src="/images/ChapterPage/Star 3.png"
+                    className="h-[20px] w-[20px] md:h-[48px] md:w-[48px] bg-cover object-cover"
+                    alt=""
+                  />
+                </div>
+              </button>
+            </div>
+            {/* chọn server */}
+            <div className="flex flex-col gap-[10px]">
+              <div className=" font-bold text-[12px] leading-[16px]  md:text-[28px] md:leading-[36px] text-white ">
+                Server
               </div>
-              {/* chọn server */}
-              <div className="flex flex-col gap-[10px]">
-                <div className=" font-bold text-[12px] leading-[16px]  md:text-[28px] md:leading-[36px] text-white ">
-                  Server
-                </div>
-                <div className="flex flex-wrap items-center justify-between">
-                  {listServer.map((item, index) => (
-                    <img
-                      key={index}
-                      src={item?.src}
-                      alt={item?.title}
-                      title={item?.title}
-                      className="w-[32px] h-[23px]  md:h-[48px]  md:w-[67px] cursor-pointer hover:opacity-80"
-                    />
-                  ))}
-                </div>
+              <div className="flex flex-wrap items-center gap-3">
+                {listServer.map((item, index) => (
+                  <img
+                    key={index}
+                    src={item?.src}
+                    alt={item?.title}
+                    title={item?.title}
+                    className="w-[32px] h-[23px]  md:h-[48px]  md:w-[67px] cursor-pointer hover:opacity-80"
+                  />
+                ))}
               </div>
             </div>
+
             <div className="flex flex-col gap-[8px] md:gap-[40px]">
               {/* info chapter */}
               <div className="flex flex-col gap-[8px] md:gap-[16px]">
@@ -363,7 +362,7 @@ const NovelPageGenre = () => {
                 </div>
                 {/* desc */}
                 <div className="">
-                  <p className="w-[223px] h-auto text-[11px] font-medium leading-[16px]  md:w-[1000px] md:font-normal md:text-[24px] md:leading-[36px] text-white">
+                  <p className="w-auto h-auto text-[11px] font-medium leading-[16px]  md:w-[1000px] md:font-normal md:text-[24px] md:leading-[36px] text-white">
                     {showFullDescription
                       ? fullDescription
                       : truncatedDescription}
@@ -381,6 +380,7 @@ const NovelPageGenre = () => {
           </div>
         </div>
       </div>
+
       <div className="py-[12px] flex items-center justify-center gap-[47px] md:gap-[87px] bg-[#3C3B38]">
         <div
           className={` ${showTab ? "tabbtn" : " none-tab "} `}
@@ -397,18 +397,18 @@ const NovelPageGenre = () => {
       </div>
       <div className="bg-black">
         {showTab && (
-          <div className="bg-black mx-36 ] ">
+          <div className="bg-black mx-4 md:mx-36 ">
             <div className="flex flex-col justify-center items-center pt-8">
-              <h1 className="text-6xl text-white ">
+              <h1 className="text-3xl md:text-6xl text-white">
                 {chapterDetail[0]?.title}
               </h1>
-              <h3 className="text-3xl text-gray-400 pt-4">
+              <h3 className="text-xl md:text-3xl text-gray-400 pt-4">
                 <span>{subTitle}</span>
               </h3>
             </div>
-            <div className="flex gap-3 justify-center pt-10">
+            <div className="flex gap-3 justify-center flex-wrap pt-10">
               <button
-                className="bg-[#138e00] h-10 px-4 flex items-center text-lg rounded-lg text-white w-50"
+                className="bg-[#138e00] h-10 px-4 flex items-center text-lg rounded-lg text-white"
                 onClick={prevChap}
               >
                 {" "}
@@ -432,7 +432,7 @@ const NovelPageGenre = () => {
               <select
                 name="chapterList"
                 id="chapterList"
-                className="bg-[#138e00] w-[200px] rounded-lg text-white justify-center"
+                className="bg-[#138e00] w-[200px] rounded-lg text-white"
                 value={currentChap}
                 onChange={() => handleChapter()}
               >
@@ -471,7 +471,7 @@ const NovelPageGenre = () => {
               </select>
 
               <button
-                className="bg-[#138e00] h-10 px-4 flex items-center text-lg rounded-lg text-white w-50"
+                className="bg-[#138e00] h-10 px-4 flex items-center text-lg rounded-lg text-white"
                 onClick={nextChap}
               >
                 {" "}
@@ -492,12 +492,10 @@ const NovelPageGenre = () => {
                 </svg>{" "}
               </button>
             </div>
-            <div className="w-[70%] pt-8 mx-auto">
-              {/* <TextToSpeech content={chapterData?.content} text={chapterData?.content} /> */}
+            <div className="w-full md:w-[70%] pt-8 mx-auto">
               <TTS
                 content={chapterData?.content || chapterData?.content_chapter}
               />{" "}
-              {/*text-to-speech and highlight*/}
             </div>
           </div>
         )}

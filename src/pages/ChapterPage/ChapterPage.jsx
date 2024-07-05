@@ -361,7 +361,7 @@ const ChapterPage = () => {
             </div>
             {/* chọn server */}
             <div className="flex flex-col gap-[10px]">
-              x``
+              
               <div className=" font-bold text-[12px] leading-[16px]  md:text-[28px] md:leading-[36px] text-white ">
                 Server
               </div>

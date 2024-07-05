@@ -316,16 +316,13 @@ const Dropdown = () => {
               <p>Genres</p>
             </div>
 
-            <p className="cursor-pointer text-xl font-semibold hover:!bg-gray-700 ">
-              Popular
-            </p>
             <div className="dropdown relative ">
               <button ref={submenuRef} onClick={() => handleOpen()}>
                 Server
               </button>
               {open ? (
                 <ul
-                  className="menu grid grid-cols-2"
+                  className="menu overflow-x-auto slider-container grid grid-cols-2"
                   onClick={() => handleOpen()}
                 >
                   {serverName &&
@@ -345,6 +342,9 @@ const Dropdown = () => {
                 </ul>
               ) : null}
             </div>
+            <p className="cursor-pointer text-xl font-semibold hover:!bg-gray-700 ">
+              Popular
+            </p>
 
             <div
               onClick={() => {

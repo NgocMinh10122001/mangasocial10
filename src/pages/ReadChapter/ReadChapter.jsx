@@ -232,11 +232,14 @@ const ReadChapter = () => {
   };
 
   return (
-    <div className="flex flex-col items-center gap-5 mt-5">
+    <div className="flex flex-col items-center gap-5  mt-5">
       <div className="flex flex-col container gap-5">
         <div className="">
           <h1 className="uppercase font-bold text-3xl">
-            {chapterDetail?.title} - {readmode ? chapterDetail?.chapter_title: chapterDetail?.chapter_name}
+            {chapterDetail?.title} -{" "}
+            {readmode
+              ? chapterDetail?.chapter_title
+              : chapterDetail?.chapter_name}
           </h1>
         </div>
 
@@ -248,29 +251,30 @@ const ReadChapter = () => {
           </label>
         </div>
 
-        <div className="flex justify-between items-center">
-          <div className="">
-            <select
-              name="cars"
-              id="chapterList"
-              className="w-[450px] h-[40px] px-3 rounded-lg"
-              onChange={(e) => handleChapter(e)}
-              value={id}
-            >
-             
-              {listChapter?.map((item, index) => (
-                <option key={index} value={item}>
-                  {listNameChapter[index]}
-                </option>
-              ))}
-            </select>
+        <div className="flex justify-between max-[596px]:flex-col gap-3 items-center">
+          <div className="flex gap-2 w-full justify-between items-center">
+            <div className="border border-gray-800 rounded-lg">
+              <select
+                name="cars"
+                id="chapterList"
+                className="min-[390px]:min-w-[350px] w-[200px] h-[40px] px-3 rounded-lg"
+                onChange={(e) => handleChapter(e)}
+                value={id}
+              >
+                {listChapter?.map((item, index) => (
+                  <option key={index} value={item}>
+                    {listNameChapter[index]}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <Button size="large" onClick={() => handleDownload()}>
+                Download
+              </Button>
+            </div>
           </div>
-          <div>
-            <Button size="large" onClick={() => handleDownload()}>
-              Download
-            </Button>
-          </div>
-          <div className="flex gap-2">
+          <div className="flex max-[596px]:justify-between items-center w-full gap-2">
             <ButtonIcon
               name={"Prev"}
               iconLeft={<GrLinkPrevious />}
@@ -308,20 +312,17 @@ const ReadChapter = () => {
         </div>
       )}
 
-      <div className="flex flex-col container gap-5">
-        <div className="flex justify-between items-center ">
-          <div className="">
+      <div className="flex flex-col mb-[118px] container gap-5">
+        <div className="flex max-[596px]:flex-col gap-3 items-center ">
+          <div className=" border border-gray-800 w-full rounded-lg">
             <select
               name="cars"
               id="chapterList"
-              className="w-[450px] h-[40px] px-3 rounded-lg"
+              className="w-[200px] max-[596px]:w-full h-[40px] px-3 rounded-lg"
               onChange={() => handleChapter()}
               value={id}
             >
-              
-              <option >
-                  Select Chapter
-                </option>
+              <option>Select Chapter</option>
               {listChapter?.map((item, index) => (
                 <option key={index} value={item}>
                   {listNameChapter[index]}
@@ -330,7 +331,7 @@ const ReadChapter = () => {
             </select>
           </div>
 
-          <div className="flex gap-2">
+          <div className="flex max-[596px]:justify-between w-full gap-2">
             <ButtonIcon
               name={"Prev"}
               iconLeft={<GrLinkPrevious />}

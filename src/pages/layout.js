@@ -34,6 +34,7 @@ import { FaBook } from "react-icons/fa6";
 import { FaGoogleDrive } from "react-icons/fa";
 import styles from "./layout.module.scss";
 
+
 let path = "";
 let arr_id_manga = [""];
 let arr_url = [""];
@@ -46,6 +47,7 @@ export default function Layout() {
 
   //handle search
   const [input, setInput] = useState("");
+
   const [search, setSearch] = useState("");
   const [searchData, setSearchData] = useState("");
   const [idMangaList, setIdMangaList] = useState("0");
@@ -59,6 +61,9 @@ export default function Layout() {
   const sv = useSelector((state) => state.server.sv);
   const loading = useSelector((state) => state.server.loading);
   const navigate = useNavigate();
+
+
+
 
   //  14    "https://br.ninemanga.com",
   //                                 13    "https://de.ninemanga.com",
@@ -385,6 +390,9 @@ export default function Layout() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState("");
 
+
+
+
   useEffect(() => {
     const os = platform.os.family;
 
@@ -422,6 +430,7 @@ export default function Layout() {
     dispatch(changeServer(index));
     this.forceUpdate();
   }
+
   return (
     <>
       <div className="flex px-3 items-center justify-between py-4 bg-gray-800  max-[480px]:hidden ">
@@ -628,8 +637,13 @@ export default function Layout() {
             <SubMenu />
           )}
           {/*  */}
-          {checkSearch && input.content && input !== "" ? (
-            <div className="h-80 w-[17rem] bg-[#DADADA] absolute mt-[375px] ml-[50px] rounded-lg border-double flex justify-center flex-col items-center overflow-y-auto ">
+          {checkSearch && input.content && input !== ""  ? (
+            <div
+              className={
+                styles.search +
+                " h-80 w-[17rem] bg-[#DADADA] absolute mt-[375px] ml-[50px] rounded-lg border-double flex justify-center flex-col items-center overflow-y-auto "
+              }
+            >
               <hr className="mt-[150px]" />
               {searchData ? (
                 searchData.slice(0, 3).map((item, index) => (
@@ -661,7 +675,7 @@ export default function Layout() {
                 <p>Not found @@</p>
               )}
 
-              <div className="text-white border-5 border-white bg-blue-400 rounded-lg h-6 w-24 flex text-center content-center justify-center my-2">
+              <div className="text-white border-5 border-white bg-blue-400 rounded-lg h-auto w-24 flex text-center content-center justify-center my-2">
                 <button onClick={() => handleCloseSearch()}>Close</button>
               </div>
             </div>
@@ -752,7 +766,7 @@ export default function Layout() {
         </div>
       </div>
       <div className="header-mobile  w-full z-[999] py-2 pe-2 bg-[#F45F17] fixed bottom-0 right-0 hidden max-[480px]:block">
-        <ul className="flex justify-between items-center ">
+        <ul className="flex w-full justify-between items-center ">
           <li className="">
             <Link
               to={`/${sv}`}
@@ -830,11 +844,11 @@ export default function Layout() {
                   </ul>
                 ) : null}
               </div> */}
-              <div className="dropdown max-[480px]:static text-sm max-[480px]:hover:!text-white">
+              <div className="dropdown relative max-[480px]:static text-sm max-[480px]:hover:!text-white">
                 <div className="!text-white hover:!text-white ">Server</div>
                 {open && (
                   <ul
-                    className="menu absolute top-0 left-0 transform -translate-y-full  grid grid-cols-2 w-auto bg-white shadow-lg max-[480px]:absolute max-[480px]:w-full z-[999]"
+                    className="menu slider-container absolute top-[-34px] left-0 bg-black transform -translate-y-full overflow-x-auto -translate-x-[50%] min-w-[330px] grid grid-cols-2 shadow-lg max-[480px]:absolute max-[480px]:w-full z-[999]"
                     onClick={() => handleOpen()}
                   >
                     {serverName &&
@@ -842,16 +856,16 @@ export default function Layout() {
                       serverName.map((item) => (
                         <li
                           key={item.sv}
-                          className="menu-item flex justify-start items-center p-2 hover:bg-gray-200"
+                          className="menu-item slider-item flex justiyf-start items-center p-2 hover:bg-gray-200"
                           onClick={() => navigate("/" + item.sv)}
                         >
                           <button
-                            className="text-left w-full"
+                            className="text-left w-full flex justify-start items-center"
                             onClick={() => dispatch(changeServer(item.sv))}
                           >
                             {item.name}
+                            <div className="ml-2">{item.icon}</div>
                           </button>
-                          <div className="ml-2">{item.icon}</div>
                         </li>
                       ))}
                   </ul>

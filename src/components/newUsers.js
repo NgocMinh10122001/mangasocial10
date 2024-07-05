@@ -23,15 +23,19 @@ const NewUsers = () => {
   return (
     <>
       <div>
-        <div className="news-right max-[435px]:!h-auto  max-[435px]:py-4 ">
-          <div className="lab">
+        <div 
+          className="slider-container news-right max-[435px]:!h-auto overflow-y-auto  max-[435px]:py-4 "
+            
+        >
+          <div className="lab text-!xl p-3">
             <label>NEW USER</label>{" "}
           </div>
-          <div className=" max-[435px]:flex  flex-col justify-center gap-4">
+          <div className="slider-container max-[435px]:flex  flex-col justify-center gap-4">
             {newUser &&
               newUser.map((newUser, index) => {
                 return (
                   <Link
+                    className="slider-item"
                     to={`/${sv}/view-user-profile`}
                     state={newUser.id_user}
                     key={index}

@@ -122,7 +122,7 @@ export default function Index() {
           <p className="max-[480px]:!text-xl">See all</p>
         </Link>
       </div>
-      <div className="news max-[480px]:flex max-[480px]:flex-col  max-[480px]:px-4">
+      <div className="news flex-rows max-[480px]:flex max-[480px]:flex-col  max-[480px]:px-4">
         <NewsComics />
         <NewUsers />
       </div>

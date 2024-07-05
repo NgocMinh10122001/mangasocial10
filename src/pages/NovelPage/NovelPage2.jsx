@@ -152,42 +152,25 @@ const NovelPage2 = () => {
   ];
 
   return (
-    <div style={{ zoom: 0.9 }}>
-      <div
-        className=" w-[100%] h-full bg-cover bg-center bg-no-repeat md:flex md:gap-30 px-[14px] pt-[14px] md:px-[141px] md:pt-[48px] gap-10"
-        style={{
-          backgroundImage: "url('/images/ChapterPage/bia.png')",
-          background:
-            "linear-gradient(0deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 100%), linear-gradient(0deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 100%), url('/images/ChapterPage/bia.png'), lightgray 50% / cover no-repeat",
-        }}
-      >
-        {loading ? (
-          <Loading
-            type={"spin"}
-            color={"#FF9F66"}
-            height={400}
-            width={400}
-            text="Loading Poster..."
-          />
-        ) : (
-          <div className="relative">
-            <img
-              src={chapterDetail?.poster}
-              alt=""
-              className=" h-[203px] w-[330px] max-[435px]:w-full  md:h-[649px] md:w-[433px] bg-cover object-cover bg-center rounded-[8px]"
+    <div style={{ zoom: 0.9 }} className="bg-black">
+      <div className=" mx-20 max-[480px]:mx-2 text-left w-100vh flex max-[768px]:flex-row max-[480px]:flex-col gap-1 p-4  px-4  bg-black">
+        <div className="ps-3 pb-5">
+          {loading ? (
+            <Loading
+              type={"spin"}
+              color={"#FF9F66"}
+              height={400}
+              width={400}
+              text="Loading Poster..."
             />
-            <div className="absolute top-0 right-5  hidden md:block ">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="118"
-                height="118"
-                viewBox="0 0 118 118"
-                fill="none"
-              >
-                <path
-                  d="M0 0H118V59C118 91.5848 91.5848 118 59 118C26.4152 118 0 91.5848 0 59V0Z"
-                  fill="#1E1E1E"
-                />
+          ) : (
+            <div className="relative max-[480px]:w-full background-container-chapter-page">
+              <img
+                src={chapterDetail?.poster}
+                alt=""
+                className="  w-100% h-auto sm:w-[100vw] md:h-[649px] md:w-[433px] max-[1250px]:min-w-[320px] max-[739px]:min-w-[270px] bg-cover object-cover bg-center rounded-[8px]"
+              />
+              <div className="absolute top-0 right-5  hidden md:block ">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="118"
@@ -196,38 +179,53 @@ const NovelPage2 = () => {
                   fill="none"
                 >
                   <path
-                    d="M0 0H118V59C118 91.5848 91.5848 118 59 118C26.4152 118 0 91.5848 0 27.8K like59V0Z"
+                    d="M0 0H118V59C118 91.5848 91.5848 118 59 118C26.4152 118 0 91.5848 0 59V0Z"
                     fill="#1E1E1E"
                   />
-                  <text
-                    x="10%"
-                    y="50%"
-                    fontSize="57px"
-                    fontWeight="bold"
-                    fill="white"
-                    tex="middle"
-                    dominantBaseline="middle"
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="118"
+                    height="118"
+                    viewBox="0 0 118 118"
+                    fill="none"
                   >
-                    18+
-                  </text>
+                    <path
+                      d="M0 0H118V59C118 91.5848 91.5848 118 59 118C26.4152 118 0 91.5848 0 27.8K like59V0Z"
+                      fill="#1E1E1E"
+                    />
+                    <text
+                      x="10%"
+                      y="50%"
+                      fontSize="57px"
+                      fontWeight="bold"
+                      fill="white"
+                      tex="middle"
+                      dominantBaseline="middle"
+                    >
+                      18+
+                    </text>
+                  </svg>
                 </svg>
-              </svg>
-            </div>
-            <div className="absolute top-0 left-0 hidden md:block ">
-              <div className="relative ">
-                <img
-                  src="/images/ChapterPage/Star 1.png"
-                  alt=""
-                  className="h-[144px] w-[144px]"
-                />
-                <div className="h-[64px] w-[125px] text-white font-semibold text-[24px] leading-[32px] absolute top-[30px] left-[10px]  text-center">
-                  New Chapter
+              </div>
+              <div className="absolute top-0 left-0 hidden md:block ">
+                <div className="relative ">
+                  <img
+                    src="/images/ChapterPage/Star 1.png"
+                    alt=""
+                    className="h-[auto] w-[200%]"
+                  />
+                  <div className="h-[64px] w-[125px] text-white font-semibold text-[24px] leading-[32px] absolute top-[30px] left-[10px]  text-center">
+                    New Chapter
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        )}
-        <div className="flex flex-col gap-[8px] md:gap-5">
+          )}
+        </div>
+
+        {/* cột  ------------------------2 */}
+
+        <div className="ms-2 flex flex-col gap-[8px] md:gap-5">
           <div className="flex flex-col gap-[8px] md:gap-[40px]">
             {/* name && tương tác */}
             <div className="flex flex-col gap-[8px] md:gap-[21px]">
@@ -267,7 +265,14 @@ const NovelPage2 = () => {
                     alt=""
                     className="h-[32px] w-[32px] hidden md:block"
                   />
-                  <div>{`${readmode ? Object.keys(chapterDetail?.chapters ?? {}).length ?? [] : chapterDetail?.chapters?.length} chapter `} </div>
+                  <div>
+                    {`${
+                      readmode
+                        ? Object.keys(chapterDetail?.chapters ?? {}).length ??
+                          []
+                        : chapterDetail?.chapters?.length
+                    } chapter `}{" "}
+                  </div>
                 </div>
               </div>
             </div>
@@ -275,28 +280,38 @@ const NovelPage2 = () => {
             {/* server && button */}
             <div className="flex flex-col gap-[40px]">
               {/* button */}
-              <div className="flex  gap-5">
-                 <Link to={`/${sv}/${chapterDetail?.genres === "manga" ?"chapter2" : "novel2"}/${slug}/${getChapterFromUrl(linkList[0]?? "")}`} className=" hover:text-white p-[8px]  rounded-[12px] md:px-[52px] md:py-[26px]  bg-[#FF2020]  text-white md:rounded-[67px] ">
-                  <div className="font-bold text-[12px] leading-[16px] md:text-[36px] md:leading-[44px] ">
+              <div className="flex gap-4 mt-5">
+                <Link
+                  to={`/${sv}/${
+                    chapterDetail?.genres === "manga" ? "chapter2" : "novel2"
+                  }/${slug}/${getChapterFromUrl(linkList[0] ?? "")}`}
+                  className=" hover:text-white p-[8px]  rounded-[12px] md:px-[52px] md:py-[26px]  bg-[#FF2020]  text-white md:rounded-[67px] "
+                >
+                  <div className="font-bold whitespace-nowrap text-[12px] leading-[16px] md:text-[36px] md:leading-[44px] ">
                     Read now
                   </div>
                 </Link>
-                <button className={ ` p-[8px]  rounded-[12px] text-black md:px-[52px] md:py-[26px]   ${active ? "bg-[#FF2020]": "bg-[#496EF1]"}  md:text-white md:rounded-[67px]`} onClick={() => handleActive("list")}>
-                  <div className="font-bold text-[12px] leading-[16px] md:text-[36px] md:leading-[44px] flex gap-1 md:gap-3 " >
-                    <div> My List </div>
+                <button
+                  className={` p-[8px]  rounded-[12px] text-black md:px-[52px] md:py-[26px]   ${
+                    active ? "bg-[#FF2020]" : "bg-[#496EF1]"
+                  }  md:text-white md:rounded-[67px]`}
+                  onClick={() => handleActive("list")}
+                >
+                  <div className="font-bold text-[16px] md:text-[36px] whitespace-nowrap leading-[20px]   md:leading-[44px] flex gap-1 md:gap-3 ">
+                    <div className="whitespace-nowrap"> My List </div>
                     <img
                       src="/images/ChapterPage/uil_plus.png"
                       alt=""
-                      className="h-[20px] w-[20px] md:h-[48px] md:w-[48px] bg-cover object-cover "
+                      className="h-[20px] w-[20px] md:h-[48px] md:w-[48px] bg-cover object-cover max-h-full "
                     />
                   </div>
                 </button>
-                <button className=" p-[8px]  rounded-[12px] md:px-[52px] md:py-[26px] bg-[#F45F17]  text-white md:rounded-[67px]">
-                  <div className="font-bold text-[12px] leading-[16px] md:text-[36px] md:leading-[44px] flex gap-1 md:gap-3 ">
+                <button className=" p-[8px]  rounded-[12px] md:px-[2rem] md:py-[1rem] bg-[#F45F17]  text-white md:rounded-[67px]">
+                  <div className="font-bold text-[12px] whitespace-nowrap leading-[16px] md:text-[36px] md:leading-[44px] flex gap-1 md:gap-3 ">
                     <div>{chapterDetail?.rate}</div>
                     <img
                       src="/images/ChapterPage/Star 3.png"
-                      className="h-[20px] w-[20px] md:h-[48px] md:w-[48px] bg-cover object-cover"
+                      className="h-auto w-[20px] md:h-[48px] md:w-[48px] bg-cover object-cover"
                       alt=""
                     />
                   </div>
@@ -307,75 +322,79 @@ const NovelPage2 = () => {
                 <div className=" font-bold text-[12px] leading-[16px]  md:text-[28px] md:leading-[36px] text-white ">
                   Server
                 </div>
-                <div className="flex flex-wrap items-center justify-between">
+                <div className="flex flex-wrap items-center gap-3">
                   {listServer.map((item, index) => (
                     <img
                       key={index}
                       src={item?.src}
                       alt={item?.title}
                       title={item?.title}
-                      className="w-[32px] h-[23px]  md:h-[48px]  md:w-[67px] cursor-pointer hover:opacity-80"
+                      className="w-1/6 md:w-[16.666%] h-auto cursor-pointer hover:opacity-80"
+                      style={{ maxWidth: "67px", height: "auto" }}
                     />
                   ))}
                 </div>
               </div>
-            </div>
-            <div className="flex flex-col gap-[8px] md:gap-[40px]">
-              {/* info chapter */}
-              <div className="flex flex-col gap-[8px] md:gap-[16px]">
-                <div className="text-[#9E9E9E] font-normal text-[12px] leading-[16px] md:text-[24px]  md:leading-[36px] flex items-center gap-2">
-                  Author:
-                  <div className="text-white">
-                    {loading ? "Loading..." : chapterDetail?.author}
+              <div className="flex flex-col gap-[8px] md:gap-[40px]">
+                {/* info chapter */}
+                <div className="flex flex-col gap-[8px] md:gap-[40px]">
+                  <div className="text-[#9E9E9E] font-normal text-[12px] leading-[16px] md:text-[24px]  md:leading-[36px] flex items-center gap-2">
+                    Author:
+                    <div className="text-white">
+                      {loading ? "Loading..." : chapterDetail?.author}
+                    </div>
                   </div>
-                </div>
-                <div className="text-[#9E9E9E] font-normal text-[12px] leading-[16px] md:text-[24px]  md:leading-[36px] flex items-center gap-2">
-                  Artist:
-                  <div className="text-white">
-                    {loading ? "Loading..." : "Unkown"}
+                  <div className="text-[#9E9E9E] font-normal text-[12px] leading-[16px] md:text-[24px]  md:leading-[36px] flex items-center gap-2">
+                    Artist:
+                    <div className="text-white">
+                      {loading ? "Loading..." : "Unkown"}
+                    </div>
                   </div>
-                </div>
-                <div className="text-[#9E9E9E] font-normal text-[12px] leading-[16px] md:text-[24px]  md:leading-[36px] flex flex-wrap items-center gap-2">
-                  Genres:
-                  <div className="text-white">{chapterDetail?.categories || chapterDetail?.catergories}</div>
-                </div>
-                <div className="text-[#9E9E9E] font-normal text-[12px] leading-[16px] md:text-[24px]  md:leading-[36px] flex items-center gap-2">
-                  Age:
-                  <div className="text-white">
-                    {loading ? "Loading..." : "18+"}
+                  <div className="text-[#9E9E9E] font-normal text-[12px] leading-[16px] md:text-[24px]  md:leading-[36px] flex flex-wrap items-center gap-2">
+                    Genres:
+                    <div className="text-white">
+                      {chapterDetail?.categories || chapterDetail?.catergories}
+                    </div>
                   </div>
-                </div>
-                {/* desc */}
-                <div className="text-[#9E9E9E] font-normal text-[12px] leading-[16px] md:text-[24px]  md:leading-[36px] flex gap-2">
-                  Description:
-                  {loading ? (
-                    "Loading..."
-                  ) : (
-                    <p className="w-[223px] h-auto text-[11px] font-medium leading-[16px]  md:w-[1000px] md:font-normal md:text-[24px] md:leading-[36px] text-white">
-                      {showFullDescription
-                        ? fullDescription
-                        : truncatedDescription}
-                      {!showFullDescription && (
-                        <button onClick={() => setShowFullDescription(true)}>
-                          <div className=" underline  underline-offset-4">
-                            See All
-                          </div>
-                        </button>
-                      )}
-                    </p>
-                  )}
+                  <div className="text-[#9E9E9E] font-normal text-[12px] leading-[16px] md:text-[24px]  md:leading-[36px] flex items-center gap-2">
+                    Age:
+                    <div className="text-white">
+                      {loading ? "Loading..." : "18+"}
+                    </div>
+                  </div>
+                  {/* desc */}
+                  <div className="text-[#9E9E9E] font-normal text-[12px] leading-[16px] md:text-[24px]  md:leading-[36px] flex gap-2">
+                    Description:
+                    {loading ? (
+                      "Loading..."
+                    ) : (
+                      <p className="w-auto h-auto text-[11px] font-medium leading-[16px]  md:w-[1000px] md:font-normal md:text-[24px] md:leading-[36px] text-white">
+                        {showFullDescription
+                          ? fullDescription
+                          : truncatedDescription}
+                        {!showFullDescription && (
+                          <button onClick={() => setShowFullDescription(true)}>
+                            <div className=" underline  underline-offset-4">
+                              See All
+                            </div>
+                          </button>
+                        )}
+                      </p>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+      {/* cột  ------------------------2 */}
       <div className="py-[12px] flex items-center justify-center gap-[47px] md:gap-[87px] bg-[#3C3B38]">
         <div
           className={` ${showTab ? "tabbtn" : " none-tab "} `}
           onClick={handleShowTab}
         >
-          { active ? "My List": "Chapter"}
+          {active ? "My List" : "Chapter"}
         </div>
         <div
           className={` ${!showTab ? "tabbtn" : " none-tab "} `}
@@ -396,55 +415,58 @@ const NovelPage2 = () => {
       ) : (
         <div>
           {showTab && active === false && (
-            <div className="bg-[#000] flex py-[50px] px-[100px] justify-center">
-              <div className="bg-[#4A4A4A] py-[24px] px-[48px]">
-                <div className="flex items-center gap-2 font-semibold text-[22px] leading-[28px] text-white ">
+            <div className="bg-[#000] flex py-[20px] md:py-[50px] px-[20px] w-[100%] sm:px-[40px] md:px-[0px] justify-center">
+              <div className="bg-[#000] py-[20px] px-[24px] sm:px-[0px] md:px-[48px] w-full max-w-[100%]">
+                <div className="flex items-center gap-2 font-semibold text-[18px] sm:text-[20px] md:text-[22px] leading-[22px] sm:leading-[24px] md:leading-[28px] text-white">
                   <img
                     src="/images/ChapterPage/jam_files-f.png"
                     alt=""
-                    className="h-[32px] w-[32px]"
+                    className="h-[24px] sm:h-[28px] md:h-[32px] w-[24px] sm:w-[28px] md:w-[32px]"
                   />
                   <div>{Object.keys(listChapter).length} chapters</div>
                 </div>
 
-                  <div className="px-12 py-6">
-                    {linkList
-                      .slice(0, visibleChapterCount)
-                      .map((item, index) => { 
-                        if (chapterDetail?.genres === "novel") {
-                          return <div key={index}>
-                            {/* { console.log("cehck genre",chapterDetail?.genres)} */}
-                            <NovelCard
-                              chapterLink={item}
-                              chapterName={ getChapterFromUrl(item)}
-                              title={chapterDetail?.title || chapterDetail?.title_novel}
-                              des={chapterDetail?.description}
-                              poster={chapterDetail?.poster}
-                              genre={ chapterDetail?.genres}
-                              slug={slug}
-                            />
-                          </div>
-                        } else { 
-                           return <div key={index}>
-
-                            <ChapterCard2
-                              chapterLink={item}
-                              chapterName={ getChapterFromUrl(item)}
-                              title={chapterDetail?.title || chapterDetail?.title_novel}
-                              des={chapterDetail?.description}
-                              poster={chapterDetail?.poster}
-                              slug={slug}
-                            />
-                          </div>
-                        }
-                      } 
-
-                      )}
-                  </div>
+                <div className="px-2 py-4">
+                  {linkList.slice(0, visibleChapterCount).map((item, index) => {
+                    if (chapterDetail?.genres === "novel") {
+                      return (
+                        <div className="my-2" key={index}>
+                          {/* { console.log("cehck genre",chapterDetail?.genres)} */}
+                          <NovelCard
+                            chapterLink={item}
+                            chapterName={getChapterFromUrl(item)}
+                            title={
+                              chapterDetail?.title || chapterDetail?.title_novel
+                            }
+                            des={chapterDetail?.description}
+                            poster={chapterDetail?.poster}
+                            genre={chapterDetail?.genres}
+                            slug={slug}
+                          />
+                        </div>
+                      );
+                    } else {
+                      return (
+                        <div key={index}>
+                          <ChapterCard2
+                            chapterLink={item}
+                            chapterName={getChapterFromUrl(item)}
+                            title={
+                              chapterDetail?.title || chapterDetail?.title_novel
+                            }
+                            des={chapterDetail?.description}
+                            poster={chapterDetail?.poster}
+                            slug={slug}
+                          />
+                        </div>
+                      );
+                    }
+                  })}
+                </div>
 
                 <div className="text-center mt-5">
                   <button
-                    className="font-semibold text-[32px] leading-[40px] text-white  "
+                    className="font-semibold text-[24px] sm:text-[28px] md:text-[32px] leading-[30px] sm:leading-[36px] md:leading-[40px] text-white "
                     onClick={handleSeeMore}
                   >
                     See More
@@ -452,8 +474,12 @@ const NovelPage2 = () => {
                 </div>
               </div>
             </div>
-            )}
-            {showTab && active && <div className="text-white bg-[#000] w-full flex py-[50px] px-[100px] justify-center">My list</div> }
+          )}
+          {showTab && active && (
+            <div className="text-white bg-[#000] w-full flex py-[50px] px-[100px] justify-center">
+              My list
+            </div>
+          )}
         </div>
       )}
 
