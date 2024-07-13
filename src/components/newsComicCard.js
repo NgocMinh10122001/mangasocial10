@@ -2,14 +2,22 @@ import React from "react";
 
 const NewsComicCard = (props) => {
   const { poster, time, title, url } = props;
+  console.log("poster", poster);
   return (
     <div className="rounded-xl group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl hover:shadow-black/30">
       <div className="w-[417px] h-[287px] max-[435px]:h-[230px] ">
-        <img
+        {/* <img
           className="h-full w-full object-cover transition-transform duration-500 group-hover:rotate-3 group-hover:scale-125"
           src={`${poster}`}
+          srcset={poster}
           alt=""
-        />
+        /> */}
+        <img
+          src={poster}
+          alt="Webtoon 'Omniscient Reader's Viewpoint' Gets TV Anime Adaptation"
+          class="image lazyloaded"
+          srcSet={poster}
+        ></img>
       </div>
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black group-hover:from-black/70 group-hover:via-black/60 group-hover:to-black/30"></div>
       <div className="absolute inset-0 flex translate-y-[60%] max-[435px]:translate-y-[44%]  flex-col items-center justify-center px-9 text-center transition-all duration-500 group-hover:translate-y-0 max-[435px]:group-hover:translate-y-[20%] mb-5 max-[435px]:mb-0">

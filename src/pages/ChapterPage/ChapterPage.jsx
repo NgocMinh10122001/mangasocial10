@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./ChapterPage.scss";
 import ChapterCard from "../../components/ChapterCard/ChapterCard";
 import axios from "axios";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Comments from "../../components/comments";
 import CMT from "../../components/cmt";
@@ -19,22 +19,22 @@ const ChapterPage = () => {
   const [visibleChapterCount, setVisibleChapterCount] = useState(12);
   const [showFullDescription, setShowFullDescription] = useState(false);
   const [comment, setComment] = useState("");
-  const [commentDetail, setCommentDetail]= useState([])
+  const [commentDetail, setCommentDetail] = useState([]);
+
   // console.log("check comment", comment);
   const [loading, setLoading] = useState(true);
-
   const params = useParams();
   const { slug } = params;
   const sv = useSelector((state) => state.server.sv);
   const readmode = useSelector((state) => state.ReadMode.readmode);
   const user_id = sessionStorage.getItem("user_id");
-  const [active, setActive] = useState(false)
+  const [active, setActive] = useState(false);
   // console.log("check read mode", readmode)
   const handleActive = (string) => {
-    if(string === "list"){
-      setActive(!active)
+    if (string === "list") {
+      setActive(!active);
     }
-  }
+  };
 
   const handleShowTab = () => {
     setShowTab(!showTab);
@@ -50,11 +50,13 @@ const ChapterPage = () => {
       );
       // console.log("response:", res);
       // console.log("comment:", comment);
-      if (res) { 
-        let resc = await axios.get(`https://apimanga.mangasocial.online/cmanga/${slug}`)
-        setComment("")
+      if (res) {
+        let resc = await axios.get(
+          `https://apimanga.mangasocial.online/cmanga/${slug}`
+        );
+        setComment("");
 
-        if (resc) setCommentDetail(resc.data)
+        if (resc) setCommentDetail(resc.data);
       }
     } catch (error) {
       console.log(error);
@@ -70,26 +72,26 @@ const ChapterPage = () => {
           `https://apimanga.mangasocial.online/rmanga/${slug}`
         );
         setChapterDetail(response.data);
+        console.log(response.data);
         setListChapter(response.data.chapters);
         // setCommentDetail(response.data.comment)
         setLoading(false);
       } else {
-        if (sv === 4) { 
-           const response = await axios.get(
-          `https://apimanga.mangasocial.online/web/rnovel/${sv}/${slug}/`
-           );
-          console.log("check res4", response);
-        setChapterDetail(response.data);
-        setListChapter(response.data.chapters);
-        setLoading(false);
-        }
-        else { 
+        if (sv === 4) {
           const response = await axios.get(
-          `https://apimanga.mangasocial.online/web/rmanga/${sv}/${slug}/`
-        );
-        setChapterDetail(response.data);
-        setListChapter(response.data.chapters);
-        setLoading(false);
+            `https://apimanga.mangasocial.online/web/rnovel/${sv}/${slug}/`
+          );
+          console.log("check res4", response);
+          setChapterDetail(response.data);
+          setListChapter(response.data.chapters);
+          setLoading(false);
+        } else {
+          const response = await axios.get(
+            `https://apimanga.mangasocial.online/web/rmanga/${sv}/${slug}/`
+          );
+          setChapterDetail(response.data);
+          setListChapter(response.data.chapters);
+          setLoading(false);
         }
       }
     } catch (error) {
@@ -98,16 +100,18 @@ const ChapterPage = () => {
     }
   };
 
-  const fetchListComment = async () => { 
-    let resc = await axios.get(`https://apimanga.mangasocial.online/cmanga/${slug}`)
-    if(resc) setCommentDetail(resc.data)
-  }
- 
+  const fetchListComment = async () => {
+    let resc = await axios.get(
+      `https://apimanga.mangasocial.online/cmanga/${slug}`
+    );
+    if (resc) setCommentDetail(resc.data);
+  };
 
   useEffect(() => {
     fetchChapterDetail();
-    fetchListComment()
+    fetchListComment();
   }, []);
+
 
   const handleSeeMore = () => {
     setVisibleChapterCount((prevCount) => prevCount + 10);
@@ -130,25 +134,19 @@ const ChapterPage = () => {
 
   const arrChapterLink = Object.keys(listChapter);
 
-
-
-
   const linkList = arrChapterLink.map(function (link) {
     return listChapter[link];
   });
 
-
-
-
-    const getChapterFromUrl = (url) => {
-    const parts = url.split('/');
+  const getChapterFromUrl = (url) => {
+    const parts = url.split("/");
     return parts[parts.length - 1];
   };
-   const getChapterFromUrl2 = (url) => {
-    const parts = url.split('/');
+  const getChapterFromUrl2 = (url) => {
+    const parts = url.split("/");
     return parts[parts.length - 2];
-   };
-  
+  };
+
   const viewsString = chapterDetail?.views || "";
   const startIndex = viewsString.lastIndexOf("has ") + 4;
   const viewsPart = viewsString.substring(startIndex);
@@ -312,7 +310,16 @@ const ChapterPage = () => {
           <div className="flex flex-col gap-[40px]">
             {/* button */}
             <div className="flex gap-4 mt-5">
-               <Link to={`/${sv}/${sv === 4  || sv === 11  ? "novel" : "chapter"}/${slug}/${readmode ? getChapterFromUrl2(linkList[0]?? "") : getChapterFromUrl(linkList[0]?? "")}`} className=" hover:text-white p-[8px]  rounded-[12px] md:px-[52px] md:py-[26px]  bg-[#FF2020]  text-white md:rounded-[67px] ">
+              <Link
+                to={`/${sv}/${
+                  sv === 4 || sv === 11 ? "novel" : "chapter"
+                }/${slug}/${
+                  readmode
+                    ? getChapterFromUrl2(linkList[0] ?? "")
+                    : getChapterFromUrl(linkList[0] ?? "")
+                }`}
+                className=" hover:text-white p-[8px]  rounded-[12px] md:px-[52px] md:py-[26px]  bg-[#FF2020]  text-white md:rounded-[67px] "
+              >
                 <div className="font-bold whitespace-nowrap text-[12px] leading-[16px] md:text-[36px] md:leading-[44px] ">
                   Read now
                 </div>
@@ -361,7 +368,6 @@ const ChapterPage = () => {
             </div>
             {/* chọn server */}
             <div className="flex flex-col gap-[10px]">
-              
               <div className=" font-bold text-[12px] leading-[16px]  md:text-[28px] md:leading-[36px] text-white ">
                 Server
               </div>
@@ -395,7 +401,9 @@ const ChapterPage = () => {
                 </div>
                 <div className="text-[#9E9E9E] font-normal text-[12px] leading-[16px] md:text-[24px]  md:leading-[36px] flex flex-wrap items-center gap-2">
                   Genres:
-                  <div className="text-white">{chapterDetail?.categories || chapterDetail?.catergories}</div>
+                  <div className="text-white">
+                    {chapterDetail?.categories || chapterDetail?.catergories}
+                  </div>
                 </div>
                 <div className="text-[#9E9E9E] font-normal text-[12px] leading-[16px] md:text-[24px]  md:leading-[36px] flex items-center gap-2">
                   Age:
@@ -475,10 +483,12 @@ const ChapterPage = () => {
                             ? arrChapterLink[index]
                             : getChapterFromUrl(item)
                         }
-                        title={chapterDetail?.title || chapterDetail?.title_novel}
+                        title={
+                          chapterDetail?.title || chapterDetail?.title_novel
+                        }
                         des={chapterDetail?.description}
                         poster={chapterDetail?.poster}
-                        genre={ chapterDetail?.genres}
+                        genre={chapterDetail?.genres}
                         slug={slug}
                       />
                     </div>
@@ -487,7 +497,11 @@ const ChapterPage = () => {
 
                 <div className="text-center mt-5">
                   <button
-                    className={ `${comment !== "" ? "bg-slate-500 hover:cursor-pointer":"bg-slate-700 hover:cursor-not-allowed"} rounded-lg m-2 w-[20%] text-white font-semibold`}
+                    className={`${
+                      comment !== ""
+                        ? "bg-slate-500 hover:cursor-pointer"
+                        : "bg-slate-700 hover:cursor-not-allowed"
+                    } rounded-lg m-2 w-[20%] text-white font-semibold`}
                     onClick={handleSeeMore}
                   >
                     See More

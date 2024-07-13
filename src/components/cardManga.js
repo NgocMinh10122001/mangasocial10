@@ -36,9 +36,9 @@ const CardManga = ({
     <NavLink to={`/${sv}/chapter/${path_segment}`}>
       <div className=" cursor-pointer">
         <div className="rounded-xl group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl hover:shadow-black/30">
-          <div className="w-full h-[300px] max-[435px]:h-[160px]">
+          <div className="w-full h-[auto] max-[435px]:h-[160px]">
             <img
-              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110 rounded-[12px]"
+              className="h-full w-full max-[480px]:w-[auto] md:!w-[full] md:!h-[330px] object-cover transition-transform duration-500 group-hover:scale-110 rounded-[12px]"
               src={poster}
               alt=""
             />
@@ -47,7 +47,7 @@ const CardManga = ({
 
         <div className="text-[#FFFFFF]">
           <div className="mt-3 max-[435px]:mt-1 max-[435px]:w-full ">
-            <p className="text-[#FFFFFF] lg:text-[16px] max-[435px]:w-full  2xl:text-[18px] leading-10  font-semibold overflow-hidden whitespace-normal w-[200px]   max-[435px]:leading-[1.75rem]">
+            <p className="text-[#FFFFFF] lg:text-[16px] max-[435px]:w-full  2xl:text-[18px] leading-10  font-semibold overflow-hidden whitespace-normal    max-[435px]:leading-[1.75rem]">
               {truncateTile(title, 16)}
             </p>
             <NavLink
@@ -72,8 +72,8 @@ const CardManga = ({
                   : getChapterFromUrl(chapterNumberReadMode)
               }`}
             >
-              <p className="lg:text-[16px] 2xl:text-[18px] max-[435px]:text-[13px] leading-8 font-semibold  mt-3 max-[435px]:mt-1">
-                 {chapter}
+              <p className="lg:text-[16px] 2xl:text-[18px] max-[435px]:text-[13px]  font-semibold  max-[435px]:mt-0">
+                {chapter}
               </p>
             </NavLink>
           </div>
@@ -92,7 +92,7 @@ const CardManga = ({
           )}
 
           {update && (
-            <div className=" max-[435px]:w-full bg-[#363636] w-max rounded-[20px] mt-3 max-[435px]:mt-2 max-[435px]:py-[0px] max-[435px]:px-[0px]">
+            <div className=" max-[435px]:w-full bg-[#363636] w-max rounded-[20px] mt-3 max-[435px]:mt-1 max-[435px]:py-[0px] max-[435px]:px-[0px]">
               <p className="max-[435px]:w-full max-[435px]:truncate max-[435px]:text-center text-normal 2xl:text-[18px] max-[435px]:text-[12px] leading-8 font-semibold">
                 Update: {update}
               </p>

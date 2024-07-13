@@ -13,7 +13,7 @@ const NewsComics = () => {
   const getNews = async () => {
     try {
       const newsResponse = await prodApis.server(sv);
-      // console.log("check qq 1", newsResponse);
+      console.log("check qq 1", newsResponse);
 
       setNews(newsResponse.data[7].data);
       // console.log("check qq", newsResponse.data[7]);

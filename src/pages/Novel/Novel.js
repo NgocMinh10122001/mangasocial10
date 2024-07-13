@@ -69,7 +69,7 @@ const Novel = () => {
             New Released Novel
             <div className="hidden max-[480px]:block w-[100px] h-[7px] bg-[#F45F17] -top-[40%] rounded-[35px] left-0 absolute "></div>
           </div>
-          <NavLink to="/newRelease">
+          <NavLink to={`/${sv}/newRelease`}>
             <p className="max-[480px]:!text-xl max-[738px]:text-[29px]">
               See all
             </p>

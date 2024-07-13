@@ -10,10 +10,12 @@ const Top15Comics = () => {
   );
   const sv = useSelector((state) => state.server.sv);
   const top15Item = top15Comics.slice(0, 15);
+
+  console.log("top15item: ", top15Item);
   return (
     <>
       {readMode === false ? (
-        <div className="grid max-[768px]:grid-cols-3 md:grid-cols-5 2xl:grid-cols-7  gap-[20px] px-[60px] max-[435px]:px-4 max-[435px]:gap-4 max-[435px]:pb-4 pb-[60px]">
+        <div className="grid max-[768px]:grid-cols-3 md:grid-cols-6 2xl:grid-cols-7  gap-[20px] px-[60px] max-[435px]:px-4 max-[435px]:gap-4 max-[435px]:pb-4 pb-[60px]">
           {top15Item.map((item, index) => (
             <CardManga
               key={index}

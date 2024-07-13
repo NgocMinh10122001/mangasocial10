@@ -7,10 +7,14 @@ import { GrLinkPrevious } from "react-icons/gr";
 import { useSelector } from "react-redux";
 import { Button } from "antd";
 import fileDownload from "js-file-download";
-import FileSaver from "file-saver";
+import FileSaver, { saveAs } from "file-saver";
 import Loading from "../../components/Loading/Loading";
 import LoadingWhite from "../../components/Loading/LoadingWhite";
 import { key } from "localforage";
+
+import jsPDF from "jspdf";
+import "jspdf/dist/polyfills.es.js";
+import jsFileDownload from "js-file-download";
 
 const ReadChapter = () => {
   const params = useParams();
@@ -21,13 +25,12 @@ const ReadChapter = () => {
 
   const [chooseChapter, setChooseChapter] = useState("");
   const [loading, setLoading] = useState(true);
-
   const sv = useSelector((state) => state.server.sv);
   const readmode = useSelector((state) => state.ReadMode.readmode);
   const navigate = useNavigate();
+
   const fetchChapter = async () => {
     try {
-      
       if (readmode) {
         const response = await axios.get(
           `https://apimanga.mangasocial.online/web/rmanga/${sv}/${slug}/${id}`
@@ -36,17 +39,16 @@ const ReadChapter = () => {
         setChapterDetail(response.data);
         setLoading(false);
         // console.log(response.data);
-       }
-      else {
-         const response = await axios.get(
+      } else {
+        const response = await axios.get(
           `https://apimanga.mangasocial.online/rmanga/${slug}/${id}`
         );
 
         setChapterDetail(response.data);
+        console.log("chapterDetail", chapterDetail);
         setLoading(false);
         // console.log(response.data);
       }
-      
     } catch (error) {
       console.log("error", error);
     }
@@ -81,61 +83,157 @@ const ReadChapter = () => {
     //   )
     // }
   };
+
+  const readFileAsDataURL = (blob) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onloadend = () => resolve(reader.result);
+      reader.onerror = reject;
+      reader.readAsDataURL(blob);
+    });
+  };
+
+  const download2PDF = async () => {
+    const proxyUrl = "https://cors-anywhere.herokuapp.com/";
+    const { image_chapter, title, chapter_title } = chapterDetail;
+    const pdf = new jsPDF();
+    for (let i = 0; i < image_chapter.length; i++) {
+      const response = await fetch(proxyUrl + image_chapter[i]);
+    }
+  };
+
+  const handleDownloadHTML = () => {
+    const { image_chapter, title, chapter_title } = chapterDetail;
+
+    const htmlContent = `
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>${title} - ${chapter_title}</title>
+      </head>
+      <body>
+        <h1>${title} - ${chapter_title}</h1>
+        ${image_chapter
+          .map(
+            (imageUrl, index) =>
+              `<img src="${imageUrl}" alt="Image ${index + 1}">`
+          )
+          .join("\n")}
+      </body>
+      </html>
+    `;
+
+    const htmlBlob = new Blob([htmlContent], { type: "text/html" });
+    const htmlUrl = URL.createObjectURL(htmlBlob);
+
+    const downloadLink = document.createElement("a");
+    downloadLink.href = htmlUrl;
+    downloadLink.download = `${title}-${chapter_title}.html`;
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+
+    document.body.removeChild(downloadLink);
+    URL.revokeObjectURL(htmlUrl);
+  };
+
   const fetchListChapter = async () => {
     try {
-     
-      if (readmode) { const response = await axios.get(
+      if (readmode) {
+        const response = await axios.get(
           `https://apimanga.mangasocial.online/web/rmanga/${sv}/${slug}/`
         );
-      // console.log("check rs", response.data.chapters);
-      
-      
-        const arrValues = Object.values(response.data.chapters);
-        const arrKeys = Object.keys(response.data.chapters);
+        // console.log("check rs", response.data.chapters);
+        const test = readmode
+          ? Object.fromEntries(
+              Object.entries(response.data.chapters || {}).sort((a, b) => {
+                const numA = a[1].includes("chapter-")
+                  ? a[1]
+                      ?.match(/chapter-([\d.]+)/)[1]
+                      ?.split(".")
+                      ?.map(Number)
+                  : a[1].match(/(\d+)\/$/)[1] || "";
+                const numB = b[1].includes("chapter-")
+                  ? b[1]
+                      ?.match(/chapter-([\d.]+)/)[1]
+                      ?.split(".")
+                      ?.map(Number)
+                  : b[1].match(/(\d+)\/$/)[1] || "";
 
-        
+                const numA2 = a[1].includes("chapter_")
+                  ? a[1]
+                      ?.match(/chapter_([\d.]+)/)[1]
+                      ?.split(".")
+                      ?.map(Number)
+                  : a[1].match(/(\d+)\/$/)[1] || "";
+                const numB2 = b[1].includes("chapter_")
+                  ? b[1]
+                      ?.match(/chapter_([\d.]+)/)[1]
+                      ?.split(".")
+                      ?.map(Number)
+                  : b[1].match(/(\d+)\/$/)[1] || "";
 
-      // console.log("check rs",keys);
+                // const chapterA = a[1].includes("chapter-")? parseInt( numA ) : parseInt( a[1].match(/(\d+)\/$/)[1])
+                //     const chapterB =  b[1].includes("chapter-")? parseInt( numB ) : parseInt( b[1].match(/(\d+)\/$/)[1])
+                const chapterA = parseInt(
+                  a[1].includes("chapter-") ? numA : numA2
+                );
+                const chapterB = parseInt(
+                  b[1].includes("chapter-") ? numB : numB2
+                );
+                return chapterA - chapterB;
+              })
+            )
+          : {};
+        const arrValues = Object.values(test);
+        console.log("check value", arrValues);
+        const arrKeys = Object.keys(test);
+        const getChapterFromUrl = (url) => {
+          const parts = url.split("/");
+          return parts[parts.length - 2];
+        };
+        setListNameChapter(arrKeys);
 
-
-     const getChapterFromUrl = (url) => {
-    const parts = url.split('/');
-    return parts[parts.length - 2];
-  };
-      setListNameChapter(arrKeys)
-      
-
-      // console.log("check key val",getChapterFromUrl(keys[0]) );
-        const values = arrValues.map((item) => getChapterFromUrl(item)
-        )
+        // console.log("check key val",getChapterFromUrl(keys[0]) );
+        const values = arrValues.map((item) => getChapterFromUrl(item));
         setListChapter(values);
         // console.log(values);
-      }
-      else { 
+      } else {
         const response = await axios.get(
           `https://apimanga.mangasocial.online/rmanga/${slug}`
         );
-      // console.log("check rs", response.data.chapters);
-      
-      
-       const arrValues = Object.values(response.data.chapters);
+        console.log("check rs", response.data.chapters);
 
+        const getChapterFromUrl = (url) => {
+          const parts = url.split("/");
+          return parts[parts.length - 1];
+        };
 
+        const arrValues = response.data.chapters.sort((a, b) => {
+          const chapterA = parseFloat(
+            a.includes("chapter")
+              ? a.includes("novel")
+                ? a.match(/chapter-([\d.]+)/)
+                : a.match(/chapter-([\d.]+)/)[1]
+              : getChapterFromUrl(a)
+          );
+          const chapterB = parseFloat(
+            b.includes("chapter")
+              ? b.includes("novel")
+                ? b.match(/chapter-([\d.]+)/)
+                : b.match(/chapter-([\d.]+)/)[1]
+              : getChapterFromUrl(b)
+          );
+          return chapterA - chapterB;
+        });
 
-      const getChapterFromUrl = (url) => {
-    const parts = url.split('/');
-    return parts[parts.length - 1];
-      };
-      
-
-      // console.log("check key val",getChapterFromUrl(keys[0]) );
-      const values = arrValues.map((item) => getChapterFromUrl(item))
+        // console.log("check key val",getChapterFromUrl(keys[0]) );
+        const values = arrValues.map((item) => getChapterFromUrl(item));
         setListChapter(values);
-        setListNameChapter(values)
-        console.log(values); 
-
+        setListNameChapter(values);
+        console.log(values);
       }
-      
     } catch (error) {
       console.log(error);
     }
@@ -154,20 +252,19 @@ const ReadChapter = () => {
   }, [slug, id]);
 
   const handleChapter = (e) => {
-    
-    if (readmode) { 
-        let selectChapter = document.getElementById("chapterList");
+    if (readmode) {
+      let selectChapter = document.getElementById("chapterList");
       let selectedChapter =
         selectChapter.options[selectChapter.selectedIndex].value;
-      console.log(selectedChapter);
+
       setChooseChapter(e.target.value);
       const linkChapter = selectedChapter.replace(
         `http://apimanga.mangasocial.online/web/rmanga/${sv}/${slug}/`,
         ""
       );
       navigate(`/${sv}/chapter/${slug}/${linkChapter}`);
-    }
-    else {  let selectChapter = document.getElementById("chapterList");
+    } else {
+      let selectChapter = document.getElementById("chapterList");
       let selectedChapter =
         selectChapter.options[selectChapter.selectedIndex].value;
       console.log(selectedChapter);
@@ -176,8 +273,8 @@ const ReadChapter = () => {
         `http://apimanga.mangasocial.online/rmanga/${slug}/`,
         ""
       );
-      navigate(`/${sv}/chapter/${slug}/${linkChapter}`); }
-    
+      navigate(`/${sv}/chapter/${slug}/${linkChapter}`);
+    }
   };
 
   let currentChapter = listChapter.indexOf(id);
@@ -185,26 +282,25 @@ const ReadChapter = () => {
 
   const prevChapter = () => {
     if (currentChapter > 0) {
-      if (readmode) { 
- const prev = listChapter[currentChapter - 1].replace(
-        `http://apimanga.mangasocial.online/web/rmanga/${sv}/${slug}/`,
-        ""
-      );
-      currentChapter--;
-      navigate(`/${sv}/chapter/${slug}/${prev}`);
-      setChooseChapter(prev);
-      console.log(currentChapter);
-      }
-      else {
+      if (readmode) {
         const prev = listChapter[currentChapter - 1].replace(
-        `http://apimanga.mangasocial.online/rmanga/${slug}/`,
-        ""
-      );
-      currentChapter--;
-      navigate(`/${sv}/chapter/${slug}/${prev}`);
-      setChooseChapter(prev);
-      console.log(currentChapter);
-       }
+          `http://apimanga.mangasocial.online/web/rmanga/${sv}/${slug}/`,
+          ""
+        );
+        currentChapter--;
+        navigate(`/${sv}/chapter/${slug}/${prev}`);
+        setChooseChapter(prev);
+        console.log(currentChapter);
+      } else {
+        const prev = listChapter[currentChapter - 1].replace(
+          `http://apimanga.mangasocial.online/rmanga/${slug}/`,
+          ""
+        );
+        currentChapter--;
+        navigate(`/${sv}/chapter/${slug}/${prev}`);
+        setChooseChapter(prev);
+        console.log(currentChapter);
+      }
     } else {
       alert("What!!???");
     }
@@ -212,19 +308,18 @@ const ReadChapter = () => {
 
   const nextChap = () => {
     if (currentChapter + 2 <= listChapter.length) {
-      if (readmode) { 
-         const next = listChapter[currentChapter + 1];
-      setLoading(true);
-      navigate(`/${sv}/chapter/${slug}/${next}/`);
-      setChooseChapter(next);
-      // console.log(slug, next);
-      }
-      else { 
+      if (readmode) {
         const next = listChapter[currentChapter + 1];
-      setLoading(true);
-      navigate(`/${sv}/chapter/${slug}/${next}/`);
-      setChooseChapter(next);
-      // console.log(slug, next);
+        setLoading(true);
+        navigate(`/${sv}/chapter/${slug}/${next}/`);
+        setChooseChapter(next);
+        // console.log(slug, next);
+      } else {
+        const next = listChapter[currentChapter + 1];
+        setLoading(true);
+        navigate(`/${sv}/chapter/${slug}/${next}/`);
+        setChooseChapter(next);
+        // console.log(slug, next);
       }
     } else {
       alert("End of manga!!!");
@@ -269,7 +364,7 @@ const ReadChapter = () => {
               </select>
             </div>
             <div>
-              <Button size="large" onClick={() => handleDownload()}>
+              <Button size="large" onClick={handleDownloadHTML}>
                 Download
               </Button>
             </div>
