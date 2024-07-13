@@ -7,6 +7,7 @@ const CommingSoon = () => {
   const commingSoon = useFetch(3);
 
   const firstThreeItem = commingSoon.slice(0, 4);
+  console.log("commingSoon: ", commingSoon);
 
   return (
     <div

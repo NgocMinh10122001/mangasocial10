@@ -87,9 +87,6 @@ export default function Index() {
           Top 15 Best Comics of the Week
           <div className="hidden max-[480px]:block w-[100px] h-[7px] bg-[#F45F17] -top-[40%] rounded-[35px] left-0 absolute "></div>
         </div>
-        <Link>
-          <p className="max-[480px]:!text-xl">See all</p>
-        </Link>
       </div>
       <Top15Comics />
 

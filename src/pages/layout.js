@@ -34,7 +34,6 @@ import { FaBook } from "react-icons/fa6";
 import { FaGoogleDrive } from "react-icons/fa";
 import styles from "./layout.module.scss";
 
-
 let path = "";
 let arr_id_manga = [""];
 let arr_url = [""];
@@ -43,6 +42,7 @@ export default function Layout() {
   const [isHovered, setIsHovered] = useState(false);
   const [isServerHovered, setIsServerHovered] = useState(false);
   const [link, setLink] = useState("");
+  const [slugState, setSlugState] = useState();
   const submenuRef = useRef(null);
 
   //handle search
@@ -56,15 +56,14 @@ export default function Layout() {
   const [url, setURL] = useState("");
   const [isMenuVisible, setIsMenuVisible] = useState(true);
   const [showMenu, setShowMenu] = useState(true);
-  const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth >= 1150);
+  const [reload, setReload] = useState(true);
+  const { slug } = useParams();
 
+  const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth >= 1150);
 
   const sv = useSelector((state) => state.server.sv);
   const loading = useSelector((state) => state.server.loading);
   const navigate = useNavigate();
-
-
-
 
   //  14    "https://br.ninemanga.com",
   //                                 13    "https://de.ninemanga.com",
@@ -264,11 +263,16 @@ export default function Layout() {
         />
       ),
     },
-    // {
-    //   sv: 19,
-    //   name: "azoranov.com/series/",
-    //   icon: <US title="Vietnamese" className="max-[480px]:h-5 max-[480px]:w-5 h-5 w-5" />,
-    // },
+    {
+      sv: 19,
+      name: "azoranov.com/series/",
+      icon: (
+        <US
+          title="Vietnamese"
+          className="max-[480px]:h-5 max-[480px]:w-5 h-5 w-5"
+        />
+      ),
+    },
   ];
 
   const dispatch = useDispatch();
@@ -305,7 +309,6 @@ export default function Layout() {
     };
 
     window.addEventListener("resize", handleResize);
-
 
     // Cleanup listener on unmount
     return () => {
@@ -359,7 +362,15 @@ export default function Layout() {
     }
   };
   for (let i = 0; i < searchData?.length; i++) {
-    arr_id_manga[i] = searchData[i].id_manga;
+    let url = searchData[i].id_manga;
+    console.log("day la url: " + url);
+    if (url.endsWith("/")) {
+      url = url.slice(0, -1);
+    }
+    while (url.endsWith(".html")) {
+      url = url.slice(0, -5);
+    }
+    arr_id_manga[i] = url;
     arr_url[i] = arr_id_manga[i].lastIndexOf("/");
     arr_path[i] = arr_id_manga[i].slice(arr_url[i] + 1, 1000);
   }
@@ -392,9 +403,6 @@ export default function Layout() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState("");
 
-
-
-
   useEffect(() => {
     const os = platform.os.family;
 
@@ -418,6 +426,12 @@ export default function Layout() {
   useEffect(() => {
     dispatch(setIsLoading(true));
   }, []);
+
+  useEffect(() => {
+    // Thực hiện reload trang khi slug thay đổi
+    // navigate(window.location.pathname, { replace: true });
+    setReload(!reload);
+  }, [slug]);
 
   const toggleMenu = () => {
     const show = !showMenu;
@@ -455,33 +469,12 @@ export default function Layout() {
           <div
             className={`hidden md:flex cursor-pointer space-x-8 text-white `}
           >
-            <div onClick={() => navigate(`/` + sv)} className="">
-              <div
-                className="comic flex justify-between gap-2 items-center  "
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
-              >
-                <p>Comic</p>
-                <img
-                  className="arrow-img w-[1rem]"
-                  src={
-                    isHovered
-                      ? "/images/Polygon cam.svg"
-                      : "/images/Polygon 1.svg"
-                  }
-                  alt="Arrow"
-                />
-              </div>
-            </div>
-
             <div
               className="cursor-pointer"
               onClick={() => navigate("/" + sv + "/genres")}
             >
               <p>Genres</p>
             </div>
-
-            <p className="cursor-pointer">Popular</p>
 
             {/* <div
             className="server"
@@ -499,6 +492,46 @@ export default function Layout() {
               alt="Arrow"
             />
           </div> */}
+
+            {/* SERVER LIST       index    link
+          --------------------------NOVEL------------------------------------
+                                        "https://www.ninemanga.com",
+                                        "https://mangajar.com/",
+                                  11    "https://www.novelhall.com"
+                                        "https://azoranov.com/series/",         
+                                   4    "https://bestlightnovel.com/",
+                                  12    "https://mto.to/",
+                                        "https://ru.ninemanga.com",
+                                   9    "https://swatmanga.net",
+                --------------------MANGA-----------------------------                        
+                                  14    "https://br.ninemanga.com",
+                                  13    "https://de.ninemanga.com",
+                                  16    "https://es.ninemanga.com",
+                                  17    "https://fr.ninemanga.com",
+                                  18    "https://it.ninemanga.com",
+                                   5    "https://mangajar.com/manga",
+                                   8    "https://mangajar.com",
+                              *    6    "https://mangakomi.io/",
+                              *    2    "https://mangareader.cc",   
+                                   7    "https://readm.org/",   
+                                   1    "https://ww5.manganelo.tv",
+                                   0    "https://www.mangainn.net",
+                                        
+    */}
+
+            <div
+              className="cursor-pointer"
+              onClick={() => {
+                dispatch(changeServer(4));
+
+                navigate("/" + 4 + "/novel");
+              }}
+              // onClick={() => dispatch(changeServer(4))}
+            >
+              {/* redirect to server novel : bestlightnovel.com*/}
+              <p className="novel">Novel</p>
+            </div>
+
             <div className="dropdown relative cursor-pointer">
               <button ref={submenuRef} onClick={() => handleOpen()}>
                 Server
@@ -545,44 +578,7 @@ export default function Layout() {
                 </>
               )}
             </div>
-            {/* SERVER LIST       index    link
-          --------------------------NOVEL------------------------------------
-                                        "https://www.ninemanga.com",
-                                        "https://mangajar.com/",
-                                  11    "https://www.novelhall.com"
-                                        "https://azoranov.com/series/",         
-                                   4    "https://bestlightnovel.com/",
-                                  12    "https://mto.to/",
-                                        "https://ru.ninemanga.com",
-                                   9    "https://swatmanga.net",
-                --------------------MANGA-----------------------------                        
-                                  14    "https://br.ninemanga.com",
-                                  13    "https://de.ninemanga.com",
-                                  16    "https://es.ninemanga.com",
-                                  17    "https://fr.ninemanga.com",
-                                  18    "https://it.ninemanga.com",
-                                   5    "https://mangajar.com/manga",
-                                   8    "https://mangajar.com",
-                              *    6    "https://mangakomi.io/",
-                              *    2    "https://mangareader.cc",   
-                                   7    "https://readm.org/",   
-                                   1    "https://ww5.manganelo.tv",
-                                   0    "https://www.mangainn.net",
-                                        
-    */}
 
-            <div
-              className="cursor-pointer"
-              onClick={() => {
-                dispatch(changeServer(4));
-
-                navigate("/" + 4 + "/novel");
-              }}
-              // onClick={() => dispatch(changeServer(4))}
-            >
-              {/* redirect to server novel : bestlightnovel.com*/}
-              <p className="novel">Novel</p>
-            </div>
             <div
               className="cursor-pointer"
               onClick={() => navigate("/" + sv + `/contact-us`)}
@@ -658,19 +654,20 @@ export default function Layout() {
                       src={item.poster}
                       alt=""
                     />
-                    <div
+                    <Link
                       to={"/" + sv + `/chapter/` + arr_path[index]}
-                      onClick={() =>
-                        navigate("/ + sv + /chapter/" + arr_path[index])
-                      }
                       className="flex"
+                      onClick={() => {
+                        navigate("/" + sv + "/chapter/" + arr_path[index]);
+                        window.location.reload();
+                      }}
                     >
                       <div className="text-lg flex flex-col ml-6 justify-center">
                         <div>{item.title}</div>
                         <div>Rate:{item.rate}</div>
                         <div>Views: {item.views}</div>
                       </div>
-                    </div>
+                    </Link>
                   </div>
                 ))
               ) : (
@@ -731,31 +728,35 @@ export default function Layout() {
             <div className="h-80 w-[17rem] bg-[#DADADA] absolute mt-[150px] ml-[20px] rounded-lg border-double flex justify-center flex-col items-center overflow-y-auto ">
               <hr className="mt-[150px]" />
               {searchData ? (
-                searchData.slice(0, 3).map((item, index) => (
-                  <div
-                    key={index}
-                    className="w-[90%] h-full border-double border-red-900 rounded-lg flex border-4 cursor-pointer  "
-                  >
-                    <img
-                      className="w-1/3 h-[69%] py-2 rounded-lg"
-                      src={item.poster}
-                      alt=""
-                    />
+                searchData.slice(0, 3).map((item, index) => {
+                  console.log(arr_path[index], "wwwwwwwwwwwwwwwwwwwwwwwww");
+                  return (
                     <div
-                      to={"/" + sv + `/chapter/` + arr_path[index]}
-                      onClick={() =>
-                        navigate("/ + sv + /chapter/" + arr_path[index])
-                      }
-                      className="flex"
+                      key={index}
+                      className="w-[90%] h-full border-double border-red-900 rounded-lg flex border-4 cursor-pointer  "
                     >
-                      <div className="text-lg flex flex-col ml-6 justify-center">
-                        <div>{item.title}</div>
-                        <div>Rate:{item.rate}</div>
-                        <div>Views: {item.views}</div>
-                      </div>
+                      <img
+                        className="w-1/3 h-[69%] py-2 rounded-lg"
+                        src={item.poster}
+                        alt=""
+                      />
+                      <Link
+                        to={"/" + sv + `/chapter/` + arr_path[index]}
+                        onClick={() => {
+                          navigate("/" + sv + "/chapter/" + arr_path[index]);
+                          window.location.reload();
+                        }}
+                        className="flex"
+                      >
+                        <div className="text-lg flex flex-col ml-6 justify-center">
+                          <div>{item.title}</div>
+                          <div>Rate:{item.rate}</div>
+                          <div>Views: {item.views}</div>
+                        </div>
+                      </Link>
                     </div>
-                  </div>
-                ))
+                  );
+                })
               ) : (
                 <p>Not found @@</p>
               )}
@@ -766,7 +767,6 @@ export default function Layout() {
             </div>
           ) : null}
         </div>
-        
       </div>
       <div className="header-mobile  w-full z-[999] py-2 pe-2 bg-[#F45F17] fixed bottom-0 right-0 hidden max-[480px]:block">
         <ul className="flex w-full justify-between items-center ">
